@@ -15,7 +15,7 @@ public class Product {
 	private int price; // 가격
 	private String productDescription; // 상품 설명
 	private String origin; // 원산지
-	private String seasonal; // 재철
+	private String seasonal; // 제철
 	private int stock; // 재고
 	private Date inputDate; // 등록일
 }

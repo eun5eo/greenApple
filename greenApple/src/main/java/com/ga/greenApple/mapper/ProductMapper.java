@@ -11,4 +11,6 @@ public interface ProductMapper {
 
 	List<Product> list();
 
+	List<Product> listSeasonal(String seasonal);
+
 }

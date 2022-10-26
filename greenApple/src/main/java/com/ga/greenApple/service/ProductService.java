@@ -8,4 +8,6 @@ public interface ProductService {
 
 	List<Product> list();
 
+	List<Product> listSeasonal(String seasonal);
+
 }

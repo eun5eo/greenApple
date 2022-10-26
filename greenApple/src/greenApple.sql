@@ -1,7 +1,7 @@
 
 -- 상품
 select * from PRODUCT;
-drop * from PRODUCT;
+drop table PRODUCT;
 create table product (
 	product_code number primary key, -- 상품 코드
 	thumbnail varchar2(250) not null, -- 썸네일
@@ -9,14 +9,14 @@ create table product (
 	price number(7) not null, -- 가격
 	product_description varchar2(3000), -- 설명
 	origin varchar2(40) not null, -- 원산지
-	seasonal varchar2(10) not null, -- 재철
+	seasonal varchar2(10) not null, -- 제철
 	stock number default 0 not null, -- 재고
     input_date date not null -- 등록일
 );
 
 -- 상품 사진
 select * from PRODUCT_IMG;
-drop * from PRODUCT_IMG;
+drop table PRODUCT_IMG;
 create table product_img (
 	img_num number primary key, -- 사진 번호
 	product_code number not null, -- 상품 코드 fk
@@ -28,7 +28,7 @@ create table product_img (
 
 -- 회원
 select * from MEMBER;
-drop * from MEMBER;
+drop table MEMBER;
 create table member(
 	id varchar2(20) primary key, -- id
 	pw varchar2(30) not null, -- pw
@@ -41,7 +41,7 @@ create table member(
 
 -- 리뷰
 select * from REVIEW;
-drop * from REVIEW;
+drop table REVIEW;
 create table review (
 	review_no number primary key, -- 리뷰 번호
 	id varchar2(20) not null, -- 아이디 fk
@@ -55,7 +55,7 @@ create table review (
 
 -- 장바구니
 select * from CART;
-drop * from CART;
+drop table CART;
 create table cart (
 	cart_num number primary key, -- 장바구니 번호
 	product_code number not null, -- 상품 코드 fk
@@ -69,7 +69,7 @@ create table cart (
 
 -- 주문
 select * from product_order;
-drop * from product_order;
+drop table product_order;
 create table product_order (
 	order_no number primary key, -- 주문 번호
 	id varchar2(20) not null, -- 아이디 fk
@@ -83,7 +83,7 @@ create table product_order (
 
 -- 주문 상세
 select * from ORDER_DETAIL;
-drop * from ORDER_DETAIL;
+drop table ORDER_DETAIL;
 create table order_detail (
 	detail_no number primary key, -- 주문 상세 번호
 	order_no number not null, -- 주문 번호 fk
@@ -100,14 +100,14 @@ create table order_detail (
 
 -- insert
 insert into product values(
-	1111,
-	'apple.jpg',
-	'사과',
+	2222,
+	'mango.jpg',
+	'망고',
 	20000,
-	'달고 맛있는 사과',
-	'한국',
-	'10월',
-	'10',
+	'노랗고 달콤한 망고',
+	'태국',
+	'sp',
+	'15',
     sysdate
 );
 
