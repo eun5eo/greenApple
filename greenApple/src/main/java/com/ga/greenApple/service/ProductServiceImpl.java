@@ -22,4 +22,9 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> listSeasonal(String seasonal) {
 		return pm.listSeasonal(seasonal);
 	}
+
+	@Override
+	public Product view(int productCode) {
+		return pm.view(productCode);
+	}
 }

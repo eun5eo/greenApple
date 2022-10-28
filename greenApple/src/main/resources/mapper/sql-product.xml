@@ -12,5 +12,8 @@
 		select * from product where seasonal = #{seasonal}
 	</select>
 	
+	<select id="view" resultType="product">
+		select * from product where product_code = #{productCode}
+	</select>
 	
 </mapper>

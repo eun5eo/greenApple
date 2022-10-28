@@ -13,4 +13,6 @@ public interface ProductMapper {
 
 	List<Product> listSeasonal(String seasonal);
 
+	Product view(int productCode);
+
 }

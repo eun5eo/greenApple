@@ -15,6 +15,7 @@ public class ProductController {
 	@Autowired
 	private ProductService ps;
 	
+	// 상품 목록
 	@RequestMapping(value = "/product")
 	public List<Product> productList() {
 		List<Product> list = ps.list();
@@ -22,10 +23,20 @@ public class ProductController {
 		return list;
 	}
 	
+	// 상품을 제철별로 
 	@RequestMapping(value = "/product/seasonal/{seasonal}") 
 	public List<Product> listSeasonal(@PathVariable String seasonal) { 
 		List<Product> listSeasonal = ps.listSeasonal(seasonal);
 		
 		return listSeasonal; 
 	}
+	
+	// 상품 상세보기
+	@RequestMapping("/product/view/{productCode}")
+	public Product view(@PathVariable int productCode) {
+		Product product = ps.view(productCode);
+		
+		return product;
+	}
+	
 }
