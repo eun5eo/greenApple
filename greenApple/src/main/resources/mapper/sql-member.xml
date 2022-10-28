@@ -4,10 +4,22 @@
 <mapper namespace="com.ga.greenApple.mapper.MemberMapper">
 	
 	<!-- resultType은 dto의 alias와 일치해야한다 -->
-	<select id="list" resultType="product">
-		select * from product order by product_code
+	<select id="select" resultType="member">
+		select * from member where id = #{id}
 	</select>
 	
+	<insert id="insert" parameterType="member">
+		insert into member values( #{id}, #{pw}, #{name}, #{tel}, sysdate, 
+			#{address}, 'n' )
+	</insert>
 	
+	<update id="update" parameterType="member">
+		update member set pw = #{pw}, name = #{name}, tel = #{tel},
+			address = #{address} where id = #{id}
+	</update>
+	
+	<update id="delete" parameterType="string">
+		update member set del = 'y' where id = #{id}
+	</update>
 	
 </mapper>

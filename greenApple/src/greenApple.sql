@@ -18,12 +18,11 @@ create table product (
 select * from PRODUCT_IMG;
 drop table PRODUCT_IMG;
 create table product_img (
-	img_num number primary key, -- 사진 번호
+	product_img_no number primary key, -- 사진 번호
 	product_code number not null, -- 상품 코드 fk
 	file_name varchar2(100), -- 파일명
-	file_size varchar2(250), -- 파일 크기
-    CONSTRAINTS product_code FOREIGN KEY(product_code) 
-        REFERENCES product(product_code)
+	CONSTRAINTS product_code FOREIGN KEY(product_code) 
+		REFERENCES product(product_code)
 );
 
 -- 회원
@@ -36,7 +35,7 @@ create table member(
 	tel number not null, -- 전화번호
 	join_date date not null, -- 가입일
 	address varchar2(90) not null, -- 주소
-	del char(1) default 'n' not null -- 삭제 여부
+	del char(1) default 'n' not null -- 탈퇴 여부
 );
 
 -- 리뷰
@@ -47,10 +46,26 @@ create table review (
 	id varchar2(20) not null, -- 아이디 fk
 	product_code number not null, -- 상품 코드 fk
 	content varchar2(900) not null, -- 내용
-    CONSTRAINTS product_code FOREIGN KEY(product_code) 
-        REFERENCES product(product_code),
-    CONSTRAINTS id FOREIGN KEY(id) 
-        REFERENCES member(id)
+	file_name varchar2(150), -- 파일명
+	CONSTRAINTS product_code FOREIGN KEY(product_code) 
+		REFERENCES product(product_code),
+	CONSTRAINTS id FOREIGN KEY(id) 
+		REFERENCES member(id)
+);
+
+-- 리뷰 사진
+-- 시퀀스 : review_image_seq
+select * from REVIEW_IMG;
+drop table REVIEW_IMG;
+create table review_img (
+	review_img_no number primary key, -- 사진 번호
+	id varchar2(20) not null, -- 아이디 fk
+	product_code number not null, -- 상품 코드 fk
+	file_name varchar2(100), -- 파일명
+	CONSTRAINTS product_code_rvImg FOREIGN KEY(product_code) 
+		REFERENCES product(product_code),
+	CONSTRAINTS id_rvImg FOREIGN KEY(id) 
+		REFERENCES member(id)
 );
 
 -- 장바구니
@@ -61,10 +76,10 @@ create table cart (
 	product_code number not null, -- 상품 코드 fk
 	id varchar2(20) not null, -- 아이디 fk
 	amount number not null, -- 수량
-    CONSTRAINTS product_code FOREIGN KEY(product_code) 
-        REFERENCES product(product_code),
-    CONSTRAINTS id FOREIGN KEY(id) 
-        REFERENCES member(id)
+	CONSTRAINTS product_code FOREIGN KEY(product_code) 
+		REFERENCES product(product_code),
+	CONSTRAINTS id FOREIGN KEY(id) 
+		REFERENCES member(id)
 );
 
 -- 주문
@@ -77,8 +92,8 @@ create table product_order (
 	address varchar2(90) not null, -- 주소
 	recipient varchar2(15) not null, -- 수령자 이름
 	recipient_tel number not null -- 수령자 전화번호
-    CONSTRAINTS id FOREIGN KEY(id) 
-        REFERENCES member(id)
+	CONSTRAINTS id FOREIGN KEY(id) 
+		REFERENCES member(id)
 );
 
 -- 주문 상세
@@ -90,15 +105,19 @@ create table order_detail (
 	product_code number not null, -- 상품 코드 fk
 	amount number not null, -- 수량
 	price number not null -- 가격
-    CONSTRAINTS orderno FOREIGN KEY(orderno) 
-        REFERENCES prod_order(orderno),
-    CONSTRAINTS product_code FOREIGN KEY(product_code) 
-        REFERENCES product(product_code)
+	CONSTRAINTS orderno FOREIGN KEY(orderno) 
+		REFERENCES prod_order(orderno),
+	CONSTRAINTS product_code FOREIGN KEY(product_code) 
+		REFERENCES product(product_code)
 );
 
 
 
+
+
 -- insert
+
+-- 상품
 insert into product values(
 	2222,
 	'mango.jpg',
@@ -109,5 +128,25 @@ insert into product values(
 	'sp',
 	'15',
     sysdate
+);
+
+-- 회원
+insert into member values(
+	'member1', -- id
+	'11', -- pw
+	'멤버', -- 이름
+	'01011112222', -- 전화번호
+	sysdate, -- 가입일
+	'서울시 강남구', -- 주소
+	'n' -- 탈퇴 여부
+);
+
+-- 리뷰
+insert into review values(
+	'1', -- 리뷰 번호
+	'member1', -- 아이디 fk
+	'1111', -- 상품 코드 fk
+	'맛있어요', -- 내용
+	'apple.jpg' -- 파일명
 );
 

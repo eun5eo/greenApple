@@ -32,7 +32,7 @@ public class ProductController {
 	}
 	
 	// 상품 상세보기
-	@RequestMapping("/product/view/{productCode}")
+	@RequestMapping(value = "/product/view/{productCode}")
 	public Product view(@PathVariable int productCode) {
 		Product product = ps.view(productCode);
 		
