@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ga.greenApple.dto.Review;
+import com.ga.greenApple.dto.ReviewImg;
 import com.ga.greenApple.mapper.ReviewMapper;
 
 @Service
@@ -21,5 +22,13 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public int rvInsert(Review review) {
 		return rm.rvInsert(review);
+	}
+
+	@Override
+	public void insertPhotos(List<ReviewImg> rvPhotos) {
+		// list에 들어있는 rvPhotos를 ri에 넣어 각각 작업하며 하나씩 처리
+		for (ReviewImg ri : rvPhotos) {
+			rm.insertRvPhoto(ri);
+		}
 	}
 }

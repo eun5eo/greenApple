@@ -8,9 +8,9 @@
 		select * from review order by review_no desc
 	</select>
 	
-	<insert id="rvInsert" >
-		<!-- review_image_seq 생성했으니 sql문 완성하고 진행 
-			member 참조 -->
+	<insert id="insertRvPhoto" parameterType="reviewImg">
+		insert into review_img values(review_image_seq.nextval,
+			#{id}, product_code = #{productCode}, #{fileName} )
 	</insert>
 	
 	
