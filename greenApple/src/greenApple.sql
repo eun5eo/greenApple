@@ -21,8 +21,7 @@ create table product_img (
 	product_img_no number primary key, -- 사진 번호
 	product_code number not null, -- 상품 코드 fk
 	file_name varchar2(100), -- 파일명
-	CONSTRAINTS product_code FOREIGN KEY(product_code) 
-		REFERENCES product(product_code)
+	FOREIGN KEY(product_code) REFERENCES product(product_code)
 );
 
 -- 회원
@@ -49,10 +48,8 @@ create table review (
 	file_name varchar2(150), -- 파일명
 	review_date date not null, -- 등록일
 	del char(1) default 'n' not null, -- 삭제 여부
-	CONSTRAINTS product_code FOREIGN KEY(product_code) 
-		REFERENCES product(product_code),
-	CONSTRAINTS id FOREIGN KEY(id) 
-		REFERENCES member(id)
+	FOREIGN KEY(product_code) REFERENCES product(product_code),
+	FOREIGN KEY(id) REFERENCES member(id)
 );
 
 -- 리뷰 사진
@@ -64,10 +61,8 @@ create table review_img (
 	id varchar2(20) not null, -- 아이디 fk
 	product_code number not null, -- 상품 코드 fk
 	file_name varchar2(100), -- 파일명
-	CONSTRAINTS product_code_rvImg FOREIGN KEY(product_code) 
-		REFERENCES product(product_code),
-	CONSTRAINTS id_rvImg FOREIGN KEY(id) 
-		REFERENCES member(id)
+	FOREIGN KEY(product_code) REFERENCES product(product_code),
+	FOREIGN KEY(id) REFERENCES member(id)
 );
 
 -- 장바구니
@@ -78,11 +73,10 @@ create table cart (
 	product_code number not null, -- 상품 코드 fk
 	id varchar2(20) not null, -- 아이디 fk
 	amount number not null, -- 수량
-	CONSTRAINTS product_code FOREIGN KEY(product_code) 
-		REFERENCES product(product_code),
-	CONSTRAINTS id FOREIGN KEY(id) 
-		REFERENCES member(id)
+	FOREIGN KEY(product_code) REFERENCES product(product_code),
+	FOREIGN KEY(id) REFERENCES member(id)
 );
+alter table CART add unique (product_code, id);
 
 -- 주문
 select * from product_order;
@@ -94,8 +88,7 @@ create table product_order (
 	address varchar2(90) not null, -- 주소
 	recipient varchar2(15) not null, -- 수령자 이름
 	recipient_tel number not null -- 수령자 전화번호
-	CONSTRAINTS id FOREIGN KEY(id) 
-		REFERENCES member(id)
+	FOREIGN KEY(id) REFERENCES member(id)
 );
 
 -- 주문 상세
@@ -107,10 +100,8 @@ create table order_detail (
 	product_code number not null, -- 상품 코드 fk
 	amount number not null, -- 수량
 	price number not null -- 가격
-	CONSTRAINTS orderno FOREIGN KEY(orderno) 
-		REFERENCES prod_order(orderno),
-	CONSTRAINTS product_code FOREIGN KEY(product_code) 
-		REFERENCES product(product_code)
+	FOREIGN KEY(orderno) REFERENCES prod_order(orderno),
+	FOREIGN KEY(product_code) REFERENCES product(product_code)
 );
 
 
