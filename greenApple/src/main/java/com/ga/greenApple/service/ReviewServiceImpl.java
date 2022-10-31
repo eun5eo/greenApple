@@ -31,4 +31,14 @@ public class ReviewServiceImpl implements ReviewService {
 			rm.insertRvPhoto(ri);
 		}
 	}
+
+	@Override
+	public int rvUpdate(Review review) {
+		return rm.rvUpdate(review);
+	}
+
+	@Override
+	public int rvDelete(int reviewNo) {
+		return rm.rvDelete(reviewNo);
+	}
 }

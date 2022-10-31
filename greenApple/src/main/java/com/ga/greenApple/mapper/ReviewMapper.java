@@ -16,4 +16,8 @@ public interface ReviewMapper {
 
 	void insertRvPhoto(ReviewImg ri);
 
+	int rvUpdate(Review review);
+
+	int rvDelete(int reviewNo);
+
 }

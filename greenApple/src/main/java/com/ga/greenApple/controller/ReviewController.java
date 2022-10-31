@@ -1,7 +1,6 @@
 package com.ga.greenApple.controller;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,12 +10,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.ga.greenApple.dto.Product;
 import com.ga.greenApple.dto.Review;
 import com.ga.greenApple.dto.ReviewImg;
 import com.ga.greenApple.service.MemberService;
@@ -24,7 +24,7 @@ import com.ga.greenApple.service.ProductService;
 import com.ga.greenApple.service.ReviewService;
 
 @RestController
-public class CommonController {	
+public class ReviewController {	
 	@Autowired
 	private ReviewService rs;
 	
@@ -34,6 +34,7 @@ public class CommonController {
 	@Autowired
 	private MemberService ms;
 	
+	// 리뷰 리스트
 	@RequestMapping(value = "/reviewList")
 	public List<Review> reviewList() {
 		List<Review> rvList = rs.rvList();
@@ -41,16 +42,17 @@ public class CommonController {
 		return rvList;
 	}
 	
-	@RequestMapping(value = "/reviewInsert")
-	public int reviewInsert(@PathVariable Review review, MultipartHttpServletRequest mhr)
-			throws IOException {
+	// 리뷰 작성
+	@PostMapping(value = "/reviewInsert")
+	public int reviewInsert(@RequestBody Review review, MultipartHttpServletRequest mhr, 
+			HttpSession session) throws IOException {
 		int result = 0;
 		
 		// 한 번에 여러 장의 파일을 받는다
 		List<MultipartFile> list = mhr.getFiles("file");
 		List<ReviewImg> rvPhotos = new ArrayList<ReviewImg>();
 		
-		String real = "src/main/resources/static/images";
+		String real = "src/main/resources/static/rvImages";
 		
 		// list의 사진을 하나씩 가져와 rvPhotos에 저장
 		for (MultipartFile mf : list) {
@@ -74,6 +76,35 @@ public class CommonController {
 		result = rs.rvInsert(review);
 		
 		if (result > 0) rs.insertPhotos(rvPhotos);
+		
+		return result;
+	}
+	
+	// 리뷰 수정
+	@PostMapping(value = "/reviewUpdate")
+	public int reviewUpdate(@RequestBody Review review, HttpSession session) 
+			throws IOException {
+		int result = 0;
+		
+		String fileName = review.getFile().getOriginalFilename();
+		
+		if (fileName != null && !fileName.equals("")) {
+			review.setFileName(fileName);
+			String real = "src/main/resources/static/rvImages";
+			FileOutputStream fos = new FileOutputStream(new File(real+"/"+fileName));
+			fos.write(review.getFile().getBytes());
+			fos.close();
+		}
+		
+		result = rs.rvUpdate(review);
+		
+		return result;
+	}
+	
+	// 리뷰 삭제
+	@PostMapping(value = "/reviewDelete")
+	public int  reviewDelete(@RequestBody int reviewNo) {
+		int result = rs.rvDelete(reviewNo);
 		
 		return result;
 	}

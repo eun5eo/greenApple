@@ -13,4 +13,8 @@ public interface ReviewService {
 
 	void insertPhotos(List<ReviewImg> rvPhotos);
 
+	int rvUpdate(Review review);
+
+	int rvDelete(int reviewNo);
+
 }

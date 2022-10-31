@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,8 +37,9 @@ public class MemberController {
 	
 	// 회원가입
 	@PostMapping(value = "/join")
-	public int join(@PathVariable Member member) {
+	public int join(@RequestBody Member member) {
 		int result = 0;
+		
 		// 한 번 더 아이디 중복 체크
 		Member memberCheck = ms.select(member.getId());
 		
@@ -53,8 +55,9 @@ public class MemberController {
 	
 	// 로그인
 	@PostMapping(value = "/login")
-	public int login(@PathVariable Member member, HttpSession session) {
+	public int login(@RequestBody Member member, HttpSession session) {
 		int result = 0;
+		
 		Member memberCheck = ms.select(member.getId());
 		
 		if (memberCheck == null || memberCheck.getDel().equals("y")) 
@@ -78,7 +81,7 @@ public class MemberController {
 	
 	// 회원정보 업데이트
 	@PostMapping(value = "/member/update")
-	public int update(@PathVariable Member member, HttpSession session) {
+	public int update(@RequestBody Member member, HttpSession session) {
 		int result = 0;
 		
 		String encPass = bpe.encode(member.getPw());
@@ -90,8 +93,9 @@ public class MemberController {
 	
 	// 회원 탈퇴
 	@PostMapping(value = "/member/delete")
-	public int delete(@PathVariable String pw, HttpSession session) {
+	public int delete(@RequestBody String pw, HttpSession session) {
 		int result = 0;
+		
 		String id = (String) session.getAttribute("id");
 		Member member = ms.select(id);
 		

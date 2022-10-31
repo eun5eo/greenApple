@@ -30,7 +30,7 @@ select * from MEMBER;
 drop table MEMBER;
 create table member(
 	id varchar2(20) primary key, -- id
-	pw varchar2(30) not null, -- pw
+	pw varchar2(90) not null, -- pw
 	name varchar2(15) not null, -- 이름
 	tel number not null, -- 전화번호
 	join_date date not null, -- 가입일
@@ -47,6 +47,8 @@ create table review (
 	product_code number not null, -- 상품 코드 fk
 	content varchar2(900) not null, -- 내용
 	file_name varchar2(150), -- 파일명
+	review_date date not null, -- 등록일
+	del char(1) default 'n' not null, -- 삭제 여부
 	CONSTRAINTS product_code FOREIGN KEY(product_code) 
 		REFERENCES product(product_code),
 	CONSTRAINTS id FOREIGN KEY(id) 
@@ -72,7 +74,7 @@ create table review_img (
 select * from CART;
 drop table CART;
 create table cart (
-	cart_num number primary key, -- 장바구니 번호
+	cart_no number primary key, -- 장바구니 번호
 	product_code number not null, -- 상품 코드 fk
 	id varchar2(20) not null, -- 아이디 fk
 	amount number not null, -- 수량
@@ -147,6 +149,8 @@ insert into review values(
 	'member1', -- 아이디 fk
 	'1111', -- 상품 코드 fk
 	'맛있어요', -- 내용
-	'apple.jpg' -- 파일명
+	'apple.jpg', -- 파일명
+	sysdate, -- 등록일
+	'n' -- 삭제 여부
 );
 

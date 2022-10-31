@@ -8,10 +8,26 @@
 		select * from review order by review_no desc
 	</select>
 	
-	<insert id="insertRvPhoto" parameterType="reviewImg">
-		insert into review_img values(review_image_seq.nextval,
-			#{id}, product_code = #{productCode}, #{fileName} )
+	<insert id="rvInsert" parameterType="review">
+		insert into review values( review_no = #{reviewNo}, #{id}, product_code = #{productCode}, 
+			#{content}, file_name = #{fileName}, sysdate, 'n' )
 	</insert>
 	
+	<insert id="insertRvPhoto" parameterType="reviewImg">
+		insert into review_img values(review_image_seq.nextval,
+			#{id}, product_code = #{productCode}, file_name = #{fileName} )
+	</insert>
+	
+	<update id="rvUpdate">
+		update review set content = #{content}
+			<if test="fileName != null">
+				, file_name = #{fileName}
+			</if> 
+			where review_no = #{reviewNo}
+	</update>
+	
+	<update id="rvDelete" parameterType="string">
+		update review set del = 'y' where review_no = #{reviewNo}
+	</update>
 	
 </mapper>
