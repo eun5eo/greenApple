@@ -102,15 +102,15 @@ public class MemberController {
 	
 	// 회원 탈퇴
 	@PostMapping(value = "/member/delete")
-	public int delete(@RequestBody String pw, HttpSession session) {
+	public int delete(@RequestBody Member member, HttpSession session) {
 		int result = 0;
 		
 		String id = (String) session.getAttribute("id");
-		Member member = ms.select(id);
+		Member memberChk = ms.select(id);
 		
-		if (bpe.matches(pw, member.getPw())) 
+		if (bpe.matches(member.getPw(), memberChk.getPw())) 
 			result = ms.delete(id);
-		else if (!bpe.matches(pw, member.getPw()))
+		else if (!bpe.matches(member.getPw(), memberChk.getPw()))
 			result = -1;
 		
 		if (result > 0) session.invalidate();
