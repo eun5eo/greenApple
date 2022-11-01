@@ -5,29 +5,29 @@
 	
 	<!-- resultType은 dto의 alias와 일치해야한다 -->
 	<select id="rvList" resultType="review">
-		select * from review order by review_no desc
+		select * from review order by reviewNo desc
 	</select>
 	
 	<insert id="rvInsert" parameterType="review">
-		insert into review values( review_no = #{reviewNo}, #{id}, product_code = #{productCode}, 
-			#{content}, file_name = #{fileName}, sysdate, 'n' )
+		insert into review values( #{reviewNo}, #{id}, #{productCode}, 
+			#{content}, #{fileName}, sysdate, 'n' )
 	</insert>
 	
 	<insert id="insertRvPhoto" parameterType="reviewImg">
 		insert into review_img values(review_image_seq.nextval,
-			#{id}, product_code = #{productCode}, file_name = #{fileName} )
+			#{id}, #{productCode}, #{fileName} )
 	</insert>
 	
 	<update id="rvUpdate">
 		update review set content = #{content}
 			<if test="fileName != null">
-				, file_name = #{fileName}
+				, fileName = #{fileName}
 			</if> 
-			where review_no = #{reviewNo}
+			where reviewNo = #{reviewNo}
 	</update>
 	
 	<update id="rvDelete" parameterType="string">
-		update review set del = 'y' where review_no = #{reviewNo}
+		update review set del = 'y' where reviewNo = #{reviewNo}
 	</update>
 	
 </mapper>

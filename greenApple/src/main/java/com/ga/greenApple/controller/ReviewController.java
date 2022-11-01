@@ -35,7 +35,7 @@ public class ReviewController {
 	private MemberService ms;
 	
 	// 리뷰 리스트
-	@RequestMapping(value = "/reviewList")
+	@RequestMapping(value = "/review/list")
 	public List<Review> reviewList() {
 		List<Review> rvList = rs.rvList();
 		
@@ -43,7 +43,7 @@ public class ReviewController {
 	}
 	
 	// 리뷰 작성
-	@PostMapping(value = "/reviewInsert")
+	@PostMapping(value = "/review/insert")
 	public int reviewInsert(@RequestBody Review review, MultipartHttpServletRequest mhr, 
 			HttpSession session) throws IOException {
 		int result = 0;
@@ -81,7 +81,7 @@ public class ReviewController {
 	}
 	
 	// 리뷰 수정
-	@PostMapping(value = "/reviewUpdate")
+	@PostMapping(value = "/review/update")
 	public int reviewUpdate(@RequestBody Review review, HttpSession session) 
 			throws IOException {
 		int result = 0;
@@ -102,7 +102,7 @@ public class ReviewController {
 	}
 	
 	// 리뷰 삭제
-	@PostMapping(value = "/reviewDelete")
+	@PostMapping(value = "/review/delete")
 	public int  reviewDelete(@RequestBody int reviewNo) {
 		int result = rs.rvDelete(reviewNo);
 		

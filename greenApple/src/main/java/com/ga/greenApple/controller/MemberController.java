@@ -81,8 +81,8 @@ public class MemberController {
 	}
 	
 	// 회원 정보
-	@PostMapping(value = "/member/information")
-	public Member information(@RequestBody String id, HttpSession session) {
+	@RequestMapping(value = "/member/information/{id}")
+	public Member information(@PathVariable String id, HttpSession session) {
 		Member member = ms.select(id);
 		
 		return member;

@@ -4,10 +4,24 @@
 <mapper namespace="com.ga.greenApple.mapper.CartMapper">
 	
 	<!-- resultType은 dto의 alias와 일치해야한다 -->
-	<select id="select" resultType="member">
-		select * from member where id = #{id}
+	<select id="cartList" resultType="cart">
+		select a.cartNo, a.productCode, a.id, a.amount, 
+			b.productName, b.price
+			from cart a left outer join product b on a.productCode = b.productCode
+			where id = #{id}
 	</select>
 	
+	<insert id="addCart" parameterType="cart">
+		insert into cart values ( cart_seq.nextval,
+			#{productCode}, #{id}, #{amount} )
+	</insert>
 	
+	<delete id="deleteCart" parameterType="integer">
+		delete from cart where cartNo = #{cartNo}
+	</delete>
+	
+	<update id="amountModify" parameterType="cart">
+		update cart set amount = #{amount} where cartNo = #{cartNo}
+	</update>
 	
 </mapper>

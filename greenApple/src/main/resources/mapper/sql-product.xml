@@ -5,7 +5,7 @@
 	
 	<!-- resultType은 dto의 alias와 일치해야한다 -->
 	<select id="list" resultType="product">
-		select * from product order by product_code
+		select * from product order by productCode
 	</select>
 	
 	<select id="listSeasonal" resultType="product">
@@ -13,7 +13,7 @@
 	</select>
 	
 	<select id="view" resultType="product">
-		select * from product where product_code = #{productCode}
+		select * from product where productCode = #{productCode}
 	</select>
 	
 </mapper>
