@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ga.greenApple.dto.Member;
@@ -77,6 +78,14 @@ public class MemberController {
 		session.invalidate(); // 세션 지우기
 		
 		return "";
+	}
+	
+	// 회원 정보
+	@PostMapping(value = "/member/information")
+	public Member information(@RequestBody String id, HttpSession session) {
+		Member member = ms.select(id);
+		
+		return member;
 	}
 	
 	// 회원정보 업데이트

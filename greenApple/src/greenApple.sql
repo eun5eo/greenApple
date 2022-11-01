@@ -125,12 +125,12 @@ insert into product values(
 
 -- 회원
 insert into member values(
-	'member1', -- id
+	'member2', -- id
 	'11', -- pw
-	'멤버', -- 이름
-	'01011112222', -- 전화번호
+	'멤버2', -- 이름
+	'01022223333', -- 전화번호
 	sysdate, -- 가입일
-	'서울시 강남구', -- 주소
+	'경기도', -- 주소
 	'n' -- 탈퇴 여부
 );
 

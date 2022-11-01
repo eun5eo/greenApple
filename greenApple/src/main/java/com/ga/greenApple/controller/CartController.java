@@ -10,5 +10,5 @@ public class CartController {
 	@Autowired
 	private CartService cs;
 	
-	// 블로그 읽고 참조해서 작성하기
+	// 글 읽고 참조해서 작성하기
 }

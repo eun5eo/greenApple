@@ -30,4 +30,5 @@ public class MemberServiceImpl implements MemberService {
 	public int delete(String id) {
 		return mm.delete(id);
 	}
+
 }

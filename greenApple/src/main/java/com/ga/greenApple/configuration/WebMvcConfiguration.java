@@ -26,14 +26,15 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	// session check
 	/* sessonCheck는 InterceptorRegistry를 재정의 한 것이니 메소드명을
 	 addInterceptors로 꼭 적어줘야한다 */
-//	@Override
-//	public void addInterceptors(InterceptorRegistry registory) {
-//		registory.addInterceptor(new SessionCheck())
-//			.excludePathPatterns("/**/join", "/**/join/idCheck"
-//					,"/**/login", "/**/product", "/**/product/seasonal")
-//			// 위 지정한 것들 제외하여 모두 세션 체크를 한다
-//			.addPathPatterns("/**");
-//	}
+	@Override
+	public void addInterceptors(InterceptorRegistry registory) {
+		registory.addInterceptor(new SessionCheck())
+			.excludePathPatterns("/**/join", "/**/join/idCheck", "/**/login"
+					, "/**/product", "/**/product/seasonal", "/**/product/view"
+					, "/**/reviewList")
+			// 위 지정한 것들 제외하여 모두 세션 체크를 한다
+			.addPathPatterns("/**");
+	}
 	
 	// spring 암호화
 	@Bean
