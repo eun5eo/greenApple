@@ -8,10 +8,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ga.greenApple.dto.Cart;
-import com.ga.greenApple.dto.Member;
 import com.ga.greenApple.service.CartService;
 
 @RestController
@@ -20,10 +20,12 @@ public class CartController {
 	private CartService cs;
 	
 	// 카트 리스트
-	@PostMapping(value = "/cart")
+	@RequestMapping(value = "/cart")
 	public List<Cart> cartList(HttpServletRequest request) {
 		String id = request.getSession().getId();
 		List<Cart> cartList = cs.cartList(id);
+		
+		// totalPrice??
 		
 		return cartList;
 	}

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ga.greenApple.dto.Member;
@@ -24,16 +24,16 @@ public class MemberController {
 	
 	// id 중복 체크
 	@RequestMapping(value = "/join/idCheck", produces = "text/html;charset=utf-8")
-	public String idCheck(@PathVariable String id) {
-		String msg = "";
+	public int idCheck(@RequestParam String id) {
+		int result = 0;
 		Member member = ms.select(id);
 		
 		if (member == null)
-			msg = "아이디 사용 가능";
+			result = 1;
 		else 
-			msg = "아이디 사용 불가";
+			result = -1;
 		
-		return msg;
+		return result;
 	}
 	
 	// 회원가입
@@ -81,8 +81,8 @@ public class MemberController {
 	}
 	
 	// 회원 정보
-	@RequestMapping(value = "/member/information/{id}")
-	public Member information(@PathVariable String id, HttpSession session) {
+	@RequestMapping(value = "/member/information")
+	public Member information(@RequestParam String id, HttpSession session) {
 		Member member = ms.select(id);
 		
 		return member;
