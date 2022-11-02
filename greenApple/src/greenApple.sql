@@ -33,7 +33,8 @@ create table member(
 	name varchar2(15) not null, -- 이름
 	tel number not null, -- 전화번호
 	joinDate date not null, -- 가입일
-	address varchar2(90) not null, -- 주소
+	address1 varchar2(90) not null, -- 주소
+	address2 varchar2(90), -- 상세 주소
 	del char(1) default 'n' not null -- 탈퇴 여부
 );
 
@@ -86,9 +87,10 @@ create table product_order (
 	orderNo number primary key, -- 주문 번호
 	id varchar2(20) not null, -- 아이디 fk
 	orderDate date not null, -- 주문일
-	address varchar2(90) not null, -- 주소
+	address1 varchar2(90) not null, -- 주소
+	address2 varchar2(90), -- 상세 주소
 	recipient varchar2(15) not null, -- 수령자 이름
-	recipientTel number not null -- 수령자 전화번호
+	recipientTel number not null, -- 수령자 전화번호
 	FOREIGN KEY(id) REFERENCES member(id)
 );
 
@@ -100,7 +102,7 @@ create table order_detail (
 	orderNo number not null, -- 주문 번호 fk
 	productCode number not null, -- 상품 코드 fk
 	amount number not null, -- 수량
-	price number not null -- 가격
+	price number not null, -- 가격
 	FOREIGN KEY(orderNo) REFERENCES prod_order(orderNo),
 	FOREIGN KEY(productCode) REFERENCES product(productCode)
 );
@@ -132,6 +134,7 @@ insert into member values(
 	'01011113333', -- 전화번호
 	sysdate, -- 가입일
 	'경기도', -- 주소
+	'경기아파트 111동 101호',
 	'n' -- 탈퇴 여부
 );
 

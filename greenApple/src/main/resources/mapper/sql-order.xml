@@ -4,8 +4,9 @@
 <mapper namespace="com.ga.greenApple.mapper.OrderMapper">
 	
 	<!-- resultType은 dto의 alias와 일치해야한다 -->
-	<select id="select" resultType="member">
-		select * from member where id = #{id}
+	<select id="memberOrderList" resultType="productOrder">
+		select * from product_order where id = #{id}
+			<!-- join해서 데이터 더 가져오기 -->
 	</select>
 	
 	

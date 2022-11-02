@@ -10,12 +10,12 @@
 	
 	<insert id="insert" parameterType="member">
 		insert into member values( #{id}, #{pw}, #{name}, #{tel}, sysdate, 
-			#{address}, 'n' )
+			#{address1}, #{address2}, 'n' )
 	</insert>
 	
 	<update id="update" parameterType="member">
 		update member set pw = #{pw}, name = #{name}, tel = #{tel},
-			address = #{address} where id = #{id}
+			address1 = #{address1}, address2 = #{address2} where id = #{id}
 	</update>
 	
 	<update id="delete" parameterType="string">

@@ -15,4 +15,10 @@ public class Order {
 	private String address; // 주소
 	private String recipient; // 수령자 이름
 	private int recipientTel; // 수령자 전화번호
+	
+	// product
+	private String productName; // 상품명
+	private int price; // 가격
+	
+	private int totalPrice;
 }
