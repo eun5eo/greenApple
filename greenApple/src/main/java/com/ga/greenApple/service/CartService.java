@@ -14,4 +14,7 @@ public interface CartService {
 
 	int amountModify(Cart cart);
 
+	// orderController에서 요청
+	void orderSuccess(Cart cart);
+
 }

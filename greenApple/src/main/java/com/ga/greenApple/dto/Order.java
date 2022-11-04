@@ -12,13 +12,17 @@ public class Order {
 	private int orderNo; // 주문 번호
 	private String id; // 아이디 fk
 	private Date orderDate; // 주문 날짜
-	private String address; // 주소
+	private String address1; // 주소
+	private String address2; // 상세 주소
 	private String recipient; // 수령자 이름
 	private int recipientTel; // 수령자 전화번호
 	
 	// product
 	private String productName; // 상품명
 	private int price; // 가격
+	
+	// 받을 정보
+	private int orderAmount; // 주문 수량
 	
 	private int totalPrice;
 }

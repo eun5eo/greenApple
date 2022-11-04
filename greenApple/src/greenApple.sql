@@ -47,7 +47,7 @@ create table review (
 	productCode number not null, -- 상품 코드 fk
 	content varchar2(900) not null, -- 내용
 	fileName varchar2(150), -- 파일명
-	reviewDate date not null, -- 등록일
+	reviewDate date not null, -- 작성일
 	del char(1) default 'n' not null, -- 삭제 여부
 	FOREIGN KEY(productCode) REFERENCES product(productCode),
 	FOREIGN KEY(id) REFERENCES member(id)
@@ -59,10 +59,10 @@ select * from REVIEW_IMG;
 drop table REVIEW_IMG;
 create table review_img (
 	reviewImgNo number primary key, -- 사진 번호
+	reviewNo number not null, -- 리뷰 번호 fk
 	id varchar2(20) not null, -- 아이디 fk
-	productCode number not null, -- 상품 코드 fk
 	fileName varchar2(100), -- 파일명
-	FOREIGN KEY(productCode) REFERENCES product(productCode),
+	FOREIGN KEY(reviewNo) REFERENCES review(reviewNo),
 	FOREIGN KEY(id) REFERENCES member(id)
 );
 
@@ -72,15 +72,15 @@ select * from CART;
 drop table CART;
 create table cart (
 	cartNo number primary key, -- 장바구니 번호
-	productCode number not null, -- 상품 코드 fk
+	productCode number not null, -- 상품 코드
 	id varchar2(20) not null, -- 아이디 fk
 	amount number not null, -- 수량
-	FOREIGN KEY(productCode) REFERENCES product(productCode),
 	FOREIGN KEY(id) REFERENCES member(id)
 );
 alter table CART add unique (product_code, id);
 
 -- 주문
+-- 시퀀스 : order_seq
 select * from product_order;
 drop table product_order;
 create table product_order (
@@ -95,6 +95,7 @@ create table product_order (
 );
 
 -- 주문 상세
+-- 시퀀스 : order_detail_seq
 select * from ORDER_DETAIL;
 drop table ORDER_DETAIL;
 create table order_detail (
@@ -103,7 +104,7 @@ create table order_detail (
 	productCode number not null, -- 상품 코드 fk
 	amount number not null, -- 수량
 	price number not null, -- 가격
-	FOREIGN KEY(orderNo) REFERENCES prod_order(orderNo),
+	FOREIGN KEY(orderNo) REFERENCES product_order(orderNo),
 	FOREIGN KEY(productCode) REFERENCES product(productCode)
 );
 
@@ -162,6 +163,24 @@ CREATE SEQUENCE cart_seq
     START WITH 1
     INCREMENT BY 1
     MINVALUE 1
+    NOMAXVALUE
+    NOCACHE
+    NOORDER
+    NOCYCLE;
+
+CREATE SEQUENCE order_seq
+    START WITH 10000000
+    INCREMENT BY 1
+    MINVALUE 10000000
+    NOMAXVALUE
+    NOCACHE
+    NOORDER
+    NOCYCLE;
+
+CREATE SEQUENCE order_detail_seq
+    START WITH 100000
+    INCREMENT BY 1
+    MINVALUE 100000
     NOMAXVALUE
     NOCACHE
     NOORDER

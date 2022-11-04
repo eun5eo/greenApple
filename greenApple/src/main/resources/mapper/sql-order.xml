@@ -4,11 +4,17 @@
 <mapper namespace="com.ga.greenApple.mapper.OrderMapper">
 	
 	<!-- resultType은 dto의 alias와 일치해야한다 -->
-	<select id="memberOrderList" resultType="productOrder">
+	<select id="memberOrderList" resultType="productOrder" parameterType="string">
 		select * from product_order where id = #{id}
-			<!-- join해서 데이터 더 가져오기 -->
 	</select>
 	
+	<insert id="orderInsert" parameterType="productOrder">
+		insert into product_order values ( order_seq.nextval, #{id}, sysdate, 
+			#{address1}, #{address2}, #{recipient}, #{recipientTel} )
+	</insert>
 	
-	
+	<insert id="orderDetailInsert" parameterType="orderDetail">
+		insert into order_detail values ( order_detail_seq.nextval, 
+			#{orderNo}, #{productCode}, #{amount}, #{price} )
+	</insert>
 </mapper>

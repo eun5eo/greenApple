@@ -15,4 +15,10 @@ public interface ProductMapper {
 
 	Product view(int productCode);
 
+	// orderController에서 요청
+	Product getProductInfo(String productName);
+
+	// orderController에서 요청
+	void stockDown(Product product2);
+
 }
