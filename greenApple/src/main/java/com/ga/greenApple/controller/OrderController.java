@@ -43,6 +43,12 @@ public class OrderController {
 	public int orderInsert(@RequestBody Order order, HttpServletRequest request) {
 		int result = 0;
 		
+		// https://kuzuro.blogspot.com/2018/10/23.html
+		
+		
+		
+		
+		
 		// 장바구니를 생각해서 여러 개 들어오는 짜임으로 변경 필요할 거 같다 => 확장 for문 (42.주문구현3 참조)
 		String id = request.getSession().getId();
 		order.setId(id);
