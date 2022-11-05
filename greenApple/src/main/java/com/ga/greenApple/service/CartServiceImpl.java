@@ -33,4 +33,11 @@ public class CartServiceImpl implements CartService {
 		return cm.amountModify(cart);
 	}
 
+	// orderController에서 요청
+	@Override
+	public void orderSuccess(Cart cart) {
+		cm.orderSuccess(cart);
+		
+	}
+
 }

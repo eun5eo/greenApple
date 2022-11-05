@@ -15,7 +15,7 @@
 	
 	<insert id="insertRvPhoto" parameterType="reviewImg">
 		insert into review_img values(review_image_seq.nextval,
-			#{id}, #{productCode}, #{fileName} )
+			#{reviewNo}, #{id}, #{fileName} )
 	</insert>
 	
 	<update id="rvUpdate">

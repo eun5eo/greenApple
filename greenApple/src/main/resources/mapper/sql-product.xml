@@ -8,12 +8,22 @@
 		select * from product order by productCode
 	</select>
 	
-	<select id="listSeasonal" resultType="product">
+	<select id="listSeasonal" resultType="product" parameterType="string">
 		select * from product where seasonal = #{seasonal}
 	</select>
 	
-	<select id="view" resultType="product">
+	<select id="view" resultType="product" parameterType="integer">
 		select * from product where productCode = #{productCode}
 	</select>
 	
+	<!-- orderController에서 요청 -->
+	<select id="getProductCode" resultType="product" parameterType="string">
+		select * from product where productName = #{productName}
+	</select>
+	
+	<!-- orderController에서 요청 -->
+	<update id="stockDown" parameterType="product">
+		update product set stock = stock - #{amountNum} 
+			where productCode = #{productCode}
+	</update>
 </mapper>

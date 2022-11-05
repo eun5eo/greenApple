@@ -27,4 +27,17 @@ public class ProductServiceImpl implements ProductService {
 	public Product view(int productCode) {
 		return pm.view(productCode);
 	}
+
+	// orderController에서 요청
+	@Override
+	public Product getProductInfo(String productName) {
+		return pm.getProductInfo(productName);
+	}
+
+	// orderController에서 요청
+	@Override
+	public void stockDown(Product product2) {
+		pm.stockDown(product2);
+		
+	}
 }

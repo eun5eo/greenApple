@@ -4,7 +4,7 @@
 <mapper namespace="com.ga.greenApple.mapper.MemberMapper">
 	
 	<!-- resultType은 dto의 alias와 일치해야한다 -->
-	<select id="select" resultType="member">
+	<select id="select" resultType="member" parameterType="string">
 		select * from member where id = #{id}
 	</select>
 	

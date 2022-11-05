@@ -18,4 +18,7 @@ public class Product {
 	private String seasonal; // 제철
 	private int stock; // 재고
 	private Date inputDate; // 등록일
+	
+	// 재고 업데이트용
+	private int amountNum;
 }
