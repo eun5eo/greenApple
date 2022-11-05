@@ -28,12 +28,6 @@ public class ReviewController {
 	@Autowired
 	private ReviewService rs;
 	
-	@Autowired
-	private ProductService ps;
-	
-	@Autowired
-	private MemberService ms;
-	
 	// 리뷰 리스트
 	@RequestMapping(value = "/review/list")
 	public List<Review> reviewList() {
