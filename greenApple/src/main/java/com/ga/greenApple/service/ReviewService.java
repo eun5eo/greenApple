@@ -7,7 +7,7 @@ import com.ga.greenApple.dto.ReviewImg;
 
 public interface ReviewService {
 
-	List<Review> rvList();
+	List<Review> rvList(int productCode);
 
 	int rvInsert(Review review);
 

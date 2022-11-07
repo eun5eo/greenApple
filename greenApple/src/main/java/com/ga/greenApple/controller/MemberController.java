@@ -23,7 +23,7 @@ public class MemberController {
 	private BCryptPasswordEncoder bpe;
 	
 	// id 중복 체크
-	@RequestMapping(value = "/join/idCheck", produces = "text/html;charset=utf-8")
+	@RequestMapping(value = "/join/idCheck")
 	public int idCheck(@RequestParam String id) {
 		int result = 0;
 		Member member = ms.select(id);

@@ -10,7 +10,7 @@ import com.ga.greenApple.dto.OrderDetail;
 @Mapper
 public interface OrderMapper {
 
-	List<Order> memberOrderList(String id);
+	List<Order> orderList(String id);
 
 	int orderInsert(Order order);
 

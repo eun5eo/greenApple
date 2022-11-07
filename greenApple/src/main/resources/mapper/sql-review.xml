@@ -5,11 +5,12 @@
 	
 	<!-- resultType은 dto의 alias와 일치해야한다 -->
 	<select id="rvList" resultType="review">
-		select * from review order by reviewNo desc
+		select * from review where productCode = #{productCode}
+			order by reviewNo desc
 	</select>
 	
 	<insert id="rvInsert" parameterType="review">
-		insert into review values( #{reviewNo}, #{id}, #{productCode}, 
+		insert into review values( review_seq.nextval, #{id}, #{productCode}, 
 			#{content}, #{fileName}, sysdate, 'n' )
 	</insert>
 	

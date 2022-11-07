@@ -4,12 +4,12 @@
 <mapper namespace="com.ga.greenApple.mapper.OrderMapper">
 	
 	<!-- resultType은 dto의 alias와 일치해야한다 -->
-	<select id="memberOrderList" resultType="productOrder" parameterType="string">
+	<select id="orderList" resultType="productOrder" parameterType="string">
 		select * from product_order where id = #{id}
 	</select>
 	
 	<insert id="orderInsert" parameterType="productOrder">
-		insert into product_order values ( order_seq.nextval, #{id}, sysdate, 
+		insert into product_order values ( #{orderNo}, #{id}, sysdate, 
 			#{address1}, #{address2}, #{recipient}, #{recipientTel} )
 	</insert>
 	

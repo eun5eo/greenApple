@@ -8,8 +8,12 @@ import lombok.Data;
 @Alias("orderDetail")
 public class OrderDetail {
 	private int detailNo; // 주문 상세 번호
-	private int orderNo; // 주문 번호 fk
+	
+	private int orderId; // 주문 아이디 fk
+	
 	private int productCode; // 상품 코드
+	
 	private int amount; // 수량
+	
 	private int price; // 가격
 }

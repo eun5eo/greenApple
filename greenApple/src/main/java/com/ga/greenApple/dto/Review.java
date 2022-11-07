@@ -11,11 +11,17 @@ import lombok.Data;
 @Alias("review")
 public class Review {
 	private int reviewNo; // 리뷰 번호
+	
 	private String id; // 아이디
+	
 	private int productCode; // 상품 코드
+	
 	private String content; // 리뷰 내용
+	
 	private String fileName; // 파일명
+	
 	private Date reviewDate; // 작성일
+	
 	private String del; // 삭제 여부
 	
 	// upload용

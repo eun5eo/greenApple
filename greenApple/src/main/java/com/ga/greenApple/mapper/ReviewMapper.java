@@ -10,7 +10,7 @@ import com.ga.greenApple.dto.ReviewImg;
 @Mapper
 public interface ReviewMapper {
 
-	List<Review> rvList();
+	List<Review> rvList(int productCode);
 
 	int rvInsert(Review review);
 

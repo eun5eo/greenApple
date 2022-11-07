@@ -7,7 +7,7 @@ import com.ga.greenApple.dto.OrderDetail;
 
 public interface OrderService {
 
-	List<Order> memberOrderList(String id);
+	List<Order> orderList(String id);
 
 	int orderInsert(Order order);
 

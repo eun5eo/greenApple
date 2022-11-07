@@ -15,8 +15,8 @@ public class ReviewServiceImpl implements ReviewService {
 	private ReviewMapper rm;
 
 	@Override
-	public List<Review> rvList() {
-		return rm.rvList();
+	public List<Review> rvList(int productCode) {
+		return rm.rvList(productCode);
 	}
 
 	@Override

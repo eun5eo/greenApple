@@ -1,11 +1,14 @@
 package com.ga.greenApple.controller;
 
+import java.text.DecimalFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,56 +33,31 @@ public class OrderController {
 	private CartService cs;
 
 	// 회원별 주문 목록
-	@PostMapping(value = "/order/memberOrderList")
-	public List<Order> memOrderList(HttpServletRequest request) {
+	@PostMapping(value = "/order/orderList")
+	public List<Order> orderList(HttpServletRequest request) {
 		String id = request.getSession().getId();
-		List<Order> memberOrderList = os.memberOrderList(id);
+		List<Order> orderList = os.orderList(id);
 		
-		return memberOrderList;
+		return orderList;
 	}
 	
 	// 주문 등록
-	@PostMapping(value = "/order/insert")
-	public int orderInsert(@RequestBody Order order, HttpServletRequest request) {
+	@PostMapping(value = "/order/orderInsert")
+	public int orderInsert(@RequestBody List<Order> orders, @RequestBody List<OrderDetail> details,
+			HttpSession session) {
 		int result = 0;
+		String id = session.getId();
 		
-		// https://kuzuro.blogspot.com/2018/10/23.html
-		
-		
-		
-		
-		
-		// 장바구니를 생각해서 여러 개 들어오는 짜임으로 변경 필요할 거 같다 => 확장 for문 (42.주문구현3 참조)
-		String id = request.getSession().getId();
-		order.setId(id);
-		result = os.orderInsert(order);
-		
-		if (result > 0) {
-			OrderDetail detail = new OrderDetail();
-			// 주문번호가 들어가있는 상태인가????????
-			Product product = ps.getProductInfo(order.getProductName());
-			
-			detail.setOrderNo(order.getOrderNo());
-			detail.setProductCode(product.getProductCode());
-			detail.setAmount(order.getOrderAmount());
-			detail.setPrice(product.getPrice());
-			
-			int detailResult = os.orderDetailInsert(detail);
-			
-			if (detailResult > 0) {
-				Cart cart = new Cart();
-				cart.setId(order.getId());
-				cart.setProductCode(product.getProductCode());
-				
-				cs.orderSuccess(cart);
-				
-				Product product2 = new Product();
-				product2.setProductCode(product.getProductCode());
-				product2.setAmountNum(order.getOrderAmount());
-				
-				ps.stockDown(product2);
-			}
+		for(Order order : orders) {
+			order.setId(id);
+			os.orderInsert(order);
 		}
+		
+		for(OrderDetail detail : details) {
+			detail.setOrderId(0);
+			os.orderDetailInsert(detail);
+		}
+		
 		
 		return result;
 	}

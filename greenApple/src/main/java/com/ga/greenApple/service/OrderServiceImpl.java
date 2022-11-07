@@ -15,8 +15,8 @@ public class OrderServiceImpl implements OrderService {
 	private OrderMapper om;
 
 	@Override
-	public List<Order> memberOrderList(String id) {
-		return om.memberOrderList(id);
+	public List<Order> orderList(String id) {
+		return om.orderList(id);
 	}
 
 	@Override

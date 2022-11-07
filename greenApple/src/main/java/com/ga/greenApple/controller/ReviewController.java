@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,8 +20,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.ga.greenApple.dto.Review;
 import com.ga.greenApple.dto.ReviewImg;
-import com.ga.greenApple.service.MemberService;
-import com.ga.greenApple.service.ProductService;
 import com.ga.greenApple.service.ReviewService;
 
 @RestController
@@ -29,19 +28,21 @@ public class ReviewController {
 	private ReviewService rs;
 	
 	// 리뷰 리스트
-	@RequestMapping(value = "/review/list")
-	public List<Review> reviewList() {
-		List<Review> rvList = rs.rvList();
+	@RequestMapping(value = "/review/list/{productCode}")
+	public List<Review> reviewList(@PathVariable int productCode) {
+		List<Review> rvList = rs.rvList(productCode);
 		
 		return rvList;
 	}
 	
 	// 리뷰 작성
 	@PostMapping(value = "/review/insert")
-	public int reviewInsert(@RequestBody Review review, MultipartHttpServletRequest mhr, 
+	public int reviewInsert(@ModelAttribute Review review, MultipartHttpServletRequest mhr, 
 			HttpSession session) throws IOException {
 		int result = 0;
-		
+		String id = (String) session.getAttribute("id");
+		review.setId(id);
+			
 		// 한 번에 여러 장의 파일을 받는다
 		List<MultipartFile> list = mhr.getFiles("file");
 		List<ReviewImg> rvPhotos = new ArrayList<ReviewImg>();
@@ -53,7 +54,7 @@ public class ReviewController {
 			ReviewImg ri = new ReviewImg();
 			String fileName = mf.getOriginalFilename();
 			ri.setFileName(fileName);
-			ri.setId(review.getId());
+			ri.setId(id);
 			
 			// reviewimg의 갯수는 사진 갯수만큼
 			rvPhotos.add(ri);
@@ -65,8 +66,8 @@ public class ReviewController {
 			
 			// review 테이블에도 그림을 넣어줘야 등록된다
 			review.setFileName(fileName);
+			
 		}
-		
 		result = rs.rvInsert(review);
 		
 		if (result > 0) rs.insertPhotos(rvPhotos);

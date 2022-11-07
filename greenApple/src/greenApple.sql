@@ -31,7 +31,7 @@ create table member(
 	id varchar2(20) primary key, -- id
 	pw varchar2(90) not null, -- pw
 	name varchar2(15) not null, -- 이름
-	tel number not null, -- 전화번호
+	tel varchar2(15) not null, -- 전화번호
 	joinDate date not null, -- 가입일
 	address1 varchar2(90) not null, -- 주소
 	address2 varchar2(90), -- 상세 주소
@@ -84,7 +84,7 @@ alter table CART add unique (product_code, id);
 select * from product_order;
 drop table product_order;
 create table product_order (
-	orderNo number primary key, -- 주문 번호
+	orderId number primary key, -- 주문 번호
 	id varchar2(20) not null, -- 아이디 fk
 	orderDate date not null, -- 주문일
 	address1 varchar2(90) not null, -- 주소
@@ -100,11 +100,11 @@ select * from ORDER_DETAIL;
 drop table ORDER_DETAIL;
 create table order_detail (
 	detailNo number primary key, -- 주문 상세 번호
-	orderNo number not null, -- 주문 번호 fk
+	orderId number not null, -- 주문 번호 fk
 	productCode number not null, -- 상품 코드 fk
 	amount number not null, -- 수량
 	price number not null, -- 가격
-	FOREIGN KEY(orderNo) REFERENCES product_order(orderNo),
+	FOREIGN KEY(orderId) REFERENCES product_order(orderId),
 	FOREIGN KEY(productCode) REFERENCES product(productCode)
 );
 
@@ -166,7 +166,7 @@ CREATE SEQUENCE cart_seq
     NOMAXVALUE
     NOCACHE
     NOORDER
-    NOCYCLE;
+    CYCLE;
 
 CREATE SEQUENCE order_seq
     START WITH 10000000
