@@ -4,7 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,7 +45,7 @@ public class MemberController {
 		Member memberCheck = ms.select(member.getId());
 		
 		if (memberCheck == null) {
-			String encPass = bpe.encode(member.getPw());
+			String encPass = bpe.encode(member.getPw()); // 암호화
 			member.setPw(encPass);
 			
 			result = ms.insert(member);
@@ -59,12 +59,14 @@ public class MemberController {
 	public int login(@RequestBody Member member, HttpSession session) {
 		int result = 0;
 		
+		// 입력 받은 id가 있는지 확인을 위한 것
 		Member memberCheck = ms.select(member.getId());
 		
 		if (memberCheck == null || memberCheck.getDel().equals("y")) 
 			result = -1; // 존재하지 않는 id
 		else if (bpe.matches(member.getPw(), memberCheck.getPw())) {
 			result = 1; // id와 pw 모두 일치할 경우
+			
 			session.setAttribute("id", member.getId());
 		}
 		
@@ -72,12 +74,11 @@ public class MemberController {
 	}
 	
 	// 로그아웃
-	@PostMapping(value = "/logout")
-	public String logout(HttpSession session) {
-		// int result = 0;
+	@GetMapping(value = "/logout")
+	public int logout(HttpSession session) {
 		session.invalidate(); // 세션 지우기
 		
-		return "";
+		return 1;
 	}
 	
 	// 회원 정보
@@ -95,6 +96,7 @@ public class MemberController {
 		
 		String encPass = bpe.encode(member.getPw());
 		member.setPw(encPass);
+		
 		result = ms.update(member);
 		
 		return result;
@@ -108,10 +110,11 @@ public class MemberController {
 		String id = (String) session.getAttribute("id");
 		Member memberChk = ms.select(id);
 		
+		// 받은 비밀번호가 현재 비밀번호와 일치한지 비교
 		if (bpe.matches(member.getPw(), memberChk.getPw())) 
 			result = ms.delete(id);
 		else if (!bpe.matches(member.getPw(), memberChk.getPw()))
-			result = -1;
+			result = -1; // 비밀번호 다름
 		
 		if (result > 0) session.invalidate();
 		

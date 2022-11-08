@@ -92,10 +92,13 @@ public class ReviewController {
 		
 		String fileName = review.getFile().getOriginalFilename();
 		
+		// 파일이 들어오지 않았다면, 이전의 것을 등록
 		if (fileName != null && !fileName.equals("")) {
 			review.setFileName(fileName);
+			
 			String real = "src/main/resources/static/rvImages";
 			FileOutputStream fos = new FileOutputStream(new File(real+"/"+fileName));
+			
 			fos.write(review.getFile().getBytes());
 			fos.close();
 		}

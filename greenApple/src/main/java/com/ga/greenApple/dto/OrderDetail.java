@@ -9,7 +9,7 @@ import lombok.Data;
 public class OrderDetail {
 	private int detailNo; // 주문 상세 번호
 	
-	private int orderId; // 주문 아이디 fk
+	private String orderId; // 주문 아이디 fk
 	
 	private int productCode; // 상품 코드
 	

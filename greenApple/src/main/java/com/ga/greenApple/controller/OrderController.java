@@ -1,22 +1,19 @@
 package com.ga.greenApple.controller;
 
-import java.text.DecimalFormat;
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ga.greenApple.dto.Cart;
 import com.ga.greenApple.dto.Order;
 import com.ga.greenApple.dto.OrderDetail;
-import com.ga.greenApple.dto.Product;
 import com.ga.greenApple.service.CartService;
 import com.ga.greenApple.service.OrderService;
 import com.ga.greenApple.service.ProductService;
@@ -46,18 +43,25 @@ public class OrderController {
 	public int orderInsert(@RequestBody List<Order> orders, @RequestBody List<OrderDetail> details,
 			HttpSession session) {
 		int result = 0;
-		String id = session.getId();
+		String id = (String) session.getAttribute("id");
 		
+		// 현재 시간으로 orderId 생성
+		Date date = new Date();
+		SimpleDateFormat fm = new SimpleDateFormat("yyyyMMddHHmmss");		
+		String nowDate = fm.format(date) + (Math.random() * 10);
+				
 		for(Order order : orders) {
+			order.setOrderId(nowDate);
 			order.setId(id);
-			os.orderInsert(order);
+			
+			result = os.orderInsert(order);
 		}
 		
 		for(OrderDetail detail : details) {
-			detail.setOrderId(0);
+			detail.setOrderId(nowDate);
+			
 			os.orderDetailInsert(detail);
 		}
-		
 		
 		return result;
 	}
