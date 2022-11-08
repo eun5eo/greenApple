@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -33,6 +34,14 @@ public class ReviewController {
 		List<Review> rvList = rs.rvList(productCode);
 		
 		return rvList;
+	}
+	
+	// reviewNo에 따른 이미지
+	@RequestMapping(value = "/review/imgList")
+	public List<ReviewImg> reviewImg(@RequestParam("reviewNo") int reviewNo) {
+		List<ReviewImg> imgList = rs.imgList(reviewNo);
+		
+		return imgList;
 	}
 	
 	// 리뷰 작성

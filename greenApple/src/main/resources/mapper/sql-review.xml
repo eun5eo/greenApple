@@ -4,9 +4,13 @@
 <mapper namespace="com.ga.greenApple.mapper.ReviewMapper">
 	
 	<!-- resultType은 dto의 alias와 일치해야한다 -->
-	<select id="rvList" resultType="review">
+	<select id="rvList" resultType="review" parameterType="integer">
 		select * from review where productCode = #{productCode}
 			order by reviewNo desc
+	</select>
+	
+	<select id="imgList" resultType="reviewImg" parameterType="integer">
+		select * from review_img where reviewNo = #{reviewNo}
 	</select>
 	
 	<insert id="rvInsert" parameterType="review">

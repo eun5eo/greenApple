@@ -8,6 +8,8 @@ import com.ga.greenApple.dto.ReviewImg;
 public interface ReviewService {
 
 	List<Review> rvList(int productCode);
+	
+	List<ReviewImg> imgList(int reviewNo);
 
 	int rvInsert(Review review);
 

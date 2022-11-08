@@ -18,6 +18,11 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<Review> rvList(int productCode) {
 		return rm.rvList(productCode);
 	}
+	
+	@Override
+	public List<ReviewImg> imgList(int reviewNo) {
+		return rm.imgList(reviewNo);
+	}
 
 	@Override
 	public int rvInsert(Review review) {
@@ -41,4 +46,5 @@ public class ReviewServiceImpl implements ReviewService {
 	public int rvDelete(int reviewNo) {
 		return rm.rvDelete(reviewNo);
 	}
+
 }
