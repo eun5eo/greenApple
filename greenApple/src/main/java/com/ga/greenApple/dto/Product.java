@@ -27,6 +27,4 @@ public class Product {
 	
 	private Date inputDate; // 등록일
 	
-	// 재고 업데이트용
-	private int amountNum;
 }

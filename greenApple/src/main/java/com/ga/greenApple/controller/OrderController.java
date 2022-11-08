@@ -22,17 +22,12 @@ import com.ga.greenApple.service.ProductService;
 public class OrderController {
 	@Autowired
 	private OrderService os;
-	
-	@Autowired
-	private ProductService ps;
-	
-	@Autowired
-	private CartService cs;
 
 	// 회원별 주문 목록
 	@PostMapping(value = "/order/orderList")
 	public List<Order> orderList(HttpServletRequest request) {
 		String id = request.getSession().getId();
+		
 		List<Order> orderList = os.orderList(id);
 		
 		return orderList;
@@ -50,6 +45,7 @@ public class OrderController {
 		SimpleDateFormat fm = new SimpleDateFormat("yyyyMMddHHmmss");		
 		String nowDate = fm.format(date) + (Math.random() * 10);
 				
+		// List로 받은 orders를 하나씩 나누기
 		for(Order order : orders) {
 			order.setOrderId(nowDate);
 			order.setId(id);
@@ -57,10 +53,14 @@ public class OrderController {
 			result = os.orderInsert(order);
 		}
 		
+		// List로 받은 details를 하나씩 나누기
 		for(OrderDetail detail : details) {
 			detail.setOrderId(nowDate);
 			
 			os.orderDetailInsert(detail);
+			
+			if (result > 0)
+				os.stockDown(detail);
 		}
 		
 		return result;

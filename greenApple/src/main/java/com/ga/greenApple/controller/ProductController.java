@@ -23,7 +23,7 @@ public class ProductController {
 		return list;
 	}
 	
-	// 상품을 제철별로 
+	// 상품을 제철별로
 	@RequestMapping(value = "/product/seasonal/{seasonal}") 
 	public List<Product> listSeasonal(@PathVariable String seasonal) { 
 		List<Product> listSeasonal = ps.listSeasonal(seasonal);

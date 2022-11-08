@@ -39,6 +39,7 @@ create table member(
 );
 
 -- 리뷰
+-- 시퀀스 : review_seq
 select * from REVIEW;
 drop table REVIEW;
 create table review (
@@ -80,17 +81,18 @@ create table cart (
 alter table CART add unique (product_code, id);
 
 -- 주문
--- 시퀀스 : order_seq
 select * from product_order;
 drop table product_order;
 create table product_order (
-	orderId number primary key, -- 주문 번호
+	orderId varchar2(20) primary key, -- 주문 아이디
 	id varchar2(20) not null, -- 아이디 fk
 	orderDate date not null, -- 주문일
 	address1 varchar2(90) not null, -- 주소
 	address2 varchar2(90), -- 상세 주소
 	recipient varchar2(15) not null, -- 수령자 이름
 	recipientTel number not null, -- 수령자 전화번호
+	payment char(1) default 'c' not null, -- 결제 여부
+	payMoney number default 0 not null, -- 결제 금액
 	FOREIGN KEY(id) REFERENCES member(id)
 );
 
@@ -100,7 +102,7 @@ select * from ORDER_DETAIL;
 drop table ORDER_DETAIL;
 create table order_detail (
 	detailNo number primary key, -- 주문 상세 번호
-	orderId number not null, -- 주문 번호 fk
+	orderId varchar2(20) not null, -- 주문 번호 fk
 	productCode number not null, -- 상품 코드 fk
 	amount number not null, -- 수량
 	price number not null, -- 가격
@@ -150,6 +152,15 @@ insert into review values(
 	'n' -- 삭제 여부
 );
 
+CREATE SEQUENCE review_seq
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE 1
+    NOMAXVALUE
+    NOCACHE
+    NOORDER
+    NOCYCLE;
+
 CREATE SEQUENCE review_image_seq
     START WITH 1
     INCREMENT BY 1
@@ -167,15 +178,6 @@ CREATE SEQUENCE cart_seq
     NOCACHE
     NOORDER
     CYCLE;
-
-CREATE SEQUENCE order_seq
-    START WITH 10000000
-    INCREMENT BY 1
-    MINVALUE 10000000
-    NOMAXVALUE
-    NOCACHE
-    NOORDER
-    NOCYCLE;
 
 CREATE SEQUENCE order_detail_seq
     START WITH 100000

@@ -6,16 +6,13 @@ import com.ga.greenApple.dto.Product;
 
 public interface ProductService {
 
+	// 상품 목록
 	List<Product> list();
 
+	// 상품을 제철별로
 	List<Product> listSeasonal(String seasonal);
 
+	// 상품 상세보기
 	Product view(int productCode);
-
-	// orderController에서 요청
-	Product getProductInfo(String productName);
-
-	// orderController에서 요청
-	void stockDown(Product product2);
 
 }

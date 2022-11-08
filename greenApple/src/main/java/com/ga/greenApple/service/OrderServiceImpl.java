@@ -14,19 +14,29 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderMapper om;
 
+	// 회원별 주문 목록
 	@Override
 	public List<Order> orderList(String id) {
 		return om.orderList(id);
 	}
 
+	// 주문 등록
 	@Override
 	public int orderInsert(Order order) {
 		return om.orderInsert(order);
 	}
 
+	// 주문 등록 (주문 상세)
 	@Override
 	public int orderDetailInsert(OrderDetail detail) {
 		return om.orderDetailInsert(detail);
+	}
+
+	// 주문 등록된 상품 수량 하향
+	@Override
+	public void stockDown(OrderDetail detail) {
+		om.stockDown(detail);
+		
 	}
 	
 }

@@ -49,6 +49,7 @@ public class ReviewController {
 	public int reviewInsert(@ModelAttribute Review review, MultipartHttpServletRequest mhr, 
 			HttpSession session) throws IOException {
 		int result = 0;
+		
 		String id = (String) session.getAttribute("id");
 		review.setId(id);
 			
@@ -79,7 +80,10 @@ public class ReviewController {
 		}
 		result = rs.rvInsert(review);
 		
-		if (result > 0) rs.insertPhotos(rvPhotos);
+		if (result > 0) {
+			int reviewNo = review.getReviewNo(); 
+			rs.insertPhotos(rvPhotos, reviewNo);
+		}
 		
 		return result;
 	}

@@ -24,6 +24,10 @@ public class Order {
 	
 	private int recipientTel; // 수령자 전화번호
 	
+	private String payment; // 결제 여부
+	
+	private int payMoney; // 결제 금액
+	
 	// product
 	private String productName; // 상품명
 	

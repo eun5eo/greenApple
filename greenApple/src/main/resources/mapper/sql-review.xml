@@ -3,26 +3,31 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ga.greenApple.mapper.ReviewMapper">
 	
+	<!-- 리뷰 리스트 -->
 	<!-- resultType은 dto의 alias와 일치해야한다 -->
 	<select id="rvList" resultType="review" parameterType="integer">
 		select * from review where productCode = #{productCode}
 			order by reviewNo desc
 	</select>
 	
+	<!-- reviewNo에 따른 이미지 -->
 	<select id="imgList" resultType="reviewImg" parameterType="integer">
 		select * from review_img where reviewNo = #{reviewNo}
 	</select>
 	
+	<!-- 리뷰 작성 -->
 	<insert id="rvInsert" parameterType="review">
 		insert into review values( review_seq.nextval, #{id}, #{productCode}, 
 			#{content}, #{fileName}, sysdate, 'n' )
 	</insert>
 	
+	<!-- 리뷰 작성 (사진) -->
 	<insert id="insertRvPhoto" parameterType="reviewImg">
 		insert into review_img values(review_image_seq.nextval,
 			#{reviewNo}, #{id}, #{fileName} )
 	</insert>
 	
+	<!-- 리뷰 수정 -->
 	<update id="rvUpdate">
 		update review set content = #{content}
 			<if test="fileName != null">
@@ -31,6 +36,7 @@
 			where reviewNo = #{reviewNo}
 	</update>
 	
+	<!-- 리뷰 삭제 -->
 	<update id="rvDelete" parameterType="string">
 		update review set del = 'y' where reviewNo = #{reviewNo}
 	</update>

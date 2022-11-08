@@ -13,31 +13,22 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductMapper pm;
 
+	// 상품 목록
 	@Override
 	public List<Product> list() {
 		return pm.list();
 	}
 
+	// 상품을 제철별로
 	@Override
 	public List<Product> listSeasonal(String seasonal) {
 		return pm.listSeasonal(seasonal);
 	}
 
+	// 상품 상세보기
 	@Override
 	public Product view(int productCode) {
 		return pm.view(productCode);
 	}
 
-	// orderController에서 요청
-	@Override
-	public Product getProductInfo(String productName) {
-		return pm.getProductInfo(productName);
-	}
-
-	// orderController에서 요청
-	@Override
-	public void stockDown(Product product2) {
-		pm.stockDown(product2);
-		
-	}
 }

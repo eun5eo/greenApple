@@ -3,27 +3,20 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ga.greenApple.mapper.ProductMapper">
 	
+	<!-- 상품 목록 -->
 	<!-- resultType은 dto의 alias와 일치해야한다 -->
 	<select id="list" resultType="product">
 		select * from product order by productCode
 	</select>
 	
+	<!-- 상품을 제철별로 -->
 	<select id="listSeasonal" resultType="product" parameterType="string">
 		select * from product where seasonal = #{seasonal}
 	</select>
 	
+	<!-- 상품 상세보기 -->
 	<select id="view" resultType="product" parameterType="integer">
 		select * from product where productCode = #{productCode}
 	</select>
 	
-	<!-- orderController에서 요청 -->
-	<select id="getProductCode" resultType="product" parameterType="string">
-		select * from product where productName = #{productName}
-	</select>
-	
-	<!-- orderController에서 요청 -->
-	<update id="stockDown" parameterType="product">
-		update product set stock = stock - #{amountNum} 
-			where productCode = #{productCode}
-	</update>
 </mapper>
