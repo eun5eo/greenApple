@@ -39,11 +39,10 @@ create table member(
 );
 
 -- 리뷰
--- 시퀀스 : review_seq
 select * from REVIEW;
 drop table REVIEW;
 create table review (
-	reviewNo number primary key, -- 리뷰 번호
+	reviewId varchar2(20) primary key, -- 리뷰 아이디
 	id varchar2(20) not null, -- 아이디 fk
 	productCode number not null, -- 상품 코드 fk
 	content varchar2(900) not null, -- 내용
@@ -60,10 +59,10 @@ select * from REVIEW_IMG;
 drop table REVIEW_IMG;
 create table review_img (
 	reviewImgNo number primary key, -- 사진 번호
-	reviewNo number not null, -- 리뷰 번호 fk
+	reviewId varchar2(20) not null, -- 리뷰 번호 fk
 	id varchar2(20) not null, -- 아이디 fk
 	fileName varchar2(100), -- 파일명
-	FOREIGN KEY(reviewNo) REFERENCES review(reviewNo),
+	FOREIGN KEY(reviewId) REFERENCES review(reviewId),
 	FOREIGN KEY(id) REFERENCES member(id)
 );
 
@@ -152,14 +151,6 @@ insert into review values(
 	'n' -- 삭제 여부
 );
 
-CREATE SEQUENCE review_seq
-    START WITH 1
-    INCREMENT BY 1
-    MINVALUE 1
-    NOMAXVALUE
-    NOCACHE
-    NOORDER
-    NOCYCLE;
 
 CREATE SEQUENCE review_image_seq
     START WITH 1

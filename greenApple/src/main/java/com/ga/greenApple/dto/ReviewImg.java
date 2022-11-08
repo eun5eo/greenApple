@@ -9,7 +9,7 @@ import lombok.Data;
 public class ReviewImg {
 	private int reviewImgNo; // 사진 번호
 	
-	private int reviewNo; // 리뷰 번호 fk
+	private String reviewId; // 리뷰 아이디 fk
 	
 	private String id; // 아이디 fk
 	

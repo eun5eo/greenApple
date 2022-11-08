@@ -3,7 +3,9 @@ package com.ga.greenApple.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -36,10 +38,10 @@ public class ReviewController {
 		return rvList;
 	}
 	
-	// reviewNo에 따른 이미지
+	// reviewId에 따른 이미지
 	@RequestMapping(value = "/review/imgList")
-	public List<ReviewImg> reviewImg(@RequestParam("reviewNo") int reviewNo) {
-		List<ReviewImg> imgList = rs.imgList(reviewNo);
+	public List<ReviewImg> reviewImg(@RequestParam("reviewId") String reviewId) {
+		List<ReviewImg> imgList = rs.imgList(reviewId);
 		
 		return imgList;
 	}
@@ -50,7 +52,13 @@ public class ReviewController {
 			HttpSession session) throws IOException {
 		int result = 0;
 		
+		// 현재 시간으로 reviewId 생성
+		Date date = new Date();
+		SimpleDateFormat fm = new SimpleDateFormat("yyyyMMddHHmmss");		
+		String nowDate = fm.format(date) + (Math.random() * 10);
+		
 		String id = (String) session.getAttribute("id");
+		review.setReviewId(nowDate);
 		review.setId(id);
 			
 		// 한 번에 여러 장의 파일을 받는다
@@ -81,8 +89,8 @@ public class ReviewController {
 		result = rs.rvInsert(review);
 		
 		if (result > 0) {
-			int reviewNo = review.getReviewNo(); 
-			rs.insertPhotos(rvPhotos, reviewNo);
+			String reviewId = review.getReviewId();
+			rs.insertPhotos(rvPhotos, reviewId);
 		}
 		
 		return result;
@@ -114,8 +122,8 @@ public class ReviewController {
 	
 	// 리뷰 삭제
 	@PostMapping(value = "/review/delete")
-	public int  reviewDelete(@RequestBody int reviewNo) {
-		int result = rs.rvDelete(reviewNo);
+	public int  reviewDelete(@RequestParam("reviewId") String reviewId) {
+		int result = rs.rvDelete(reviewId);
 		
 		return result;
 	}

@@ -13,31 +13,28 @@ public class CartServiceImpl implements CartService {
 	@Autowired
 	private CartMapper cm;
 
+	// 카트 리스트
 	@Override
 	public List<Cart> cartList(String id) {
 		return cm.cartList(id);
 	}
 
+	// 카트 담기
 	@Override
 	public int addCart(Cart cart) {
 		return cm.addCart(cart);
 	}
 
+	// 카트 삭제
 	@Override
 	public int deleteCart(int cartNo) {
 		return cm.deleteCart(cartNo);
 	}
 	
+	// 카트 수량 수정
 	@Override
 	public int amountModify(Cart cart) {
 		return cm.amountModify(cart);
-	}
-
-	// orderController에서 요청
-	@Override
-	public void orderSuccess(Cart cart) {
-		cm.orderSuccess(cart);
-		
 	}
 
 }

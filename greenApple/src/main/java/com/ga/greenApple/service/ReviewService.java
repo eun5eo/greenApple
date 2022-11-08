@@ -11,18 +11,18 @@ public interface ReviewService {
 	List<Review> rvList(int productCode);
 	
 	// reviewNo에 따른 이미지
-	List<ReviewImg> imgList(int reviewNo);
+	List<ReviewImg> imgList(String reviewId);
 
 	// 리뷰 작성
 	int rvInsert(Review review);
 
 	// 리뷰 작성 (사진)
-	void insertPhotos(List<ReviewImg> rvPhotos, int reviewNo);
+	void insertPhotos(List<ReviewImg> rvPhotos, String reviewId);
 
 	// 리뷰 수정
 	int rvUpdate(Review review);
 
 	// 리뷰 삭제
-	int rvDelete(int reviewNo);
+	int rvDelete(String reviewId);
 
 }

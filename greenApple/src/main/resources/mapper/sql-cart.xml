@@ -3,6 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ga.greenApple.mapper.CartMapper">
 	
+	<!-- 카트 리스트 -->
 	<!-- resultType은 dto의 alias와 일치해야한다 -->
 	<select id="cartList" resultType="cart" parameterType="string">
 		select a.cartNo, a.productCode, a.id, a.amount, 
@@ -11,21 +12,20 @@
 			where id = #{id}
 	</select>
 	
+	<!-- 카트 담기 -->
 	<insert id="addCart" parameterType="cart">
 		insert into cart values ( cart_seq.nextval,
 			#{productCode}, #{id}, #{amount} )
 	</insert>
 	
+	<!-- 카트 삭제 -->
 	<delete id="deleteCart" parameterType="integer">
 		delete from cart where cartNo = #{cartNo}
 	</delete>
 	
+	<!-- 카트 수량 수정 -->
 	<update id="amountModify" parameterType="cart">
 		update cart set amount = #{amount} where cartNo = #{cartNo}
 	</update>
 	
-	<!-- orderController에서 요청 -->
-	<delete id="orderSuccess" parameterType="cart">
-		delete from cart where id = #{id} and productCode = #{productCode}
-	</delete>
 </mapper>

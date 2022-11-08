@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 @Alias("review")
 public class Review {
-	private int reviewNo; // 리뷰 번호
+	private String reviewId; // 리뷰 아이디
 	
 	private String id; // 아이디
 	

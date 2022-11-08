@@ -22,8 +22,8 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	// reviewNo에 따른 이미지
 	@Override
-	public List<ReviewImg> imgList(int reviewNo) {
-		return rm.imgList(reviewNo);
+	public List<ReviewImg> imgList(String reviewId) {
+		return rm.imgList(reviewId);
 	}
 
 	// 리뷰 작성
@@ -34,10 +34,10 @@ public class ReviewServiceImpl implements ReviewService {
 
 	// 리뷰 작성 (사진)
 	@Override
-	public void insertPhotos(List<ReviewImg> rvPhotos, int reviewNo) {
+	public void insertPhotos(List<ReviewImg> rvPhotos, String reviewId) {
 		// list에 들어있는 rvPhotos를 ri에 넣어 각각 작업하며 하나씩 처리
 		for (ReviewImg ri : rvPhotos) {
-			ri.setReviewNo(reviewNo);
+			ri.setReviewId(reviewId);
 			rm.insertRvPhoto(ri);
 		}
 	}
@@ -50,8 +50,8 @@ public class ReviewServiceImpl implements ReviewService {
 
 	// 리뷰 삭제
 	@Override
-	public int rvDelete(int reviewNo) {
-		return rm.rvDelete(reviewNo);
+	public int rvDelete(String reviewId) {
+		return rm.rvDelete(reviewId);
 	}
 
 }

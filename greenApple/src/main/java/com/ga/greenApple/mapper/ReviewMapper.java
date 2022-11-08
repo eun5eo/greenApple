@@ -14,7 +14,7 @@ public interface ReviewMapper {
 	List<Review> rvList(int productCode);
 	
 	// reviewNo에 따른 이미지
-	List<ReviewImg> imgList(int reviewNo);
+	List<ReviewImg> imgList(String reviewId);
 
 	// 리뷰 작성
 	int rvInsert(Review review);
@@ -26,6 +26,6 @@ public interface ReviewMapper {
 	int rvUpdate(Review review);
 
 	// 리뷰 삭제
-	int rvDelete(int reviewNo);
+	int rvDelete(String reviewId);
 
 }
