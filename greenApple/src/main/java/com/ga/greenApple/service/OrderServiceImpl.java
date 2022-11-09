@@ -38,5 +38,12 @@ public class OrderServiceImpl implements OrderService {
 		om.stockDown(detail);
 		
 	}
+
+	// 주문 등록된 상품 카트에서 삭제
+	@Override
+	public void deleteCart(OrderDetail detail) {
+		om.deleteCart(detail);
+		
+	}
 	
 }

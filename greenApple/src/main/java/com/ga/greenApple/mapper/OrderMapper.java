@@ -22,4 +22,7 @@ public interface OrderMapper {
 	// 주문 등록된 상품 수량 하향
 	void stockDown(OrderDetail detail);
 
+	// 주문 등록된 상품 카트에서 삭제
+	void deleteCart(OrderDetail detail);
+
 }

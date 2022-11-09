@@ -43,7 +43,7 @@ public class OrderController {
 		// 현재 시간으로 orderId 생성
 		Date date = new Date();
 		SimpleDateFormat fm = new SimpleDateFormat("yyyyMMddHHmmss");		
-		String nowDate = fm.format(date) + (Math.random() * 10);
+		String nowDate = fm.format(date) + (int)(Math.random() * 10);
 				
 		// List로 받은 orders를 하나씩 나누기
 		for(Order order : orders) {
@@ -59,8 +59,12 @@ public class OrderController {
 			
 			os.orderDetailInsert(detail);
 			
-			if (result > 0)
+			if (result > 0) {
+				detail.setId(id);
+				
 				os.stockDown(detail);
+				os.deleteCart(detail);
+			}
 		}
 		
 		return result;

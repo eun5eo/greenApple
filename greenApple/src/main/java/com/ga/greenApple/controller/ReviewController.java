@@ -55,7 +55,7 @@ public class ReviewController {
 		// 현재 시간으로 reviewId 생성
 		Date date = new Date();
 		SimpleDateFormat fm = new SimpleDateFormat("yyyyMMddHHmmss");		
-		String nowDate = fm.format(date) + (Math.random() * 10);
+		String nowDate = fm.format(date) + (int)(Math.random() * 10);
 		
 		String id = (String) session.getAttribute("id");
 		review.setReviewId(nowDate);

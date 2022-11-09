@@ -28,4 +28,9 @@
 			where productCode = #{productCode}
 	</update>
 	
+	<!-- 주문 등록된 상품 카트에서 삭제 -->
+	<delete id="deleteCart" parameterType="orderDetail">
+		delete from cart where id = #{id} and productCode = #{productCode}
+	</delete>
+	
 </mapper>

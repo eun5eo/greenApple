@@ -28,12 +28,12 @@ public class Order {
 	
 	private int payMoney; // 결제 금액
 	
-	// product
+	// product에서 꺼내줄 정보
 	private String productName; // 상품명
 	
 	private int price; // 가격
 	
-	// 받을 정보
+	// 주문 등록 시 받을 정보
 	private int amount; // 주문 수량
 	
 	private int totalPrice;

@@ -6,12 +6,12 @@
 	<!-- 리뷰 리스트 -->
 	<!-- resultType은 dto의 alias와 일치해야한다 -->
 	<select id="rvList" resultType="review" parameterType="integer">
-		select * from review where productCode = #{productCode}
+		select * from review where productCode = #{productCode} and del != 'y'
 			order by reviewId desc
 	</select>
 	
 	<!-- reviewId에 따른 이미지 -->
-	<select id="imgList" resultType="reviewImg" parameterType="integer">
+	<select id="imgList" resultType="reviewImg" parameterType="string">
 		select * from review_img where reviewId = #{reviewId}
 	</select>
 	
