@@ -26,8 +26,6 @@ public class Order {
 	
 	private String payment; // 결제 여부
 	
-	private int payMoney; // 결제 금액
-	
 	// product에서 꺼내줄 정보
 	private String productName; // 상품명
 	
@@ -35,7 +33,5 @@ public class Order {
 	
 	// 주문 등록 시 받을 정보
 	private int amount; // 주문 수량
-	
-	private int totalPrice;
 
 }
