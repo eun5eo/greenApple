@@ -15,8 +15,8 @@ public class ProductServiceImpl implements ProductService {
 
 	// 상품 목록
 	@Override
-	public List<Product> list(String search, String keyword) {
-		return pm.list(search, keyword);
+	public List<Product> list(String keyword) {
+		return pm.list(keyword);
 	}
 
 	// 상품을 제철별로

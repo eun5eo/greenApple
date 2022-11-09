@@ -9,7 +9,7 @@
 		select * from product 
 			<where>
 				<if test="keyword != null and keyword != ''">
-					${search} like '%'||#{keyword}||'%'
+					like '%'||#{keyword}||'%'
 				</if>
 			</where>
 			 order by inputDate desc

@@ -98,7 +98,7 @@ public class ReviewController {
 	
 	// 리뷰 수정
 	@PostMapping(value = "/review/update")
-	public int reviewUpdate(@RequestBody Review review, HttpSession session) 
+	public int reviewUpdate(@ModelAttribute Review review, HttpSession session) 
 			throws IOException {
 		int result = 0;
 		
@@ -121,7 +121,7 @@ public class ReviewController {
 	}
 	
 	// 리뷰 삭제
-	@PostMapping(value = "/review/delete")
+	@RequestMapping(value = "/review/delete")
 	public int  reviewDelete(@RequestParam("reviewId") String reviewId) {
 		int result = rs.rvDelete(reviewId);
 		

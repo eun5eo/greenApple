@@ -18,10 +18,9 @@ public class ProductController {
 	
 	// 상품 목록
 	@RequestMapping(value = "/product")
-	public List<Product> productList(@RequestParam("search") String search,
-			@RequestParam("keyword") String keyword) {
-		List<Product> list = ps.list(search, keyword);
-			
+	public List<Product> productList(@RequestParam("keyword") String keyword) {
+		List<Product> list = ps.list(keyword);
+		
 		return list;
 	}
 	

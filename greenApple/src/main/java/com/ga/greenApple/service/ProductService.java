@@ -7,7 +7,7 @@ import com.ga.greenApple.dto.Product;
 public interface ProductService {
 
 	// 상품 목록
-	List<Product> list(String search, String keyword);
+	List<Product> list(String keyword);
 
 	// 상품을 제철별로
 	List<Product> listSeasonal(String seasonal);

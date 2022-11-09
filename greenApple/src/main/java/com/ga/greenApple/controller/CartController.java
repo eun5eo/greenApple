@@ -21,8 +21,8 @@ public class CartController {
 	
 	// 카트 리스트
 	@RequestMapping(value = "/cart")
-	public List<Cart> cartList(HttpServletRequest request) {
-		String id = request.getSession().getId();
+	public List<Cart> cartList(HttpSession session) {
+		String id = (String) session.getAttribute("id");
 		List<Cart> cartList = cs.cartList(id);
 		
 		// totalPrice??
