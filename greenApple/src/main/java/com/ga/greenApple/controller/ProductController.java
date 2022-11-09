@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ga.greenApple.dto.Product;
@@ -17,8 +18,9 @@ public class ProductController {
 	
 	// 상품 목록
 	@RequestMapping(value = "/product")
-	public List<Product> productList() {
-		List<Product> list = ps.list();
+	public List<Product> productList(@RequestParam("search") String search,
+			@RequestParam("keyword") String keyword) {
+		List<Product> list = ps.list(search, keyword);
 			
 		return list;
 	}

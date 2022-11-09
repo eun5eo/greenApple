@@ -27,4 +27,8 @@ public class Product {
 	
 	private Date inputDate; // 등록일
 	
+	// 검색용
+	private String search;
+	
+	private String keyword;
 }

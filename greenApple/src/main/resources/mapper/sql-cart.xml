@@ -7,7 +7,7 @@
 	<!-- resultType은 dto의 alias와 일치해야한다 -->
 	<select id="cartList" resultType="cart" parameterType="string">
 		select a.cartNo, a.productCode, a.id, a.amount, 
-			b.productName, b.price
+			b.productName, b.price, b.thumbnail
 			from cart a left outer join product b on a.productCode = b.productCode
 			where id = #{id}
 	</select>

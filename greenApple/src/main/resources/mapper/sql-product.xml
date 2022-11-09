@@ -5,8 +5,14 @@
 	
 	<!-- 상품 목록 -->
 	<!-- resultType은 dto의 alias와 일치해야한다 -->
-	<select id="list" resultType="product">
-		select * from product order by productCode
+	<select id="list" resultType="product" parameterType="string">
+		select * from product 
+			<where>
+				<if test="keyword != null and keyword != ''">
+					${search} like '%'||#{keyword}||'%'
+				</if>
+			</where>
+			 order by inputDate desc
 	</select>
 	
 	<!-- 상품을 제철별로 -->

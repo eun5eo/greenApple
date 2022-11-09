@@ -10,7 +10,7 @@ import com.ga.greenApple.dto.Product;
 public interface ProductMapper {
 
 	// 상품 목록
-	List<Product> list();
+	List<Product> list(String search, String keyword);
 
 	// 상품을 제철별로
 	List<Product> listSeasonal(String seasonal);
