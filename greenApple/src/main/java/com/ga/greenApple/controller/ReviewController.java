@@ -46,6 +46,14 @@ public class ReviewController {
 		return imgList;
 	}
 	
+	// 리스트나 뷰에 쓰일 리뷰 갯수
+	@RequestMapping(value = "/review/reviewNum")
+	public int reviewNum(@RequestParam("productCode") int productCode) {
+		int reviewNum = rs.reviewNum(productCode);
+				
+		return reviewNum;
+	}
+	
 	// 리뷰 작성
 	@PostMapping(value = "/review/insert")
 	public int reviewInsert(@ModelAttribute Review review, MultipartHttpServletRequest mhr, 

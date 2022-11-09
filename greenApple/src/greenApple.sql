@@ -117,7 +117,7 @@ create table order_detail (
 
 -- 상품
 insert into product values(
-	1111,
+	3333,
 	'mango.jpg',
 	'망고',
 	20000,
@@ -142,7 +142,7 @@ insert into member values(
 
 -- 리뷰
 insert into review values(
-	'1', -- 리뷰 번호
+	'20221109', -- 리뷰 아이디
 	'member1', -- 아이디 fk
 	'1111', -- 상품 코드 fk
 	'맛있어요', -- 내용
@@ -178,4 +178,5 @@ CREATE SEQUENCE order_detail_seq
     NOCACHE
     NOORDER
     NOCYCLE;
+
 

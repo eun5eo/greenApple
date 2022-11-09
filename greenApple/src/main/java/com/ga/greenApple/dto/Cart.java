@@ -18,6 +18,8 @@ public class Cart {
 	// product에서 꺼내줄 정보
 	private String productName; // 상품명
 	
+	private String thumbnail; // 상품 사진
+	
 	private int price; // 가격
 	
 }

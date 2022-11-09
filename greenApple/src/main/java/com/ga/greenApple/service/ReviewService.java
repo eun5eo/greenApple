@@ -12,6 +12,9 @@ public interface ReviewService {
 	
 	// reviewNo에 따른 이미지
 	List<ReviewImg> imgList(String reviewId);
+	
+	// 리스트나 뷰에 쓰일 리뷰 갯수
+	int reviewNum(int productCode);
 
 	// 리뷰 작성
 	int rvInsert(Review review);

@@ -25,6 +25,12 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<ReviewImg> imgList(String reviewId) {
 		return rm.imgList(reviewId);
 	}
+	
+	// 리스트나 뷰에 쓰일 리뷰 갯수
+	@Override
+	public int reviewNum(int productCode) {
+		return rm.reviewNum(productCode);
+	}
 
 	// 리뷰 작성
 	@Override

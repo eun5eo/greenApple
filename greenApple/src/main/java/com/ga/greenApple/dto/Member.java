@@ -19,7 +19,9 @@ public class Member {
 	
 	private Date joinDate; // 가입일
 	
-	private String address; // 주소
+	private String address1; // 주소
+	
+	private String address2; // 상세 주소
 	
 	private String del; // 탈퇴여부
 }

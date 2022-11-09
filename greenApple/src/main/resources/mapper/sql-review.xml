@@ -15,6 +15,12 @@
 		select * from review_img where reviewId = #{reviewId}
 	</select>
 	
+	<!-- 리스트나 뷰에 쓰일 리뷰 갯수 -->
+	<select id="reviewNum" resultType="integer" parameterType="integer">
+		select count(reviewId) from review 
+			where productCode = #{productCode};
+	</select>
+	
 	<!-- 리뷰 작성 -->
 	<insert id="rvInsert" parameterType="review">
 		insert into review values( #{reviewId}, #{id}, #{productCode}, 

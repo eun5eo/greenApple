@@ -29,7 +29,7 @@ public class ProductController {
 	public List<Product> listSeasonal(@PathVariable String seasonal) { 
 		List<Product> listSeasonal = ps.listSeasonal(seasonal);
 		
-		return listSeasonal; 
+		return listSeasonal;
 	}
 	
 	// 상품 상세보기
