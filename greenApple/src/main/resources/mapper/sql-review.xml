@@ -18,7 +18,7 @@
 	<!-- 리스트나 뷰에 쓰일 리뷰 갯수 -->
 	<select id="reviewNum" resultType="integer" parameterType="integer">
 		select count(reviewId) from review 
-			where productCode = #{productCode};
+			where productCode = #{productCode} and del != 'y'
 	</select>
 	
 	<!-- 리뷰 작성 -->
@@ -32,6 +32,11 @@
 		insert into review_img values(review_image_seq.nextval,
 			#{reviewId}, #{id}, #{fileName} )
 	</insert>
+	
+	<!-- 리뷰 수정/삭제 시 작성자 id 찾기 (비교용) -->
+	<select id="findWriteId" parameterType="string">
+		select id from where reviewId = #{reviewId}
+	</select>
 	
 	<!-- 리뷰 수정 -->
 	<update id="rvUpdate">

@@ -47,6 +47,12 @@ public class ReviewServiceImpl implements ReviewService {
 			rm.insertRvPhoto(ri);
 		}
 	}
+	
+	// 리뷰 수정/삭제 시 작성자 id 찾기 (비교용)
+	@Override
+	public String findWriterId(String reviewId) {
+		return rm.findWriteId(reviewId);
+	}
 
 	// 리뷰 수정
 	@Override

@@ -24,6 +24,9 @@ public interface ReviewMapper {
 
 	// 리뷰 작성 (사진)
 	void insertRvPhoto(ReviewImg ri);
+	
+	// 리뷰 수정/삭제 시 작성자 id 찾기 (비교용)
+	String findWriteId(String reviewId);
 
 	// 리뷰 수정
 	int rvUpdate(Review review);

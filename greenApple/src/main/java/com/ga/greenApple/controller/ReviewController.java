@@ -109,29 +109,40 @@ public class ReviewController {
 	public int reviewUpdate(@ModelAttribute Review review, HttpSession session) 
 			throws IOException {
 		int result = 0;
+		String requestId = rs.findWriterId(review.getReviewId());
+		String sessionId = (String) session.getAttribute("id");
 		
-		String fileName = review.getFile().getOriginalFilename();
-		
-		// 파일이 들어오지 않았다면, 이전의 것을 등록
-		if (fileName != null && !fileName.equals("")) {
-			review.setFileName(fileName);
+		if (sessionId == requestId) {
+			String fileName = review.getFile().getOriginalFilename();
 			
-			String real = "src/main/resources/static/rvImages";
-			FileOutputStream fos = new FileOutputStream(new File(real+"/"+fileName));
+			// 파일이 들어오지 않았다면, 이전의 것을 등록
+			if (fileName != null && !fileName.equals("")) {
+				review.setFileName(fileName);
+				
+				String real = "src/main/resources/static/rvImages";
+				FileOutputStream fos = new FileOutputStream(new File(real+"/"+fileName));
+				
+				fos.write(review.getFile().getBytes());
+				fos.close();
+			}
 			
-			fos.write(review.getFile().getBytes());
-			fos.close();
-		}
-		
-		result = rs.rvUpdate(review);
+			result = rs.rvUpdate(review);
+		} else result = -1; // id 일치 x
 		
 		return result;
 	}
 	
 	// 리뷰 삭제
 	@RequestMapping(value = "/review/delete")
-	public int  reviewDelete(@RequestParam("reviewId") String reviewId) {
-		int result = rs.rvDelete(reviewId);
+	public int  reviewDelete(@RequestParam("reviewId") String reviewId,
+			HttpSession session) {
+		int result = 0;
+		String requestId = rs.findWriterId(reviewId);
+		String sessionId = (String) session.getAttribute("id");
+		
+		if (requestId == sessionId) {
+			result = rs.rvDelete(reviewId);
+		} else result = -1;
 		
 		return result;
 	}
