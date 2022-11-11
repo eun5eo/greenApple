@@ -125,7 +125,6 @@ public class ReviewController {
 				fos.write(review.getFile().getBytes());
 				fos.close();
 			}
-			
 			result = rs.rvUpdate(review);
 		} else result = -1; // id 일치 x
 		

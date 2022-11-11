@@ -12,8 +12,8 @@
 	<!-- 주문 등록 -->
 	<insert id="orderInsert" parameterType="productOrder">
 		insert into product_order values ( #{orderId}, #{id}, sysdate, 
-			#{address1}, #{address2}, #{recipient}, #{recipientTel}, #{payment},
-			#{payMoney} )
+			#{address1}, #{address2}, #{recipient}, #{recipientTel},
+			payment = 'y', #{payMoney} )
 	</insert>
 	
 	<!-- 주문 등록 (주문 상세) -->

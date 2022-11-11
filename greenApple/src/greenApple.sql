@@ -89,9 +89,9 @@ create table product_order (
 	address1 varchar2(90) not null, -- 주소
 	address2 varchar2(90), -- 상세 주소
 	recipient varchar2(15) not null, -- 수령자 이름
-	recipientTel number not null, -- 수령자 전화번호
-	payment char(1) default 'c' not null, -- 결제 여부
-	payMoney number default 0 not null, -- 결제 금액
+	recipientTel varchar2(15) not null, -- 수령자 전화번호
+	payment char(1) default 'n' not null, -- 결제 여부
+	paymoney number default 0 not null, -- 결제 금액
 	FOREIGN KEY(id) REFERENCES member(id)
 );
 

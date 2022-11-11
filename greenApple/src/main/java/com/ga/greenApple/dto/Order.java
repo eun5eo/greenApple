@@ -26,12 +26,16 @@ public class Order {
 	
 	private String payment; // 결제 여부
 	
+	private int paymoney; // 결제 금액
+	
+	// 환불 여부, 주문취소???????
+	
 	// product에서 꺼내줄 정보
 	private String productName; // 상품명
 	
 	private int price; // 가격
 	
-	// 주문 등록 시 받을 정보
+	// 처리 시 받아올 정보
 	private int amount; // 주문 수량
 
 }
