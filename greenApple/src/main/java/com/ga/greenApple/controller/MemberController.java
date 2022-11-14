@@ -121,4 +121,15 @@ public class MemberController {
 		return result;
 	}
 	
+	// 현재 세션 아이디 전송
+	@RequestMapping(value = "/member/session")
+	public String giveSession(HttpSession session) {
+		String sessionId = (String) session.getAttribute("id");
+		
+		if (sessionId == null || sessionId == "") 
+			sessionId = "null";
+		
+		return sessionId;
+	}
+	
 }
