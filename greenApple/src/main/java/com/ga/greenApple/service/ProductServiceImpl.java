@@ -19,6 +19,12 @@ public class ProductServiceImpl implements ProductService {
 		return pm.list(product);
 	}
 
+	// 총 상품 갯수 (페이징)
+	@Override
+	public int getTotal() {
+		return pm.getTotal();
+	}
+
 	// 상품을 제철별로
 	@Override
 	public List<Product> listSeasonal(String seasonal) {
@@ -29,11 +35,6 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Product view(int productCode) {
 		return pm.view(productCode);
-	}
-
-	@Override
-	public int getTotal() {
-		return pm.getTotal();
 	}
 
 }
