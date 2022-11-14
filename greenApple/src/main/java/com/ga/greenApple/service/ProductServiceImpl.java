@@ -31,4 +31,9 @@ public class ProductServiceImpl implements ProductService {
 		return pm.view(productCode);
 	}
 
+	@Override
+	public int getTotal() {
+		return pm.getTotal();
+	}
+
 }

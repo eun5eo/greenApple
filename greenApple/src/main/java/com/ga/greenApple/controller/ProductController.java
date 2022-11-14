@@ -23,8 +23,17 @@ public class ProductController {
 			@RequestParam("page") int page) {
 		Product product = new Product();
 		
-		int startRow = 1;
-		int endRow = page * 8;
+		int rowPerPage = 8; // 한 번 로드할 때 뜨는 상품 수
+		
+		int startRow = (page -1) * rowPerPage +1;
+		int endRow = startRow + rowPerPage -1;
+		
+		int total = ps.getTotal();
+		int totalNum = (int) Math.ceil((double) total / rowPerPage);
+		 
+		
+		if (endRow > totalNum)
+			endRow = totalNum;
 		
 		product.setStartRow(startRow);
 		product.setEndRow(endRow);

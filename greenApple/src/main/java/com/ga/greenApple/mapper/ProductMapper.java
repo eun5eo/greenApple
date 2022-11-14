@@ -18,4 +18,6 @@ public interface ProductMapper {
 	// 상품 상세보기
 	Product view(int productCode);
 
+	int getTotal();
+
 }

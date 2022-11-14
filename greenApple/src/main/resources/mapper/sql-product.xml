@@ -14,7 +14,11 @@
 				</if>
 			</where>
 				order by inputDate desc) e)
-				where rn between #{startRow} and ${endRow}
+				where rn between #{startRow} and #{endRow}
+	</select>
+	
+	<select id="getTotal" parameterType="integer">
+		select count(*) from product where del = 'n'
 	</select>
 	
 	<!-- 상품을 제철별로 -->
