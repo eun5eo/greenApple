@@ -30,7 +30,7 @@ public class ProductController {
 		
 		int total = ps.getTotal();
 		int totalNum = (int) Math.ceil((double) total / rowPerPage);
-		 
+		
 		
 		if (endRow > totalNum)
 			endRow = totalNum;
