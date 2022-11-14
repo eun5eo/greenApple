@@ -45,5 +45,11 @@ public class OrderServiceImpl implements OrderService {
 		om.deleteCart(detail);
 		
 	}
+
+	// 주문 취소
+	@Override
+	public int orderDelete(String orderId) {
+		return om.orderDelete(orderId);
+	}
 	
 }

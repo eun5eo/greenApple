@@ -92,6 +92,7 @@ create table product_order (
 	recipientTel varchar2(15) not null, -- 수령자 전화번호
 	payment char(1) default 'n' not null, -- 결제 여부
 	paymoney number default 0 not null, -- 결제 금액
+	orderDel char(1) default 'n' not null, -- 주문취소 여부
 	FOREIGN KEY(id) REFERENCES member(id)
 );
 
@@ -137,6 +138,18 @@ insert into member values(
 	sysdate, -- 가입일
 	'경기도', -- 주소
 	'경기아파트 111동 101호',
+	'n' -- 탈퇴 여부
+);
+
+-- 관리자
+insert into member values(
+	'admin', -- id
+	'imadmin0099', -- pw
+	'관리자', -- 이름
+	'01000000000', -- 전화번호
+	sysdate, -- 가입일
+	'집', -- 주소
+	'내 집',
 	'n' -- 탈퇴 여부
 );
 

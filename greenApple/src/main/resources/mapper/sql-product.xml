@@ -5,14 +5,16 @@
 	
 	<!-- 상품 목록 -->
 	<!-- resultType은 dto의 alias와 일치해야한다 -->
-	<select id="list" resultType="product" parameterType="string">
-		select * from product 
+	<select id="list" resultType="product" parameterType="product">
+		select * from product (select rownum rn, e.* from (
+			select * from product
 			<where>
 				<if test="keyword != null and keyword != ''">
 					and productName like '%'||#{keyword}||'%'
 				</if>
 			</where>
-			 order by inputDate desc
+				order by inputDate desc) e)
+				where rn between #{startRow} and ${endRow}
 	</select>
 	
 	<!-- 상품을 제철별로 -->

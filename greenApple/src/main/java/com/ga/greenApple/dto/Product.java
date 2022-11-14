@@ -27,4 +27,11 @@ public class Product {
 	
 	private Date inputDate; // 등록일
 	
+	// 검색용
+	private String keyword; // 검색 단어
+	
+	// 페이징용
+	private int startRow; // 시작페이지
+	
+	private int endRow; // 끝페이지
 }

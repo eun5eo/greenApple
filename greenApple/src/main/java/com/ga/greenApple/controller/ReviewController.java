@@ -112,6 +112,7 @@ public class ReviewController {
 		String requestId = rs.findWriterId(review.getReviewId());
 		String sessionId = (String) session.getAttribute("id");
 		
+		// 뷰에서 버튼을 감춰놓았지만, 한 번 더 확인
 		if (sessionId == requestId) {
 			String fileName = review.getFile().getOriginalFilename();
 			
@@ -139,6 +140,7 @@ public class ReviewController {
 		String requestId = rs.findWriterId(reviewId);
 		String sessionId = (String) session.getAttribute("id");
 		
+		// 뷰에서 버튼을 감춰놓았지만, 한 번 더 확인
 		if (requestId == sessionId) {
 			result = rs.rvDelete(reviewId);
 		} else result = -1;

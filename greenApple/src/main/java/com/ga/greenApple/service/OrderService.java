@@ -22,4 +22,7 @@ public interface OrderService {
 	// 주문 등록된 상품 카트에서 삭제
 	void deleteCart(OrderDetail detail);
 
+	// 주문 취소
+	int orderDelete(String orderId);
+
 }

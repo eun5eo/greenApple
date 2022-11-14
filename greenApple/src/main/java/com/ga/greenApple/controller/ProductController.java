@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,8 +19,17 @@ public class ProductController {
 	
 	// 상품 목록
 	@RequestMapping(value = "/product")
-	public List<Product> productList(@RequestParam("keyword") String keyword) {
-		List<Product> list = ps.list(keyword);
+	public List<Product> productList(@RequestParam("keyword") String keyword,
+			@RequestParam("page") int page) {
+		Product product = new Product();
+		
+		int startRow = 1;
+		int endRow = page * 8;
+		
+		product.setStartRow(startRow);
+		product.setEndRow(endRow);
+		
+		List<Product> list = ps.list(product);
 		
 		return list;
 	}

@@ -33,4 +33,10 @@
 		delete from cart where id = #{id} and productCode = #{productCode}
 	</delete>
 	
+	<!-- 주문 취소 -->
+	<update id="orderDelete" parameterType="string">
+		update product_order set orderDel = 'y'
+			where orderId = #{orderId}
+	</update>
+	
 </mapper>

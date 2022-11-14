@@ -10,13 +10,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ga.greenApple.dto.Order;
 import com.ga.greenApple.dto.OrderDetail;
-import com.ga.greenApple.service.CartService;
 import com.ga.greenApple.service.OrderService;
-import com.ga.greenApple.service.ProductService;
 
 @RestController
 public class OrderController {
@@ -66,6 +65,14 @@ public class OrderController {
 				os.deleteCart(detail);
 			}
 		}
+		
+		return result;
+	}
+	
+	// 주문 취소
+	@PostMapping(value = "/order/orderDelete")
+	public int orderDelete(@RequestParam("orderId") String orderId , HttpSession session) {
+		int result = os.orderDelete(orderId);
 		
 		return result;
 	}

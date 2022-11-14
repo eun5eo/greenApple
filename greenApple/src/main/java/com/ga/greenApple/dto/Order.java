@@ -28,7 +28,7 @@ public class Order {
 	
 	private int paymoney; // 결제 금액
 	
-	// 주문취소???????
+	private String orderDel; // 주문취소 여부
 	
 	// product에서 꺼내줄 정보
 	private String productName; // 상품명
