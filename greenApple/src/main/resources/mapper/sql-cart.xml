@@ -12,20 +12,28 @@
 			where id = #{id}
 	</select>
 	
+	<select id="orderWish" resultType="cart" parameterType="string">
+		select a.cartNo, a.productCode, a.id, a.amount, 
+			b.productName, b.price, b.thumbnail
+			from cart a left outer join product b on a.productCode = b.productCode
+			where id = #{id} and checkStatus = 1
+	</select>
+	
 	<!-- 카트 담기 -->
 	<insert id="addCart" parameterType="cart">
 		insert into cart values ( cart_seq.nextval,
 			#{productCode}, #{id}, #{amount} )
 	</insert>
 	
+	<!-- 카트 수정 -->
+	<update id="amountModify" parameterType="cart">
+		update cart set amount = #{amount}, checkStatus = #{checkStatus}
+			where cartNo = #{cartNo}
+	</update>
+	
 	<!-- 카트 삭제 -->
 	<delete id="deleteCart" parameterType="integer">
 		delete from cart where cartNo = #{cartNo}
 	</delete>
-	
-	<!-- 카트 수량 수정 -->
-	<update id="amountModify" parameterType="cart">
-		update cart set amount = #{amount} where cartNo = #{cartNo}
-	</update>
 	
 </mapper>

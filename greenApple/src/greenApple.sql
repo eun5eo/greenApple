@@ -75,6 +75,7 @@ create table cart (
 	productCode number not null, -- 상품 코드
 	id varchar2(20) not null, -- 아이디 fk
 	amount number not null, -- 수량
+	checkStatus number(1) default 0 not null, -- 체크 상태
 	FOREIGN KEY(id) REFERENCES member(id)
 );
 alter table CART add unique (product_code, id);
@@ -90,6 +91,7 @@ create table product_order (
 	address2 varchar2(90), -- 상세 주소
 	recipient varchar2(15) not null, -- 수령자 이름
 	recipientTel varchar2(15) not null, -- 수령자 전화번호
+	orderMemo varchar2(180), -- 배송 요청사항
 	payment char(1) default 'n' not null, -- 결제 여부
 	paymoney number default 0 not null, -- 결제 금액
 	orderDel char(1) default 'n' not null, -- 주문취소 여부

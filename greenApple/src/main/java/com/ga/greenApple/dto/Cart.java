@@ -15,6 +15,8 @@ public class Cart {
 	
 	private int amount; // 수량
 	
+	private int checkStatus; // 카트에서의 체크 여부
+	
 	// product에서 꺼내줄 정보
 	private String productName; // 상품명
 	

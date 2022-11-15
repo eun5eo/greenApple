@@ -3,7 +3,6 @@ package com.ga.greenApple.dto;
 import java.sql.Date;
 
 import org.apache.ibatis.type.Alias;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
@@ -23,6 +22,8 @@ public class Order {
 	private String recipient; // 수령자 이름
 	
 	private int recipientTel; // 수령자 전화번호
+	
+	private String orderMemo; // 배송 요청사항
 	
 	private String payment; // 결제 여부
 	

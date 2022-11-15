@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ga.greenApple.dto.Cart;
 import com.ga.greenApple.dto.Order;
 import com.ga.greenApple.dto.OrderDetail;
 import com.ga.greenApple.service.OrderService;
@@ -31,6 +32,8 @@ public class OrderController {
 		
 		return orderList;
 	}
+	
+	// 바로구매
 	
 	// 주문 등록
 	@PostMapping(value = "/order/orderInsert")

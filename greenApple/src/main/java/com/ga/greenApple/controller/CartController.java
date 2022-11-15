@@ -26,15 +26,31 @@ public class CartController {
 		String id = (String) session.getAttribute("id");
 		List<Cart> cartList = cs.cartList(id);
 		
-		// totalPrice??
-		
 		return cartList;
+	}
+	
+	// 구매하려는 상품 정보 보여주기
+	@PostMapping(value = "/cart/orderWish")
+	public List<Cart> orderWish(HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		
+		List<Cart> orderWish = cs.orderWish(id);
+		
+		return orderWish;
 	}
 	
 	// 카트 담기
 	@PostMapping(value = "/cart/add")
 	public int cartAdd(@RequestBody Cart cart, HttpSession session) {
 		int result = cs.addCart(cart);
+		
+		return result;
+	}
+	
+	// 카트 수정
+	@PostMapping(value = "/cart/update")
+	public int update(@RequestBody Cart cart, HttpSession session) {
+		int result = cs.update(cart);
 		
 		return result;
 	}
@@ -47,12 +63,4 @@ public class CartController {
 		return result;
 	}
 	
-	// 카트 수량 수정
-	@PostMapping(value = "/cart/modify")
-	public int amountModify(@RequestBody Cart cart, HttpSession session) {
-		int result = cs.amountModify(cart);
-		
-		return result;
-	}
-
 }

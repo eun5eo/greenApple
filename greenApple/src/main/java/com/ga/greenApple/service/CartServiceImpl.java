@@ -18,23 +18,29 @@ public class CartServiceImpl implements CartService {
 	public List<Cart> cartList(String id) {
 		return cm.cartList(id);
 	}
+	
+	// 구매하려는 상품 정보 보여주기
+	@Override
+	public List<Cart> orderWish(String id) {
+		return cm.orderWish(id);
+	}
 
 	// 카트 담기
 	@Override
 	public int addCart(Cart cart) {
 		return cm.addCart(cart);
 	}
+	
+	// 카트 수정
+	@Override
+	public int update(Cart cart) {
+		return cm.update(cart);
+	}
 
 	// 카트 삭제
 	@Override
 	public int deleteCart(int cartNo) {
 		return cm.deleteCart(cartNo);
-	}
-	
-	// 카트 수량 수정
-	@Override
-	public int amountModify(Cart cart) {
-		return cm.amountModify(cart);
 	}
 
 }

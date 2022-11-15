@@ -51,5 +51,5 @@ public class OrderServiceImpl implements OrderService {
 	public int orderDelete(String orderId) {
 		return om.orderDelete(orderId);
 	}
-	
+
 }
