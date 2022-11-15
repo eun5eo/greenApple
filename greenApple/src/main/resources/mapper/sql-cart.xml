@@ -12,6 +12,7 @@
 			where id = #{id}
 	</select>
 	
+	<!-- 구매하려는 상품 정보 결제창에 보여주기 -->
 	<select id="orderWish" resultType="cart" parameterType="string">
 		select a.cartNo, a.productCode, a.id, a.amount, 
 			b.productName, b.price, b.thumbnail
@@ -22,11 +23,11 @@
 	<!-- 카트 담기 -->
 	<insert id="addCart" parameterType="cart">
 		insert into cart values ( cart_seq.nextval,
-			#{productCode}, #{id}, #{amount} )
+			#{productCode}, #{id}, #{amount}, 0 )
 	</insert>
 	
 	<!-- 카트 수정 -->
-	<update id="amountModify" parameterType="cart">
+	<update id="update" parameterType="cart">
 		update cart set amount = #{amount}, checkStatus = #{checkStatus}
 			where cartNo = #{cartNo}
 	</update>

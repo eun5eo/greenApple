@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ga.greenApple.dto.Cart;
 import com.ga.greenApple.dto.Order;
 import com.ga.greenApple.dto.OrderDetail;
+import com.ga.greenApple.dto.Product;
 import com.ga.greenApple.service.OrderService;
 
 @RestController
@@ -33,7 +33,14 @@ public class OrderController {
 		return orderList;
 	}
 	
-	// 바로구매
+	// 주문 상세 목록
+	@PostMapping(value = "/order/orderDetailList")
+	public List<OrderDetail> orderDetailList(@RequestBody Order order, HttpSession session) {
+		String orderId = order.getOrderId();
+		List<OrderDetail> detailList = os.detailList(orderId);
+		
+		return detailList;
+	}
 	
 	// 주문 등록
 	@PostMapping(value = "/order/orderInsert")

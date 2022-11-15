@@ -19,7 +19,7 @@ public class CartServiceImpl implements CartService {
 		return cm.cartList(id);
 	}
 	
-	// 구매하려는 상품 정보 보여주기
+	// 구매하려는 상품 정보 결제창에 보여주기
 	@Override
 	public List<Cart> orderWish(String id) {
 		return cm.orderWish(id);

@@ -19,6 +19,12 @@ public class OrderServiceImpl implements OrderService {
 	public List<Order> orderList(String id) {
 		return om.orderList(id);
 	}
+	
+	// 주문 상세 목록
+	@Override
+	public List<OrderDetail> detailList(String orderId) {
+		return om.detailList(orderId);
+	}
 
 	// 주문 등록
 	@Override

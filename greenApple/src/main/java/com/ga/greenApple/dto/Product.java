@@ -34,4 +34,7 @@ public class Product {
 	private int startRow; // 시작페이지
 	
 	private int endRow; // 끝페이지
+	
+	// 바로 구매용
+	private int amount; // 수량
 }

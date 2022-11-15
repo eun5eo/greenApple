@@ -9,6 +9,9 @@ public interface OrderService {
 
 	// 회원별 주문 목록
 	List<Order> orderList(String id);
+	
+	// 주문 상세 목록
+	List<OrderDetail> detailList(String orderId);
 
 	// 주문 등록
 	int orderInsert(Order order);

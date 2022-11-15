@@ -27,4 +27,10 @@
 		select * from product where productCode = #{productCode}
 	</select>
 	
+	<!-- 바로구매하려는 상품 정보 결제창에 보여주기 -->
+	<select id="nowOrder" resultType="product" parameterType="product">
+		select productCode, thumbnail, productName, price
+			where productCode = #{productCode}
+	</select>
+	
 </mapper>

@@ -9,6 +9,11 @@
 		select * from product_order where id = #{id}
 	</select>
 	
+	<!-- 주문 상세 목록 -->
+	<select id="detailList" resultType="orderDetail" parameterType="string">
+		select * from order_detail where orderId = #{orderId}
+	</select>
+	
 	<!-- 주문 등록 -->
 	<insert id="orderInsert" parameterType="productOrder">
 		insert into product_order values ( #{orderId}, #{id}, sysdate, 

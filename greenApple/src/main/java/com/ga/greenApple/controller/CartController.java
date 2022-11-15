@@ -29,8 +29,8 @@ public class CartController {
 		return cartList;
 	}
 	
-	// 구매하려는 상품 정보 보여주기
-	@PostMapping(value = "/cart/orderWish")
+	// 구매하려는 상품 정보 결제창에 보여주기
+	@RequestMapping(value = "/cart/orderWish")
 	public List<Cart> orderWish(HttpSession session) {
 		String id = (String) session.getAttribute("id");
 		

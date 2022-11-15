@@ -9,7 +9,7 @@ public interface CartService {
 	// 카트 리스트
 	List<Cart> cartList(String id);
 	
-	// 구매하려는 상품 정보 보여주기
+	// 구매하려는 상품 정보 결제창에 보여주기
 	List<Cart> orderWish(String id);
 
 	// 카트 담기

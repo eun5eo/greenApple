@@ -2,8 +2,12 @@ package com.ga.greenApple.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,8 +35,8 @@ public class ProductController {
 		}
 		
 		int rowPerPage = 8; // 한 번 로드할 때 뜨는 상품 수
-		int startRow = (page -1) * rowPerPage +1;	// 시작 상품 페이지
-		int endRow = startRow + rowPerPage -1;	// 끝 상품 
+		int startRow = (page -1) * rowPerPage +1;	// 상품 시작 번호
+		int endRow = startRow + rowPerPage -1;	// 상품 끝 번호 
 		
 		product.setStartRow(startRow);
 		product.setEndRow(endRow);
@@ -56,6 +60,16 @@ public class ProductController {
 		Product product = ps.view(productCode);
 		
 		return product;
+	}
+	
+	// 바로구매하려는 상품 정보 결제창에 보여주기
+	@PostMapping(value = "/product/nowOrder")
+	public Product nowOrder(@RequestBody Product product, HttpSession session) {
+		Product productInfo = ps.nowOrder(product);
+		
+		productInfo.setAmount(product.getAmount());
+		
+		return productInfo;
 	}
 	
 }

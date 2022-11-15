@@ -37,4 +37,10 @@ public class ProductServiceImpl implements ProductService {
 		return pm.view(productCode);
 	}
 
+	// 바로구매하려는 상품 정보 결제창에 보여주기
+	@Override
+	public Product nowOrder(Product product) {
+		return pm.nowOrder(product);
+	}
+
 }
