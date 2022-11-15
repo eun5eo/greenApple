@@ -44,7 +44,7 @@ public class OrderController {
 	
 	// 주문 등록
 	@PostMapping(value = "/order/orderInsert")
-	public int orderInsert(@RequestBody List<Order> orders, @RequestBody List<OrderDetail> details,
+	public int orderInsert(@RequestBody Order order, @RequestBody List<OrderDetail> details,
 			HttpSession session) {
 		int result = 0;
 		String id = (String) session.getAttribute("id");
@@ -53,14 +53,11 @@ public class OrderController {
 		Date date = new Date();
 		SimpleDateFormat fm = new SimpleDateFormat("yyyyMMddHHmmss");		
 		String nowDate = fm.format(date) + (int)(Math.random() * 10);
-				
-		// List로 받은 orders를 하나씩 나누기
-		for(Order order : orders) {
-			order.setOrderId(nowDate);
-			order.setId(id);
-			
-			result = os.orderInsert(order);
-		}
+		
+		order.setOrderId(nowDate);
+		order.setId(id);
+		
+		result = os.orderInsert(order);
 		
 		// List로 받은 details를 하나씩 나누기
 		for(OrderDetail detail : details) {
