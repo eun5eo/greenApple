@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +17,6 @@ public class ProductController {
 	private ProductService ps;
 	
 	// 상품 목록
-	@SuppressWarnings("unused")
 	@RequestMapping(value = "/product")
 	public List<Product> productList(@RequestParam("keyword") String keyword,
 			@RequestParam("page") int page) {
@@ -29,17 +27,18 @@ public class ProductController {
 		if (keyword != null || keyword != "") {
 			product.setKeyword(keyword);
 			
-			list = ps.list(product);	
-		} else {
-			int rowPerPage = 8; // 한 번 로드할 때 뜨는 상품 수
-			int startRow = 1;	// 시작 상품 번호
-			int endRow = startRow + rowPerPage -1;	// 끝 상품 번호
-			
-			product.setStartRow(startRow);
-			product.setEndRow(endRow);
-			
 			list = ps.list(product);
 		}
+		
+		int rowPerPage = 8; // 한 번 로드할 때 뜨는 상품 수
+		int startRow = (page -1) * rowPerPage +1;	// 시작 상품 페이지
+		int endRow = startRow + rowPerPage -1;	// 끝 상품 
+		
+		product.setStartRow(startRow);
+		product.setEndRow(endRow);
+		
+		list = ps.list(product);
+		
 		return list;
 	}
 	
