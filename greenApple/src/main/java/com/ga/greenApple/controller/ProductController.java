@@ -18,27 +18,28 @@ public class ProductController {
 	private ProductService ps;
 	
 	// 상품 목록
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/product")
 	public List<Product> productList(@RequestParam("keyword") String keyword,
 			@RequestParam("page") int page) {
 		Product product = new Product();
 		
-		int rowPerPage = 8; // 한 번 로드할 때 뜨는 상품 수
+		List<Product> list;
 		
-		int startRow = (page -1) * rowPerPage +1;
-		int endRow = startRow + rowPerPage -1;
-		
-		int total = ps.getTotal();
-		int totalNum = (int) Math.ceil((double) total / rowPerPage);
-		// test
-		if (endRow > totalNum)
-			endRow = totalNum;
-		
-		product.setStartRow(startRow);
-		product.setEndRow(endRow);
-		
-		List<Product> list = ps.list(product);
-		
+		if (keyword != null || keyword != "") {
+			product.setKeyword(keyword);
+			
+			list = ps.list(product);	
+		} else {
+			int rowPerPage = 8; // 한 번 로드할 때 뜨는 상품 수
+			int startRow = 1;	// 시작 상품 번호
+			int endRow = startRow + rowPerPage -1;	// 끝 상품 번호
+			
+			product.setStartRow(startRow);
+			product.setEndRow(endRow);
+			
+			list = ps.list(product);
+		}
 		return list;
 	}
 	
