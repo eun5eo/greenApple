@@ -116,7 +116,7 @@ public class ReviewController {
 		if (sessionId == requestId) {
 			String fileName = review.getFile().getOriginalFilename();
 			
-			// 파일이 들어오지 않았다면, 이전의 것을 등록
+			// 수정 시 새 파일이 들어오지 않았다면, 이전의 파일을 가져와서 등록
 			if (fileName != null && !fileName.equals("")) {
 				review.setFileName(fileName);
 				

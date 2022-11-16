@@ -23,7 +23,7 @@ public class OrderController {
 	@Autowired
 	private OrderService os;
 
-	// 회원별 주문 목록
+	// 회원별 주문 내역 목록
 	@PostMapping(value = "/order/orderList")
 	public List<Order> orderList(HttpServletRequest request) {
 		String id = request.getSession().getId();

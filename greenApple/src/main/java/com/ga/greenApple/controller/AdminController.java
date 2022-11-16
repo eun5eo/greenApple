@@ -1,7 +1,6 @@
 package com.ga.greenApple.controller;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,10 +11,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.ga.greenApple.dto.Member;
 import com.ga.greenApple.dto.Product;
 import com.ga.greenApple.dto.ProductImg;
 import com.ga.greenApple.service.AdminService;
@@ -66,12 +68,61 @@ public class AdminController {
 	}
 	
 	// 상품 수정
+	@PostMapping(value = "/admin/productUpdate")
+	public int productUpdate(@ModelAttribute Product product, HttpSession session) 
+			throws IOException {
+		int result = 0;
+		String id = (String) session.getAttribute("id");
+		
+		if (id == "admin") {
+			String fileName = product.getFile().getOriginalFilename();
+			
+			// 수정 시 새 파일이 들어오지 않았다면, 이전의 파일을 가져와서 등록
+			if (fileName != null && !fileName.equals("")) {
+				product.setFileName(fileName);
+				
+				String realPath = "src/main/resources/static/pdImages";
+				FileOutputStream fos = new FileOutputStream(new File(realPath+"/"+fileName));
+				
+				fos.write(product.getFile().getBytes());
+				fos.close();
+			}
+			result = as.pdUpdate(product);
+		} else result = -1;
+		
+		return result;
+	}
 	
 	// 상품 삭제
+	@RequestMapping(value = "/admin/productDelete")
+	public int productDelete(@RequestParam("productCode") int productCode,
+			HttpSession session) {
+		int result = 0;
+		
+		String id = (String) session.getAttribute("id");
+		
+		if (id == "admin") {
+			result = as.pdDelete(productCode);
+		} else result = -1;
+		
+		return result;
+	}
 	
 	// 상품 품절
 	
 	// 회원 목록
+	@PostMapping(value = "/admin/memberList")
+	public List<Member> memberList(HttpSession session) {		
+		String id = (String) session.getAttribute("id");
+		
+		List<Member> memberList = null;
+		
+		if (id == "admin") {
+			memberList = as.memberList();
+		}
+		
+		return memberList;
+	}
 	
 	// 리뷰 관리
 }

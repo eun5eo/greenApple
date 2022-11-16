@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ga.greenApple.dto.Member;
 import com.ga.greenApple.dto.Product;
 import com.ga.greenApple.dto.ProductImg;
 import com.ga.greenApple.mapper.AdminMapper;
@@ -29,4 +30,23 @@ public class AdminServiceImpl implements AdminService {
 			am.insertPhotos(pi);
 		}
 	}
+	
+	// 상품 수정
+	@Override
+	public int pdUpdate(Product product) {
+		return am.pdUpdate(product);
+	}
+
+	// 상품 삭제
+	@Override
+	public int pdDelete(int productCode) {
+		return am.pdDelete(productCode);
+	}
+
+	// 회원 목록
+	@Override
+	public List<Member> memberList() {
+		return am.memberList();
+	}
+
 }

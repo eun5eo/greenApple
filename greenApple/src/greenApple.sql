@@ -12,7 +12,9 @@ create table product (
 	origin varchar2(40) not null, -- 원산지
 	seasonal varchar2(10) not null, -- 제철
 	stock number default 0 not null, -- 재고
-    inputDate date not null -- 등록일
+    inputDate date not null, -- 등록일
+    soldOut chat(1) default 'n' not null, -- 품절 여부
+    del char(1) default 'n' not null -- 상품 삭제 여부
 );
 
 -- 상품 사진
@@ -147,7 +149,7 @@ insert into member values(
 -- 관리자
 insert into member values(
 	'admin', -- id
-	'imadmin0099', -- pw
+	'imrealadmin00', -- pw
 	'관리자', -- 이름
 	'01000000000', -- 전화번호
 	sysdate, -- 가입일

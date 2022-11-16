@@ -3,6 +3,7 @@ package com.ga.greenApple.dto;
 import java.sql.Date;
 
 import org.apache.ibatis.type.Alias;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
@@ -28,6 +29,13 @@ public class Product {
 	private int stock; // 재고
 	
 	private Date inputDate; // 등록일
+	
+	private String soldOut; // 품절 여부
+	
+	private String del; // 상품 삭제 여부
+	
+	// upload용
+	private MultipartFile file;
 	
 	// 검색용
 	private String keyword; // 검색 단어

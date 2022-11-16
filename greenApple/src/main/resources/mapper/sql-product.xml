@@ -14,12 +14,12 @@
 				</if>
 			</where>
 			order by inputDate desc) e)
-			where rn between 1 and #{endRow}
+			where del = 'n' and rn between 1 and #{endRow}
 	</select>
 	
 	<!-- 상품을 제철별로 -->
 	<select id="listSeasonal" resultType="product" parameterType="string">
-		select * from product where seasonal = #{seasonal}
+		select * from product where seasonal = #{seasonal} and del = 'n'
 	</select>
 	
 	<!-- 상품 상세보기 -->

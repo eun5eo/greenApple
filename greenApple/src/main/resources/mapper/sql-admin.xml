@@ -7,7 +7,7 @@
 	<insert id="pdInsert" parameterType="product">
 		insert into product values ( product_code_seq.nextval, #{thumbnail}, #{fileName}, 
 			#{productName}, #{price}, #{productDescription}, #{origin}, #{seasonal}, 
-			#{stock}, sysdate )
+			#{stock}, sysdate, 'n', 'n' )
 	</insert>
 	
 	<!-- 상품 사진 등록 -->
@@ -15,5 +15,26 @@
 		insert into product_img values ( product_img_seq.nextval, #{productCode}, 
 			#{fileName} )
 	</insert>
+	
+	<!-- 상품 수정 -->
+	<update id="pdUpdate" parameterType="product">
+		update product set thumbnail = #{thumbnail}, productName = #{productName}, 
+			price = #{price}, productDescription = #{productDescription},
+			origin = #{origin}, seasonal = #{seasonal}, stock = #{stock}
+			<if test="fileName != null">
+				, fileName = #{fileName}
+			</if>
+			where productCode = #{productCode}
+	</update>
+	
+	<!-- 상품 삭제 -->
+	<update id="pdDelete" parameterType="integer">
+		update product set del = 'y' where productCode = #{productCode}
+	</update>
+	
+	<!-- 회원 목록 -->
+	<select id="memberList" resultType="member">
+		select id, name, tel, joinDate, address1, address2, del from member
+	</select>
 	
 </mapper>
