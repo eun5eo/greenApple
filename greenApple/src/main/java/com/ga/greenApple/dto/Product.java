@@ -13,6 +13,8 @@ public class Product {
 	
 	private String thumbnail; // 썸네일
 	
+	private String fileName; // 파일명
+	
 	private String productName; // 상품명
 	
 	private int price; // 가격

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ga.greenApple.mapper.AdminMapper">
+	
+	<!-- 상품 등록 -->
+	<insert id="pdInsert" parameterType="product">
+		insert into product values ( product_code_seq.nextval, #{thumbnail}, #{fileName}, 
+			#{productName}, #{price}, #{productDescription}, #{origin}, #{seasonal}, 
+			#{stock}, sysdate )
+	</insert>
+	
+	<!-- 상품 사진 등록 -->
+	<insert id="insertphotos" parameterType="productImg">
+		insert into product_img values ( product_img_seq.nextval, #{productCode}, 
+			#{fileName} )
+	</insert>
+	
+</mapper>

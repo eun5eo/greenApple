@@ -68,12 +68,12 @@ public class ReviewController {
 		String id = (String) session.getAttribute("id");
 		review.setReviewId(nowDate);
 		review.setId(id);
-			
+		
 		// 한 번에 여러 장의 파일을 받는다
 		List<MultipartFile> list = mhr.getFiles("file");
 		List<ReviewImg> rvPhotos = new ArrayList<ReviewImg>();
 		
-		String real = "src/main/resources/static/rvImages";
+		String realPath = "src/main/resources/static/rvImages";
 		
 		// list의 사진을 하나씩 가져와 rvPhotos에 저장
 		for (MultipartFile mf : list) {
@@ -82,11 +82,11 @@ public class ReviewController {
 			ri.setFileName(fileName);
 			ri.setId(id);
 			
-			// reviewimg의 갯수는 사진 갯수만큼
+			// reviewImg의 갯수는 사진의 갯수만큼
 			rvPhotos.add(ri);
 			
 			// 그림 파일 저장
-			FileOutputStream fos = new FileOutputStream(new File(real+"/"+fileName));
+			FileOutputStream fos = new FileOutputStream(new File(realPath+"/"+fileName));
 			fos.write(mf.getBytes());
 			fos.close();
 			
@@ -120,8 +120,8 @@ public class ReviewController {
 			if (fileName != null && !fileName.equals("")) {
 				review.setFileName(fileName);
 				
-				String real = "src/main/resources/static/rvImages";
-				FileOutputStream fos = new FileOutputStream(new File(real+"/"+fileName));
+				String realPath = "src/main/resources/static/rvImages";
+				FileOutputStream fos = new FileOutputStream(new File(realPath+"/"+fileName));
 				
 				fos.write(review.getFile().getBytes());
 				fos.close();

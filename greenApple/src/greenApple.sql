@@ -5,6 +5,7 @@ drop table PRODUCT;
 create table product (
 	productCode number primary key, -- 상품 코드
 	thumbnail varchar2(250) not null, -- 썸네일
+	fileName varchar2(150), -- 파일명
 	productName varchar2(90) not null, -- 상품명 30자
 	price number(7) not null, -- 가격
 	productDescription varchar2(3000), -- 설명
@@ -189,6 +190,15 @@ CREATE SEQUENCE order_detail_seq
     START WITH 100000
     INCREMENT BY 1
     MINVALUE 100000
+    NOMAXVALUE
+    NOCACHE
+    NOORDER
+    NOCYCLE;
+
+CREATE SEQUENCE product_code_seq
+    START WITH 10000000
+    INCREMENT BY 1
+    MINVALUE 10000000
     NOMAXVALUE
     NOCACHE
     NOORDER

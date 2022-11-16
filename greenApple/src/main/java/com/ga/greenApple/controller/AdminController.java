@@ -1,0 +1,77 @@
+package com.ga.greenApple.controller;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.ga.greenApple.dto.Product;
+import com.ga.greenApple.dto.ProductImg;
+import com.ga.greenApple.service.AdminService;
+
+@RestController
+public class AdminController {
+	@Autowired
+	private AdminService as;
+	
+	// 상품 등록
+	@PostMapping(value = "/admin/productInsert")
+	public int productInsert(@ModelAttribute Product product, MultipartHttpServletRequest mhr, 
+			HttpSession session) throws IOException {
+		int result = 0;
+		
+		// 상품 코드 생성 => 시퀀스 처리
+		// 한 번에 여러 장의 파일을 받는다
+		List<MultipartFile> list = mhr.getFiles("file");
+		List<ProductImg> pdPhotos = new ArrayList<ProductImg>();
+		
+		String realPath = "src/main/resources/static/pdImages";
+		
+		// list의 사진을 하나씩 가져와 pdPhotos에 저장
+		for (MultipartFile mf : list) {
+			ProductImg pi = new ProductImg();
+			String fileName = mf.getOriginalFilename();
+			pi.setFileName(fileName);
+			
+			// productImg의 갯수는 사진의 갯수만큼
+			pdPhotos.add(pi);
+			
+			// 그림 파일 저장
+			FileOutputStream fos = new FileOutputStream(new File(realPath+"/"+fileName));
+			fos.write(mf.getBytes());
+			fos.close();
+			
+			// product 테이블에도 그림을 넣어줘야 등록된다
+			product.setFileName(fileName);
+		}
+		result = as.pdInsert(product);
+		
+		if (result > 0) {
+			int productCode = product.getProductCode();
+			as.insertPhotos(pdPhotos, productCode);
+		}
+		
+		return result;
+	}
+	
+	// 상품 수정
+	
+	// 상품 삭제
+	
+	// 상품 품절
+	
+	// 회원 목록
+	
+	// 리뷰 관리
+}
