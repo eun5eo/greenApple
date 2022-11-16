@@ -5,6 +5,7 @@ import java.util.List;
 import com.ga.greenApple.dto.Member;
 import com.ga.greenApple.dto.Product;
 import com.ga.greenApple.dto.ProductImg;
+import com.ga.greenApple.dto.Review;
 
 public interface AdminService {
 
@@ -22,5 +23,11 @@ public interface AdminService {
 
 	// 회원 목록
 	List<Member> memberList();
+
+	// 리뷰 목록
+	List<Review> reviewList();
+
+	// 리뷰 삭제
+	int reviewDelete(String reviewId);
 
 }

@@ -37,4 +37,14 @@
 		select id, name, tel, joinDate, address1, address2, del from member
 	</select>
 	
+	<!-- 리뷰 목록 -->
+	<select id="reviewList" resultType="review">
+		select * from review
+	</select>
+	
+	<!-- 리뷰 삭제 -->
+	<update id="reviewDelete" parameterType="string">
+		update review set del = 'y' where reviewId = #{reviewId}
+	</update>
+	
 </mapper>

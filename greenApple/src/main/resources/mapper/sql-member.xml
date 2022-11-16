@@ -26,4 +26,9 @@
 		update member set del = 'y' where id = #{id}
 	</update>
 	
+	<!-- 회원별 작성한 리뷰 보기 -->
+	<select id="myReview" resultType="review" parameterType="string">
+		select 
+	</select>
+	
 </mapper>

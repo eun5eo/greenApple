@@ -49,8 +49,8 @@ public class CartController {
 	
 	// 카트 수정
 	@PostMapping(value = "/cart/update")
-	public int update(@RequestBody Cart cart, HttpSession session) {
-		int result = cs.update(cart);
+	public int cartUpdate(@RequestBody Cart cart, HttpSession session) {
+		int result = cs.cartUpdate(cart);
 		
 		return result;
 	}

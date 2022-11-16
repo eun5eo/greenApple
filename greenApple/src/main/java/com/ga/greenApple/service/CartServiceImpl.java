@@ -33,8 +33,8 @@ public class CartServiceImpl implements CartService {
 	
 	// 카트 수정
 	@Override
-	public int update(Cart cart) {
-		return cm.update(cart);
+	public int cartUpdate(Cart cart) {
+		return cm.cartUpdate(cart);
 	}
 
 	// 카트 삭제

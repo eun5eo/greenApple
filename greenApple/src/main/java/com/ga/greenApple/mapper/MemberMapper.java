@@ -1,8 +1,11 @@
 package com.ga.greenApple.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ga.greenApple.dto.Member;
+import com.ga.greenApple.dto.Review;
 
 @Mapper
 public interface MemberMapper {
@@ -18,5 +21,8 @@ public interface MemberMapper {
 
 	// 회원 탈퇴
 	int delete(String id);
+
+	// 회원별 작성한 리뷰 보기
+	List<Review> myReview(String id);
 
 }

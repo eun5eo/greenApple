@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.ga.greenApple.dto.Member;
 import com.ga.greenApple.dto.Product;
 import com.ga.greenApple.dto.ProductImg;
+import com.ga.greenApple.dto.Review;
 
 @Mapper
 public interface AdminMapper {
@@ -25,5 +26,11 @@ public interface AdminMapper {
 
 	// 회원 목록
 	List<Member> memberList();
+
+	// 리뷰 목록
+	List<Review> reviewList();
+
+	// 리뷰 삭제
+	int reviewDelete(String reviewId);
 
 }

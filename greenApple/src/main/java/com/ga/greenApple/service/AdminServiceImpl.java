@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.ga.greenApple.dto.Member;
 import com.ga.greenApple.dto.Product;
 import com.ga.greenApple.dto.ProductImg;
+import com.ga.greenApple.dto.Review;
 import com.ga.greenApple.mapper.AdminMapper;
 
 @Service
@@ -47,6 +48,18 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Member> memberList() {
 		return am.memberList();
+	}
+
+	// 리뷰 목록
+	@Override
+	public List<Review> reviewList() {
+		return am.reviewList();
+	}
+
+	// 리뷰 삭제
+	@Override
+	public int reviewDelete(String reviewId) {
+		return am.reviewDelete(reviewId);
 	}
 
 }

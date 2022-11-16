@@ -1,5 +1,7 @@
 package com.ga.greenApple.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ga.greenApple.dto.Member;
+import com.ga.greenApple.dto.Review;
 import com.ga.greenApple.service.MemberService;
 
 @RestController
@@ -24,7 +27,7 @@ public class MemberController {
 	
 	// id 중복 체크
 	@RequestMapping(value = "/join/idCheck")
-	public int idCheck(@RequestParam String id) {
+	public int memberIdCheck(@RequestParam String id) {
 		int result = 0;
 		Member member = ms.select(id);
 		
@@ -38,7 +41,7 @@ public class MemberController {
 	
 	// 회원가입
 	@PostMapping(value = "/join")
-	public int join(@RequestBody Member member) {
+	public int memberJoin(@RequestBody Member member) {
 		int result = 0;
 		
 		// 한 번 더 아이디 중복 체크
@@ -83,7 +86,7 @@ public class MemberController {
 	
 	// 회원 정보
 	@RequestMapping(value = "/member/information")
-	public Member information(@RequestParam String id, HttpSession session) {
+	public Member memberInformation(@RequestParam String id, HttpSession session) {
 		Member member = ms.select(id);
 		
 		return member;
@@ -91,7 +94,7 @@ public class MemberController {
 	
 	// 회원정보 업데이트
 	@PostMapping(value = "/member/update")
-	public int update(@RequestBody Member member, HttpSession session) {
+	public int memberUpdate(@RequestBody Member member, HttpSession session) {
 		int result = 0;
 		
 		String encPass = bpe.encode(member.getPw());
@@ -104,7 +107,7 @@ public class MemberController {
 	
 	// 회원 탈퇴
 	@PostMapping(value = "/member/delete")
-	public int delete(@RequestBody Member member, HttpSession session) {
+	public int memberDelete(@RequestBody Member member, HttpSession session) {
 		int result = 0;
 		
 		String id = (String) session.getAttribute("id");
@@ -119,6 +122,16 @@ public class MemberController {
 		if (result > 0) session.invalidate();
 		
 		return result;
+	}
+	
+	// 회원별 작성한 리뷰 보기
+	@PostMapping(value = "/member/myReview")
+	public List<Review> memberMyreview(HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		
+		List<Review> myReview = ms.myReview(id);
+		
+		return myReview;
 	}
 	
 	// 현재 세션 아이디 전송

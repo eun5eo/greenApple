@@ -16,7 +16,7 @@ public interface CartService {
 	int addCart(Cart cart);
 	
 	// 카트 수정
-	int update(Cart cart);
+	int cartUpdate(Cart cart);
 	
 	// 카트 삭제
 	int deleteCart(int cartNo);

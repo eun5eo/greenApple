@@ -27,7 +27,7 @@
 	</insert>
 	
 	<!-- 카트 수정 -->
-	<update id="update" parameterType="cart">
+	<update id="cartUpdate" parameterType="cart">
 		update cart set amount = #{amount}, checkStatus = #{checkStatus}
 			where cartNo = #{cartNo}
 	</update>

@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.ga.greenApple.dto.Member;
 import com.ga.greenApple.dto.Product;
 import com.ga.greenApple.dto.ProductImg;
+import com.ga.greenApple.dto.Review;
 import com.ga.greenApple.service.AdminService;
 
 @RestController
@@ -124,5 +125,31 @@ public class AdminController {
 		return memberList;
 	}
 	
-	// 리뷰 관리
+	// 리뷰 목록
+	@PostMapping(value = "/admin/reviewList")
+	public List<Review> reviewList(HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		
+		List<Review> reviewList = null;
+		
+		if (id == "admin") {
+			reviewList = as.reviewList();
+		}
+		
+		return reviewList;
+	}
+	
+	// 리뷰 삭제 처리
+	@PostMapping(value = "/admin/reviewDelete")
+	public int reviewDelete(@RequestParam("reviewId") String reviewId, HttpSession session) {
+		int result = 0;
+		
+		String id = (String) session.getAttribute("id");
+		
+		if (id == "admin") {
+			result = as.reviewDelete(reviewId);
+		}
+		
+		return result;
+	}
 }

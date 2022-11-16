@@ -1,6 +1,9 @@
 package com.ga.greenApple.service;
 
+import java.util.List;
+
 import com.ga.greenApple.dto.Member;
+import com.ga.greenApple.dto.Review;
 
 public interface MemberService {
 
@@ -15,5 +18,8 @@ public interface MemberService {
 
 	// 회원 탈퇴
 	int delete(String id);
+
+	// 회원별 작성한 리뷰 보기
+	List<Review> myReview(String id);
 
 }
