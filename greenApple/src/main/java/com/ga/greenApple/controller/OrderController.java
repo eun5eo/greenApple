@@ -79,8 +79,12 @@ public class OrderController {
 	
 	// 주문 취소
 	@PostMapping(value = "/order/orderDelete")
-	public int orderDelete(@RequestParam("orderId") String orderId , HttpSession session) {
-		int result = os.orderDelete(orderId);
+	public int orderDelete(@RequestBody Order order, HttpSession session) {
+		int result = os.orderDelete(order.getOrderId());
+		
+		if (result > 0) {
+			os.detailDelete(order.getOrderId());
+		}
 		
 		return result;
 	}

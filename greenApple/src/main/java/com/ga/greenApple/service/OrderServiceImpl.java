@@ -58,4 +58,11 @@ public class OrderServiceImpl implements OrderService {
 		return om.orderDelete(orderId);
 	}
 
+	// 주문 상세 취소
+	@Override
+	public void detailDelete(String orderId) {
+		om.detailDelete(orderId);
+		
+	}
+
 }

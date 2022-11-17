@@ -28,4 +28,7 @@ public interface OrderService {
 	// 주문 취소
 	int orderDelete(String orderId);
 
+	// 주문 상세 취소
+	void detailDelete(String orderId);
+
 }

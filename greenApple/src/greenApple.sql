@@ -96,7 +96,7 @@ create table product_order (
 	recipientTel varchar2(15) not null, -- 수령자 전화번호
 	orderMemo varchar2(180), -- 배송 요청사항
 	payment char(1) default 'n' not null, -- 결제 여부
-	paymoney number default 0 not null, -- 결제 금액
+	payMoney number default 0 not null, -- 결제 금액
 	orderDel char(1) default 'n' not null, -- 주문취소 여부
 	FOREIGN KEY(id) REFERENCES member(id)
 );
@@ -111,6 +111,7 @@ create table order_detail (
 	productCode number not null, -- 상품 코드 fk
 	amount number not null, -- 수량
 	price number not null, -- 가격
+	
 	FOREIGN KEY(orderId) REFERENCES product_order(orderId),
 	FOREIGN KEY(productCode) REFERENCES product(productCode)
 );

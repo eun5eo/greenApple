@@ -17,6 +17,8 @@ public class OrderDetail {
 	
 	private int price; // 가격
 	
+	private String del; // 삭제여부
+	
 	// 주문 성공 시 cart delete용
 	private String id; // 회원 아이디
 }

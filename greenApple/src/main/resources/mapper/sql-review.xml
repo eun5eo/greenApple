@@ -34,12 +34,12 @@
 	</insert>
 	
 	<!-- 리뷰 수정/삭제 시 작성자 id 찾기 (비교용) -->
-	<select id="findWriteId" parameterType="string">
-		select id from where reviewId = #{reviewId}
+	<select id="findWriteId" resultType="string" parameterType="string">
+		select id from review where reviewId = #{reviewId}
 	</select>
 	
 	<!-- 리뷰 수정 -->
-	<update id="rvUpdate">
+	<update id="rvUpdate" parameterType="review">
 		update review set content = #{content}
 			<if test="fileName != null">
 				, fileName = #{fileName}

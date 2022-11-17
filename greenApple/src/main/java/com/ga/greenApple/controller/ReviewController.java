@@ -109,11 +109,11 @@ public class ReviewController {
 	public int reviewUpdate(@ModelAttribute Review review, HttpSession session) 
 			throws IOException {
 		int result = 0;
-		String requestId = rs.findWriterId(review.getReviewId());
-		String sessionId = (String) session.getAttribute("id");
+		String requestId = rs.findWriterId(review.getReviewId()); // DB에 등록된 리뷰 작성자
+		String sessionId = (String) session.getAttribute("id"); // 세션 아이디
 		
 		// 뷰에서 버튼을 감춰놓았지만, 한 번 더 확인
-		if (sessionId == requestId) {
+		if (sessionId.equals(requestId)) {
 			String fileName = review.getFile().getOriginalFilename();
 			
 			// 수정 시 새 파일이 들어오지 않았다면, 이전의 파일을 가져와서 등록
@@ -141,7 +141,7 @@ public class ReviewController {
 		String sessionId = (String) session.getAttribute("id");
 		
 		// 뷰에서 버튼을 감춰놓았지만, 한 번 더 확인
-		if (requestId == sessionId) {
+		if (sessionId.equals(requestId)) {
 			result = rs.rvDelete(reviewId);
 		} else result = -1;
 		

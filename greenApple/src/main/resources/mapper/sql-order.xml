@@ -44,4 +44,10 @@
 			where orderId = #{orderId}
 	</update>
 	
+	<!-- 주문 상세 취소 -->
+	<update id="detailDelete" parameterType="string">
+		update order_detail set del = 'y'
+			where orderId = #{orderId}
+	</update>
+	
 </mapper>
