@@ -1,6 +1,7 @@
 package com.ga.greenApple.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
@@ -39,4 +40,6 @@ public class Order {
 	// 처리 시 받아올 정보
 	private int amount; // 주문 수량
 
+	// order 처리 시 detail에 담을 정보
+	private List<OrderDetail> detailList;
 }

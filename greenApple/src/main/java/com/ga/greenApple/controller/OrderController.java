@@ -44,8 +44,7 @@ public class OrderController {
 	
 	// 주문 등록
 	@PostMapping(value = "/order/orderInsert")
-	public int orderInsert(@RequestBody Order order, @RequestBody List<OrderDetail> details,
-			HttpSession session) {
+	public int orderInsert(@RequestBody Order order, HttpSession session) {
 		int result = 0;
 		String id = (String) session.getAttribute("id");
 		
@@ -59,17 +58,19 @@ public class OrderController {
 		
 		result = os.orderInsert(order);
 		
-		// List로 받은 details를 하나씩 나누기
-		for(OrderDetail detail : details) {
-			detail.setOrderId(nowDate);
-			
-			os.orderDetailInsert(detail);
-			
-			if (result > 0) {
-				detail.setId(id);
+		// List로 받은 detailList를 하나씩 분리
+		if (result > 0) {
+			for (OrderDetail detail : order.getDetailList()) {
+				detail.setOrderId(nowDate);
 				
-				os.stockDown(detail);
-				os.deleteCart(detail);
+				int detailResult = os.orderDetailInsert(detail);
+				
+				if (detailResult > 0) {
+					detail.setId(id);
+					
+					os.stockDown(detail);
+					os.deleteCart(detail);
+				}
 			}
 		}
 		
