@@ -13,14 +13,14 @@ create table product (
 	seasonal varchar2(10) not null, -- 제철
 	stock number default 0 not null, -- 재고
     inputDate date not null, -- 등록일
-    soldOut chat(1) default 'n' not null, -- 품절 여부
+    soldOut char(1) default 'n' not null, -- 품절 여부
     del char(1) default 'n' not null -- 상품 삭제 여부
 );
 
 -- 상품 사진
 select * from PRODUCT_IMG;
 drop table PRODUCT_IMG;
-create table productImg (
+create table product_img (
 	productImgNo number primary key, -- 사진 번호
 	productCode number not null, -- 상품 코드 fk
 	fileName varchar2(100), -- 파일명

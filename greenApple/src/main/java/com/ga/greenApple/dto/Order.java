@@ -28,7 +28,7 @@ public class Order {
 	
 	private String payment; // 결제 여부
 	
-	private int paymoney; // 결제 금액
+	private int payMoney; // 결제 금액
 	
 	private String orderDel; // 주문취소 여부
 	
