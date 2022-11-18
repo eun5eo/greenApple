@@ -18,13 +18,13 @@
 	<insert id="orderInsert" parameterType="productOrder">
 		insert into product_order values ( #{orderId}, #{id}, sysdate, 
 			#{address1}, #{address2}, #{recipient}, #{recipientTel},
-			#{orderMemo}, payment = 'y', #{payMoney}, 'n' )
+			#{orderMemo}, 'y', #{payMoney}, 'n' )
 	</insert>
 	
 	<!-- 주문 등록 (주문 상세) -->
 	<insert id="orderDetailInsert" parameterType="orderDetail">
 		insert into order_detail values ( order_detail_seq.nextval, 
-			#{orderId}, #{productCode}, #{amount}, #{price} )
+			#{orderId}, #{productCode}, #{amount}, #{price}, 'n' )
 	</insert>
 	
 	<!-- 주문 등록된 상품 수량 하향 -->
