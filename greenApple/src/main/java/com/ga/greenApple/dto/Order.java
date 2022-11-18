@@ -22,7 +22,7 @@ public class Order {
 	
 	private String recipient; // 수령자 이름
 	
-	private int recipientTel; // 수령자 전화번호
+	private String recipientTel; // 수령자 전화번호
 	
 	private String orderMemo; // 배송 요청사항
 	

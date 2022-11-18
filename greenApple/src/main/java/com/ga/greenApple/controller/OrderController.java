@@ -4,18 +4,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ga.greenApple.dto.Order;
 import com.ga.greenApple.dto.OrderDetail;
-import com.ga.greenApple.dto.Product;
 import com.ga.greenApple.service.OrderService;
 
 @RestController
@@ -25,8 +22,8 @@ public class OrderController {
 
 	// 회원별 주문 내역 목록
 	@PostMapping(value = "/order/orderList")
-	public List<Order> orderList(HttpServletRequest request) {
-		String id = request.getSession().getId();
+	public List<Order> orderList(HttpSession session) {
+		String id = (String) session.getAttribute("id");
 		
 		List<Order> orderList = os.orderList(id);
 		
