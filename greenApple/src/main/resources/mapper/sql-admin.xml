@@ -37,6 +37,11 @@
 		select id, name, tel, joinDate, address1, address2, del from member
 	</select>
 	
+	<!-- 회원 탈퇴 처리 -->
+	<update id="memberDelete" parameterType="string">
+		update member set del = 'y' where id = #{id}
+	</update>
+	
 	<!-- 리뷰 목록 -->
 	<select id="reviewList" resultType="review">
 		select * from review

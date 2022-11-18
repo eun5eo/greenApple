@@ -23,6 +23,9 @@ public interface AdminService {
 
 	// 회원 목록
 	List<Member> memberList();
+	
+	// 회원 탈퇴 처리
+	int memberDelete(String id);
 
 	// 리뷰 목록
 	List<Review> reviewList();

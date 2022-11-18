@@ -49,6 +49,12 @@ public class AdminServiceImpl implements AdminService {
 	public List<Member> memberList() {
 		return am.memberList();
 	}
+	
+	// 회원 탈퇴 처리
+	@Override
+	public int memberDelete(String id) {
+		return am.memberDelete(id);
+	}
 
 	// 리뷰 목록
 	@Override

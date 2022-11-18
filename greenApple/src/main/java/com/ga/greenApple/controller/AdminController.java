@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -75,7 +76,7 @@ public class AdminController {
 		int result = 0;
 		String id = (String) session.getAttribute("id");
 		
-		if (id == "admin") {
+		if (id.equals("admin")) {
 			String fileName = product.getFile().getOriginalFilename();
 			
 			// 수정 시 새 파일이 들어오지 않았다면, 이전의 파일을 가져와서 등록
@@ -102,7 +103,7 @@ public class AdminController {
 		
 		String id = (String) session.getAttribute("id");
 		
-		if (id == "admin") {
+		if (id.equals("admin")) {
 			result = as.pdDelete(productCode);
 		} else result = -1;
 		
@@ -118,11 +119,25 @@ public class AdminController {
 		
 		List<Member> memberList = null;
 		
-		if (id == "admin") {
+		if (id.equals("admin")) {
 			memberList = as.memberList();
 		}
 		
 		return memberList;
+	}
+	
+	// 회원 탈퇴 처리
+	@PostMapping(value = "/admin/memberDelete")
+	public int memberDelete(@RequestBody Member member, HttpSession session) {
+		int result = 0;
+		
+		String id = (String) session.getAttribute("id");
+		
+		if (id.equals("admin")) {
+			result = as.memberDelete(member.getId());
+		}
+		
+		return result;
 	}
 	
 	// 리뷰 목록
@@ -132,7 +147,7 @@ public class AdminController {
 		
 		List<Review> reviewList = null;
 		
-		if (id == "admin") {
+		if (id.equals("admin")) {
 			reviewList = as.reviewList();
 		}
 		
@@ -146,7 +161,7 @@ public class AdminController {
 		
 		String id = (String) session.getAttribute("id");
 		
-		if (id == "admin") {
+		if (id.equals("admin")) {
 			result = as.reviewDelete(reviewId);
 		}
 		
