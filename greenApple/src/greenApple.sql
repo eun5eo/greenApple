@@ -111,7 +111,7 @@ create table order_detail (
 	productCode number not null, -- 상품 코드 fk
 	amount number not null, -- 수량
 	price number not null, -- 가격
-	
+	detailDel char(1) default 'n' not null, -- 주문 취소 여부	
 	FOREIGN KEY(orderId) REFERENCES product_order(orderId),
 	FOREIGN KEY(productCode) REFERENCES product(productCode)
 );

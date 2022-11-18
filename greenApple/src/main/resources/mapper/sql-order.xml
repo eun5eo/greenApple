@@ -18,7 +18,7 @@
 	<insert id="orderInsert" parameterType="productOrder">
 		insert into product_order values ( #{orderId}, #{id}, sysdate, 
 			#{address1}, #{address2}, #{recipient}, #{recipientTel},
-			#{orderMemo}, payment = 'y', #{payMoney} )
+			#{orderMemo}, payment = 'y', #{payMoney}, 'n' )
 	</insert>
 	
 	<!-- 주문 등록 (주문 상세) -->
@@ -46,7 +46,7 @@
 	
 	<!-- 주문 상세 취소 -->
 	<update id="detailDelete" parameterType="string">
-		update order_detail set del = 'y'
+		update order_detail set detailDel = 'y'
 			where orderId = #{orderId}
 	</update>
 	
