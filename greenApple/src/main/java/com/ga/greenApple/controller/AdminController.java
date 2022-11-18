@@ -35,7 +35,6 @@ public class AdminController {
 			HttpSession session) throws IOException {
 		int result = 0;
 		
-		// 상품 코드 생성 => 시퀀스 처리
 		// 한 번에 여러 장의 파일을 받는다
 		List<MultipartFile> list = mhr.getFiles("file");
 		List<ProductImg> pdPhotos = new ArrayList<ProductImg>();

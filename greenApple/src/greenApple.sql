@@ -75,8 +75,8 @@ select * from CART;
 drop table CART;
 create table cart (
 	cartNo number primary key, -- 장바구니 번호
-	productCode number not null, -- 상품 코드
 	id varchar2(20) not null, -- 아이디 fk
+	productCode number not null, -- 상품 코드
 	amount number not null, -- 수량
 	checkStatus number(1) default 0 not null, -- 체크 상태
 	FOREIGN KEY(id) REFERENCES member(id)
@@ -107,7 +107,7 @@ select * from ORDER_DETAIL;
 drop table ORDER_DETAIL;
 create table order_detail (
 	detailNo number primary key, -- 주문 상세 번호
-	orderId varchar2(20) not null, -- 주문 번호 fk
+	orderId varchar2(20) not null, -- 주문 아이디 fk
 	productCode number not null, -- 상품 코드 fk
 	amount number not null, -- 수량
 	price number not null, -- 가격
