@@ -84,7 +84,7 @@ create table cart (
 alter table CART add unique (product_code, id);
 
 -- 주문
-select * from product_order; 
+select * from product_order;
 drop table product_order;
 create table product_order (
 	orderId varchar2(20) primary key, -- 주문 아이디
