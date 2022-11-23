@@ -43,6 +43,12 @@ public class AdminServiceImpl implements AdminService {
 	public int pdDelete(int productCode) {
 		return am.pdDelete(productCode);
 	}
+	
+	// 상품 품절
+	@Override
+	public int productSoldOut(int productCode) {
+		return am.productSoldOut(productCode);
+	}
 
 	// 회원 목록
 	@Override

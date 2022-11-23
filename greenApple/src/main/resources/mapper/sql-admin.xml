@@ -32,6 +32,11 @@
 		update product set del = 'y' where productCode = #{productCode}
 	</update>
 	
+	<!-- 상품 품절 -->
+	<update id="productSoldOut" parameterType="integer">
+		update product set soldOut = 'y' where productCode = #{productCode}
+	</update>
+	
 	<!-- 회원 목록 -->
 	<select id="memberList" resultType="member">
 		select id, name, tel, joinDate, address1, address2, del from member

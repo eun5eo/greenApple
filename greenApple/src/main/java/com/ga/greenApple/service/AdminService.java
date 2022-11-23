@@ -20,6 +20,9 @@ public interface AdminService {
 
 	// 상품 삭제
 	int pdDelete(int productCode);
+	
+	// 상품 품절
+	int productSoldOut(int productCode);
 
 	// 회원 목록
 	List<Member> memberList();

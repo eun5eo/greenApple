@@ -110,6 +110,17 @@ public class AdminController {
 	}
 	
 	// 상품 품절
+	@PostMapping(value = "/admin/productSoldOut")
+	public int productSoldOut(@RequestBody Product product, HttpSession session) {
+		int result = 0;
+		String id = (String) session.getAttribute("id");
+		
+		if (id.equals("admin")) {
+			result = as.productSoldOut(product.getProductCode());
+		}
+		
+		return result;
+	}
 	
 	// 회원 목록
 	@PostMapping(value = "/admin/memberList")
