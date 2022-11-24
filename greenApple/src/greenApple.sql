@@ -1,4 +1,8 @@
 
+alter table product modify (productCode varchar2(20));
+alter table product_img modify (productCode varchar2(20));
+alter table cart modify (productCode varchar2(20));
+alter table order_detail modify (productCode varchar2(20));
 -- 상품
 select * from PRODUCT;
 drop table PRODUCT;
@@ -76,7 +80,7 @@ drop table CART;
 create table cart (
 	cartNo number primary key, -- 장바구니 번호
 	id varchar2(20) not null, -- 아이디 fk
-	productCode number not null, -- 상품 코드
+	productCode varchar2(20) not null, -- 상품 코드
 	amount number not null, -- 수량
 	checkStatus number(1) default 0 not null, -- 체크 상태
 	FOREIGN KEY(id) REFERENCES member(id)
@@ -108,7 +112,7 @@ drop table ORDER_DETAIL;
 create table order_detail (
 	detailNo number primary key, -- 주문 상세 번호
 	orderId varchar2(20) not null, -- 주문 아이디 fk
-	productCode number not null, -- 상품 코드 fk
+	productCode varchar2(20) not null, -- 상품 코드 fk
 	amount number not null, -- 수량
 	price number not null, -- 가격
 	detailDel char(1) default 'n' not null, -- 주문 취소 여부	
