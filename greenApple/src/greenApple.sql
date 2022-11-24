@@ -3,7 +3,7 @@
 select * from PRODUCT;
 drop table PRODUCT;
 create table product (
-	productCode number primary key, -- 상품 코드
+	productCode varchar2(20) primary key, -- 상품 코드
 	thumbnail varchar2(250) not null, -- 썸네일
 	fileName varchar2(150), -- 파일명
 	productName varchar2(90) not null, -- 상품명 30자
@@ -22,7 +22,7 @@ select * from PRODUCT_IMG;
 drop table PRODUCT_IMG;
 create table product_img (
 	productImgNo number primary key, -- 사진 번호
-	productCode number not null, -- 상품 코드 fk
+	productCode varchar2(20) not null, -- 상품 코드 fk
 	fileName varchar2(100), -- 파일명
 	FOREIGN KEY(productCode) REFERENCES product(productCode)
 );

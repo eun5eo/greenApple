@@ -5,7 +5,7 @@
 	
 	<!-- 상품 등록 -->
 	<insert id="pdInsert" parameterType="product">
-		insert into product values ( product_code_seq.nextval, #{thumbnail}, #{fileName}, 
+		insert into product values ( #{productCode}, #{thumbnail}, #{fileName}, 
 			#{productName}, #{price}, #{productDescription}, #{origin}, #{seasonal}, 
 			#{stock}, sysdate, 'n', 'n' )
 	</insert>
@@ -28,12 +28,12 @@
 	</update>
 	
 	<!-- 상품 삭제 -->
-	<update id="pdDelete" parameterType="integer">
+	<update id="pdDelete" parameterType="string">
 		update product set del = 'y' where productCode = #{productCode}
 	</update>
 	
 	<!-- 상품 품절 -->
-	<update id="productSoldOut" parameterType="integer">
+	<update id="productSoldOut" parameterType="string">
 		update product set soldOut = 'y' where productCode = #{productCode}
 	</update>
 	

@@ -13,16 +13,16 @@ public interface AdminService {
 	int pdInsert(Product product);
 
 	// 상품 사진 등록
-	void insertPhotos(List<ProductImg> pdPhotos, int productCode);
+	void insertPhotos(List<ProductImg> pdPhotos, String productCode);
 	
 	// 상품 수정
 	int pdUpdate(Product product);
 
 	// 상품 삭제
-	int pdDelete(int productCode);
+	int pdDelete(String productCode);
 	
 	// 상품 품절
-	int productSoldOut(int productCode);
+	int productSoldOut(String productCode);
 
 	// 회원 목록
 	List<Member> memberList();

@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 @Alias("product")
 public class Product {
-	private int productCode; // 상품 코드
+	private String productCode; // 상품 코드
 	
 	private String thumbnail; // 썸네일
 	

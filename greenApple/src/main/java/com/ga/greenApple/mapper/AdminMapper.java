@@ -22,10 +22,10 @@ public interface AdminMapper {
 	int pdUpdate(Product product);
 
 	// 상품 삭제
-	int pdDelete(int productCode);
+	int pdDelete(String productCode);
 	
 	// 상품 품절
-	int productSoldOut(int productCode);
+	int productSoldOut(String productCode);
 
 	// 회원 목록
 	List<Member> memberList();

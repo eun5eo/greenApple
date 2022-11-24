@@ -9,7 +9,7 @@ import lombok.Data;
 public class ProductImg {
 	private int productImgNo; // 사진 번호
 	
-	private int productCode;  // 상품 코드 fk
+	private String productCode;  // 상품 코드 fk
 	
 	private String fileName;  // 파일명
 }

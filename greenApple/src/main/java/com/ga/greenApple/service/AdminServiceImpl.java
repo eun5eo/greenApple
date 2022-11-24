@@ -24,7 +24,7 @@ public class AdminServiceImpl implements AdminService {
 
 	// 상품 사진 등록
 	@Override
-	public void insertPhotos(List<ProductImg> pdPhotos, int productCode) {
+	public void insertPhotos(List<ProductImg> pdPhotos, String productCode) {
 		// list에 들어있는 pdPhotos를 pi에 넣어 각각 작업하며 하나씩 처리
 		for (ProductImg pi : pdPhotos) {
 			pi.setProductCode(productCode);
@@ -40,13 +40,13 @@ public class AdminServiceImpl implements AdminService {
 
 	// 상품 삭제
 	@Override
-	public int pdDelete(int productCode) {
+	public int pdDelete(String productCode) {
 		return am.pdDelete(productCode);
 	}
 	
 	// 상품 품절
 	@Override
-	public int productSoldOut(int productCode) {
+	public int productSoldOut(String productCode) {
 		return am.productSoldOut(productCode);
 	}
 

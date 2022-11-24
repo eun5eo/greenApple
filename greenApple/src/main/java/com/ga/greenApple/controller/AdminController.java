@@ -3,7 +3,9 @@ package com.ga.greenApple.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -35,6 +37,11 @@ public class AdminController {
 			HttpSession session) throws IOException {
 		int result = 0;
 		
+		// productCode 생성
+		Date date = new Date();
+		SimpleDateFormat fm = new SimpleDateFormat("yyMMddHHmmss");
+		String nowDate = fm.format(date);
+		
 		// 한 번에 여러 장의 파일을 받는다
 		List<MultipartFile> list = mhr.getFiles("file");
 		List<ProductImg> pdPhotos = new ArrayList<ProductImg>();
@@ -57,11 +64,12 @@ public class AdminController {
 			
 			// product 테이블에도 그림을 넣어줘야 등록된다
 			product.setFileName(fileName);
+			product.setProductCode(nowDate);
 		}
 		result = as.pdInsert(product);
 		
 		if (result > 0) {
-			int productCode = product.getProductCode();
+			String productCode = product.getProductCode();
 			as.insertPhotos(pdPhotos, productCode);
 		}
 		
@@ -96,7 +104,7 @@ public class AdminController {
 	
 	// 상품 삭제
 	@RequestMapping(value = "/admin/productDelete")
-	public int productDelete(@RequestParam("productCode") int productCode,
+	public int productDelete(@RequestParam("productCode") String productCode,
 			HttpSession session) {
 		int result = 0;
 		
