@@ -74,7 +74,7 @@ public class ReviewController {
 		List<ReviewImg> rvPhotos = new ArrayList<ReviewImg>();
 		
 		// 사진 파일이 들어온 경우
-		if (review.getFiles() == null) {
+		if (review.getFiles() != null) {
 			String realPath = "src/main/resources/static/rvImages";
 			
 			// list의 사진을 하나씩 가져와 rvPhotos에 저장
@@ -99,7 +99,7 @@ public class ReviewController {
 			result = rs.reviewInsert(review);
 		
 		// 사진 파일이 들어오지 않은 경우 (리뷰 글만)
-		} else if (review.getFiles() != null) {
+		} else if (review.getFiles() == null) {
 			String fileName = "n";
 			review.setFileName(fileName);
 			
