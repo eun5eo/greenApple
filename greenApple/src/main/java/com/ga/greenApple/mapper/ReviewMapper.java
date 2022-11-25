@@ -11,16 +11,16 @@ import com.ga.greenApple.dto.ReviewImg;
 public interface ReviewMapper {
 
 	// 리뷰 리스트
-	List<Review> rvList(String productCode);
+	List<Review> reviewList(String productCode);
 	
 	// reviewNo에 따른 이미지
-	List<ReviewImg> imgList(String reviewId);
+	List<ReviewImg> reviewImgList(String reviewId);
 	
 	// 리스트나 뷰에 쓰일 리뷰 갯수
 	int reviewNum(String productCode);
 
 	// 리뷰 작성
-	int rvInsert(Review review);
+	int reviewInsert(Review review);
 
 	// 리뷰 작성 (사진)
 	void insertRvPhoto(ReviewImg ri);
@@ -29,9 +29,12 @@ public interface ReviewMapper {
 	String findWriteId(String reviewId);
 
 	// 리뷰 수정
-	int rvUpdate(Review review);
+	int reviewUpdate(Review review);
+	
+	// 리뷰 이미지 삭제
+	int reviewImgDelete(String reviewId);
 
 	// 리뷰 삭제
-	int rvDelete(String reviewId);
+	int reviewDelete(String reviewId);
 
 }

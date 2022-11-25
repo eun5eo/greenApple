@@ -5,13 +5,13 @@
 	
 	<!-- 리뷰 리스트 -->
 	<!-- resultType은 dto의 alias와 일치해야한다 -->
-	<select id="rvList" resultType="review" parameterType="string">
+	<select id="reviewList" resultType="review" parameterType="string">
 		select * from review where productCode = #{productCode} and del != 'y'
 			order by reviewId desc
 	</select>
 	
 	<!-- reviewId에 따른 이미지 -->
-	<select id="imgList" resultType="reviewImg" parameterType="string">
+	<select id="reviewImgList" resultType="reviewImg" parameterType="string">
 		select * from review_img where reviewId = #{reviewId}
 	</select>
 	
@@ -22,7 +22,7 @@
 	</select>
 	
 	<!-- 리뷰 작성 -->
-	<insert id="rvInsert" parameterType="review">
+	<insert id="reviewInsert" parameterType="review">
 		insert into review values( #{reviewId}, #{id}, #{productCode}, 
 			#{content}, #{fileName}, sysdate, 'n' )
 	</insert>
@@ -33,13 +33,8 @@
 			#{reviewId}, #{id}, #{fileName} )
 	</insert>
 	
-	<!-- 리뷰 수정/삭제 시 작성자 id 찾기 (비교용) -->
-	<select id="findWriteId" resultType="string" parameterType="string">
-		select id from review where reviewId = #{reviewId}
-	</select>
-	
 	<!-- 리뷰 수정 -->
-	<update id="rvUpdate" parameterType="review">
+	<update id="reviewUpdate" parameterType="review">
 		update review set content = #{content}
 			<if test="fileName != null">
 				, fileName = #{fileName}
@@ -47,8 +42,13 @@
 			where reviewId = #{reviewId}
 	</update>
 	
+	<!-- 리뷰 이미지 삭제 -->
+	<delete id="reviewImgDelete" parameterType="string">
+		delete from review_img where reviewId = #{reviewId}
+	</delete>
+	
 	<!-- 리뷰 삭제 -->
-	<update id="rvDelete" parameterType="string">
+	<update id="reviewDelete" parameterType="string">
 		update review set del = 'y' where reviewId = #{reviewId}
 	</update>
 	

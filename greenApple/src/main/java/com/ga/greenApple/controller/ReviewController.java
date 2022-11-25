@@ -33,17 +33,17 @@ public class ReviewController {
 	// 리뷰 리스트
 	@RequestMapping(value = "/review/list/{productCode}")
 	public List<Review> reviewList(@PathVariable String productCode) {
-		List<Review> rvList = rs.rvList(productCode);
+		List<Review> reviewList = rs.reviewList(productCode);
 		
-		return rvList;
+		return reviewList;
 	}
 	
 	// reviewId에 따른 이미지
 	@RequestMapping(value = "/review/imgList")
 	public List<ReviewImg> reviewImg(@RequestParam("reviewId") String reviewId) {
-		List<ReviewImg> imgList = rs.imgList(reviewId);
+		List<ReviewImg> reviewImgList = rs.reviewImgList(reviewId);
 		
-		return imgList;
+		return reviewImgList;
 	}
 	
 	// 리스트나 뷰에 쓰일 리뷰 갯수
@@ -73,30 +73,41 @@ public class ReviewController {
 		List<MultipartFile> list = mhr.getFiles("files");
 		List<ReviewImg> rvPhotos = new ArrayList<ReviewImg>();
 		
-		String realPath = "src/main/resources/static/rvImages";
+		// 사진 파일이 들어온 경우
+		if (review.getFiles() == null) {
+			String realPath = "src/main/resources/static/rvImages";
+			
+			// list의 사진을 하나씩 가져와 rvPhotos에 저장
+			for (MultipartFile mf : list) {
+				ReviewImg ri = new ReviewImg();
+				String fileName = mf.getOriginalFilename();
+				ri.setFileName(fileName);
+				ri.setId(id);
+				
+				// reviewImg의 갯수는 사진의 갯수만큼
+				rvPhotos.add(ri);
+				
+				// 그림 파일 저장
+				FileOutputStream fos = new FileOutputStream(new File(realPath+"/"+fileName));
+				fos.write(mf.getBytes());
+				fos.close();
+				
+				// review 테이블에도 그림을 넣어줘야 등록된다
+				review.setFileName(fileName);
+				
+			}
+			result = rs.reviewInsert(review);
 		
-		// list의 사진을 하나씩 가져와 rvPhotos에 저장
-		for (MultipartFile mf : list) {
-			ReviewImg ri = new ReviewImg();
-			String fileName = mf.getOriginalFilename();
-			ri.setFileName(fileName);
-			ri.setId(id);
-			
-			// reviewImg의 갯수는 사진의 갯수만큼
-			rvPhotos.add(ri);
-			
-			// 그림 파일 저장
-			FileOutputStream fos = new FileOutputStream(new File(realPath+"/"+fileName));
-			fos.write(mf.getBytes());
-			fos.close();
-			
-			// review 테이블에도 그림을 넣어줘야 등록된다
+		// 사진 파일이 들어오지 않은 경우 (리뷰 글만)
+		} else if (review.getFiles() != null) {
+			String fileName = "n";
 			review.setFileName(fileName);
 			
+			// result 값을 다르게 하여 reviewImg에 입력하지 않게 한다
+			result = rs.reviewInsert(review) + 1;
 		}
-		result = rs.rvInsert(review);
 		
-		if (result > 0) {
+		if (result == 1) {
 			String reviewId = nowDate;
 			
 			rs.insertPhotos(rvPhotos, reviewId, id);
@@ -107,28 +118,60 @@ public class ReviewController {
 	
 	// 리뷰 수정
 	@PostMapping(value = "/review/update")
-	public int reviewUpdate(@ModelAttribute Review review, HttpSession session) 
-			throws IOException {
+	public int reviewUpdate(@ModelAttribute Review review, MultipartHttpServletRequest mhr,
+			HttpSession session) throws IOException {
 		int result = 0;
-		String requestId = rs.findWriterId(review.getReviewId()); // DB에 등록된 리뷰 작성자
-		String sessionId = (String) session.getAttribute("id"); // 세션 아이디
 		
-		// 뷰에서 버튼을 감춰놓았지만, 한 번 더 확인
-		if (sessionId.equals(requestId)) {
-			String fileName = ((MultipartFile) review.getFiles()).getOriginalFilename();
+		String id = (String) session.getAttribute("id");
+		
+		// 한 번에 여러 장의 파일을 받는다
+		List<MultipartFile> list = mhr.getFiles("files");
+		List<ReviewImg> rvPhotos = new ArrayList<ReviewImg>();
+		
+		String fileName = ((MultipartFile) review.getFiles()).getOriginalFilename();
+		String realPath = "src/main/resources/static/rvImages";
+		
+		// 수정 시 새 파일이 들어오지 않았다면, 이전의 파일을 가져와서 등록
+		if (review.getFiles() == null) {
+			review.setFileName(fileName);
 			
-			// 수정 시 새 파일이 들어오지 않았다면, 이전의 파일을 가져와서 등록
-			if (fileName != null && !fileName.equals("")) {
-				review.setFileName(fileName);
+			FileOutputStream fos = new FileOutputStream(new File(realPath+"/"+fileName));
+			
+			fos.write(((MultipartFile) review.getFiles()).getBytes());
+			fos.close();
+			
+			result = rs.reviewUpdate(review);
+			
+		// 수정 시 새 파일이 들어온 경우, 원래의 사진을 지우고 새로 업로드
+		} else if (review.getFiles() != null) {
+			// 기존에 등록된 이미지를 지운다
+			result = rs.reviewImgDelete(review.getReviewId());
+			
+			// list의 사진을 하나씩 가져와 rvPhotos에 저장
+			for (MultipartFile mf : list) {
+				ReviewImg ri = new ReviewImg();
+				fileName = mf.getOriginalFilename();
+				ri.setFileName(fileName);
 				
-				String realPath = "src/main/resources/static/rvImages";
+				// reviewImg의 갯수는 사진의 갯수만큼
+				rvPhotos.add(ri);
+				
+				// 그림 파일 저장
 				FileOutputStream fos = new FileOutputStream(new File(realPath+"/"+fileName));
-				
-				fos.write(((MultipartFile) review.getFiles()).getBytes());
+				fos.write(mf.getBytes());
 				fos.close();
+				
+				// review 테이블에도 그림을 넣어줘야 등록된다
+				review.setFileName(fileName);
 			}
-			result = rs.rvUpdate(review);
-		} else result = -1; // id 일치 x
+			result = rs.reviewUpdate(review);
+			
+			if (result == 2) {
+				String reviewId = review.getReviewId();
+				
+				rs.insertPhotos(rvPhotos, reviewId, id);
+			}
+		}
 		
 		return result;
 	}
@@ -138,13 +181,8 @@ public class ReviewController {
 	public int  reviewDelete(@RequestParam("reviewId") String reviewId,
 			HttpSession session) {
 		int result = 0;
-		String requestId = rs.findWriterId(reviewId);
-		String sessionId = (String) session.getAttribute("id");
-		
-		// 뷰에서 버튼을 감춰놓았지만, 한 번 더 확인
-		if (sessionId.equals(requestId)) {
-			result = rs.rvDelete(reviewId);
-		} else result = -1;
+
+		result = rs.reviewDelete(reviewId);
 		
 		return result;
 	}

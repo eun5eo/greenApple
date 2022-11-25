@@ -16,14 +16,14 @@ public class ReviewServiceImpl implements ReviewService {
 
 	// 리뷰 리스트
 	@Override
-	public List<Review> rvList(String productCode) {
-		return rm.rvList(productCode);
+	public List<Review> reviewList(String productCode) {
+		return rm.reviewList(productCode);
 	}
 	
 	// reviewNo에 따른 이미지
 	@Override
-	public List<ReviewImg> imgList(String reviewId) {
-		return rm.imgList(reviewId);
+	public List<ReviewImg> reviewImgList(String reviewId) {
+		return rm.reviewImgList(reviewId);
 	}
 	
 	// 리스트나 뷰에 쓰일 리뷰 갯수
@@ -34,8 +34,8 @@ public class ReviewServiceImpl implements ReviewService {
 
 	// 리뷰 작성
 	@Override
-	public int rvInsert(Review review) {
-		return rm.rvInsert(review);
+	public int reviewInsert(Review review) {
+		return rm.reviewInsert(review);
 	}
 
 	// 리뷰 작성 (사진)
@@ -58,14 +58,20 @@ public class ReviewServiceImpl implements ReviewService {
 
 	// 리뷰 수정
 	@Override
-	public int rvUpdate(Review review) {
-		return rm.rvUpdate(review);
+	public int reviewUpdate(Review review) {
+		return rm.reviewUpdate(review);
+	}
+	
+	// 리뷰 이미지 삭제
+	@Override
+	public int reviewImgDelete(String reviewId) {
+		return rm.reviewImgDelete(reviewId);
 	}
 
 	// 리뷰 삭제
 	@Override
-	public int rvDelete(String reviewId) {
-		return rm.rvDelete(reviewId);
+	public int reviewDelete(String reviewId) {
+		return rm.reviewDelete(reviewId);
 	}
 
 }
