@@ -56,7 +56,7 @@ public class ProductController {
 	
 	// 상품 상세보기
 	@RequestMapping(value = "/product/view/{productCode}")
-	public Product view(@PathVariable int productCode) {
+	public Product view(@PathVariable String productCode) {
 		Product product = ps.view(productCode);
 		
 		return product;

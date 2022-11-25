@@ -33,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
 
 	// 상품 상세보기
 	@Override
-	public Product view(int productCode) {
+	public Product view(String productCode) {
 		return pm.view(productCode);
 	}
 

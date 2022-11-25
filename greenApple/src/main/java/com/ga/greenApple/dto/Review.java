@@ -14,7 +14,7 @@ public class Review {
 	
 	private String id; // 아이디
 	
-	private int productCode; // 상품 코드
+	private String productCode; // 상품 코드
 	
 	private String content; // 리뷰 내용
 	

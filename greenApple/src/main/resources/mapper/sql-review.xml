@@ -5,7 +5,7 @@
 	
 	<!-- 리뷰 리스트 -->
 	<!-- resultType은 dto의 alias와 일치해야한다 -->
-	<select id="rvList" resultType="review" parameterType="integer">
+	<select id="rvList" resultType="review" parameterType="string">
 		select * from review where productCode = #{productCode} and del != 'y'
 			order by reviewId desc
 	</select>
@@ -16,7 +16,7 @@
 	</select>
 	
 	<!-- 리스트나 뷰에 쓰일 리뷰 갯수 -->
-	<select id="reviewNum" resultType="integer" parameterType="integer">
+	<select id="reviewNum" resultType="integer" parameterType="string">
 		select count(reviewId) from review 
 			where productCode = #{productCode} and del != 'y'
 	</select>

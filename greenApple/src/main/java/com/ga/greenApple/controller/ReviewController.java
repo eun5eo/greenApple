@@ -32,7 +32,7 @@ public class ReviewController {
 	
 	// 리뷰 리스트
 	@RequestMapping(value = "/review/list/{productCode}")
-	public List<Review> reviewList(@PathVariable int productCode) {
+	public List<Review> reviewList(@PathVariable String productCode) {
 		List<Review> rvList = rs.rvList(productCode);
 		
 		return rvList;
@@ -48,7 +48,7 @@ public class ReviewController {
 	
 	// 리스트나 뷰에 쓰일 리뷰 갯수
 	@RequestMapping(value = "/review/reviewNum")
-	public int reviewNum(@RequestParam("productCode") int productCode) {
+	public int reviewNum(@RequestParam("productCode") String productCode) {
 		int reviewNum = rs.reviewNum(productCode);
 				
 		return reviewNum;

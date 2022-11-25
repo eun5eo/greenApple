@@ -16,7 +16,7 @@ public interface ProductService {
 	List<Product> listSeasonal(String seasonal);
 
 	// 상품 상세보기
-	Product view(int productCode);
+	Product view(String productCode);
 
 	// 바로구매하려는 상품 정보 결제창에 보여주기
 	Product nowOrder(Product product);

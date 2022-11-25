@@ -11,7 +11,7 @@ public class Cart {
 	
 	private String id; // 아이디 fk
 	
-	private int productCode; // 상품 코드
+	private String productCode; // 상품 코드
 	
 	private int amount; // 수량
 	

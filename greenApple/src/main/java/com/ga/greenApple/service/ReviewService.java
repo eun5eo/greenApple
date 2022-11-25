@@ -8,13 +8,13 @@ import com.ga.greenApple.dto.ReviewImg;
 public interface ReviewService {
 
 	// 리뷰 리스트
-	List<Review> rvList(int productCode);
+	List<Review> rvList(String productCode);
 	
 	// reviewNo에 따른 이미지
 	List<ReviewImg> imgList(String reviewId);
 	
 	// 리스트나 뷰에 쓰일 리뷰 갯수
-	int reviewNum(int productCode);
+	int reviewNum(String productCode);
 
 	// 리뷰 작성
 	int rvInsert(Review review);

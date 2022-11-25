@@ -23,7 +23,7 @@
 	</select>
 	
 	<!-- 상품 상세보기 -->
-	<select id="view" resultType="product" parameterType="integer">
+	<select id="view" resultType="product" parameterType="string">
 		select * from product where productCode = #{productCode}
 	</select>
 	

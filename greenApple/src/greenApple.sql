@@ -1,8 +1,4 @@
 
-alter table product modify (productCode varchar2(20));
-alter table product_img modify (productCode varchar2(20));
-alter table cart modify (productCode varchar2(20));
-alter table order_detail modify (productCode varchar2(20));
 -- 상품
 select * from PRODUCT;
 drop table PRODUCT;
@@ -51,7 +47,7 @@ drop table REVIEW;
 create table review (
 	reviewId varchar2(20) primary key, -- 리뷰 아이디
 	id varchar2(20) not null, -- 아이디 fk
-	productCode number not null, -- 상품 코드 fk
+	productCode varchar2(20) not null, -- 상품 코드 fk
 	content varchar2(900) not null, -- 내용
 	fileName varchar2(150), -- 파일명
 	reviewDate date not null, -- 작성일

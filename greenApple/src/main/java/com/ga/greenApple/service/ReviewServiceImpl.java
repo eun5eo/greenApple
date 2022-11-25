@@ -16,7 +16,7 @@ public class ReviewServiceImpl implements ReviewService {
 
 	// 리뷰 리스트
 	@Override
-	public List<Review> rvList(int productCode) {
+	public List<Review> rvList(String productCode) {
 		return rm.rvList(productCode);
 	}
 	
@@ -28,7 +28,7 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	// 리스트나 뷰에 쓰일 리뷰 갯수
 	@Override
-	public int reviewNum(int productCode) {
+	public int reviewNum(String productCode) {
 		return rm.reviewNum(productCode);
 	}
 
