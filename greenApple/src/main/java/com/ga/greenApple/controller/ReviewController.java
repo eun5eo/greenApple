@@ -70,7 +70,7 @@ public class ReviewController {
 		review.setId(id);
 		
 		// 한 번에 여러 장의 파일을 받는다
-		List<MultipartFile> list = mhr.getFiles("file");
+		List<MultipartFile> list = mhr.getFiles("files");
 		List<ReviewImg> rvPhotos = new ArrayList<ReviewImg>();
 		
 		String realPath = "src/main/resources/static/rvImages";
@@ -97,8 +97,9 @@ public class ReviewController {
 		result = rs.rvInsert(review);
 		
 		if (result > 0) {
-			String reviewId = review.getReviewId();
-			rs.insertPhotos(rvPhotos, reviewId);
+			String reviewId = nowDate;
+			
+			rs.insertPhotos(rvPhotos, reviewId, id);
 		}
 		
 		return result;
@@ -114,7 +115,7 @@ public class ReviewController {
 		
 		// 뷰에서 버튼을 감춰놓았지만, 한 번 더 확인
 		if (sessionId.equals(requestId)) {
-			String fileName = review.getFile().getOriginalFilename();
+			String fileName = ((MultipartFile) review.getFiles()).getOriginalFilename();
 			
 			// 수정 시 새 파일이 들어오지 않았다면, 이전의 파일을 가져와서 등록
 			if (fileName != null && !fileName.equals("")) {
@@ -123,7 +124,7 @@ public class ReviewController {
 				String realPath = "src/main/resources/static/rvImages";
 				FileOutputStream fos = new FileOutputStream(new File(realPath+"/"+fileName));
 				
-				fos.write(review.getFile().getBytes());
+				fos.write(((MultipartFile) review.getFiles()).getBytes());
 				fos.close();
 			}
 			result = rs.rvUpdate(review);

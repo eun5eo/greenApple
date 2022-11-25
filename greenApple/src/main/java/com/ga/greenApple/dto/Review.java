@@ -1,6 +1,7 @@
 package com.ga.greenApple.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,5 +26,5 @@ public class Review {
 	private String del; // 삭제 여부
 	
 	// upload용
-	private MultipartFile file;
+	private List<MultipartFile> files;
 }

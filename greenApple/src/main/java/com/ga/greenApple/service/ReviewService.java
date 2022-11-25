@@ -20,7 +20,7 @@ public interface ReviewService {
 	int rvInsert(Review review);
 
 	// 리뷰 작성 (사진)
-	void insertPhotos(List<ReviewImg> rvPhotos, String reviewId);
+	void insertPhotos(List<ReviewImg> rvPhotos, String reviewId, String id);
 
 	// 리뷰 수정/삭제 시 작성자 id 찾기 (비교용)
 	String findWriterId(String reviewId);

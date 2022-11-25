@@ -40,10 +40,12 @@ public class ReviewServiceImpl implements ReviewService {
 
 	// 리뷰 작성 (사진)
 	@Override
-	public void insertPhotos(List<ReviewImg> rvPhotos, String reviewId) {
+	public void insertPhotos(List<ReviewImg> rvPhotos, String reviewId, String id) {
 		// list에 들어있는 rvPhotos를 ri에 넣어 각각 작업하며 하나씩 처리
 		for (ReviewImg ri : rvPhotos) {
 			ri.setReviewId(reviewId);
+			ri.setId(id);
+			
 			rm.insertRvPhoto(ri);
 		}
 	}
