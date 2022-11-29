@@ -25,6 +25,9 @@ public interface ReviewService {
 	// 리뷰 수정/삭제 시 작성자 id 찾기 (비교용)
 	String findWriterId(String reviewId);
 	
+	// 리뷰 수정 (이미지 변경 없을 시)
+	int reviewUpdateNoImg(Review review);
+	
 	// 리뷰 수정
 	int reviewUpdate(Review review);
 	
@@ -33,5 +36,6 @@ public interface ReviewService {
 
 	// 리뷰 삭제
 	int reviewDelete(String reviewId);
+
 
 }

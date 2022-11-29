@@ -23,7 +23,7 @@
 	<!-- 카트 담기 -->
 	<insert id="addCart" parameterType="cart">
 		insert into cart values ( cart_seq.nextval,
-			#{productCode}, #{id}, #{amount}, 0 )
+			#{id}, #{productCode}, #{amount}, 0 )
 	</insert>
 	
 	<!-- 카트 수정 -->

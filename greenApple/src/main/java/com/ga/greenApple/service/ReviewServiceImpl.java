@@ -55,6 +55,12 @@ public class ReviewServiceImpl implements ReviewService {
 	public String findWriterId(String reviewId) {
 		return rm.findWriteId(reviewId);
 	}
+	
+	// 리뷰 수정 (이미지 변경 없을 시)
+	@Override
+	public int reviewUpdateNoImg(Review review) {
+		return rm.reviewUpdateNoImg(review);
+	}
 
 	// 리뷰 수정
 	@Override

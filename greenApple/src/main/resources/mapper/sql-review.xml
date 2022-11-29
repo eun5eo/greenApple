@@ -33,6 +33,11 @@
 			#{reviewId}, #{id}, #{fileName} )
 	</insert>
 	
+	<!-- 리뷰 수정 (이미지 변경 없을 시) -->
+	<update id="reviewUpdateNoImg" parameterType="review">
+		update review set content = #{content} where reviewId = #{reviewId}
+	</update>
+	
 	<!-- 리뷰 수정 -->
 	<update id="reviewUpdate" parameterType="review">
 		update review set content = #{content}
