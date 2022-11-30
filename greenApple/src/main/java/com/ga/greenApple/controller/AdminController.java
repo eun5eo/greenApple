@@ -164,7 +164,7 @@ public class AdminController {
 		
 		if (id.equals("admin")) {
 			result = as.productSoldOut(product.getProductCode());
-		}
+		} else result = -1;
 		
 		return result;
 	}
@@ -192,7 +192,7 @@ public class AdminController {
 		
 		if (id.equals("admin")) {
 			result = as.memberDelete(member.getId());
-		}
+		} else result = -1;
 		
 		return result;
 	}
@@ -220,7 +220,7 @@ public class AdminController {
 		
 		if (id.equals("admin")) {
 			result = as.reviewDelete(reviewId);
-		}
+		} else result = -1;
 		
 		return result;
 	}
