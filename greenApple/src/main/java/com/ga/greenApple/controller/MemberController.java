@@ -111,6 +111,7 @@ public class MemberController {
 		int result = 0;
 		
 		String id = (String) session.getAttribute("id");
+		
 		Member memberChk = ms.select(id);
 		
 		// 받은 비밀번호가 현재 비밀번호와 일치한지 비교

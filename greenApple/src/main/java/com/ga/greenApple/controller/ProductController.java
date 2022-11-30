@@ -28,12 +28,14 @@ public class ProductController {
 		
 		List<Product> list;
 		
+		// 검색
 		if (keyword != null || keyword != "") {
 			product.setKeyword(keyword);
 			
 			list = ps.list(product);
 		}
 		
+		// 리액트 무한 스크롤 페이징
 		int rowPerPage = 8; // 한 번 로드할 때 뜨는 상품 수
 		int startRow = (page -1) * rowPerPage +1;	// 상품 시작 번호
 		int endRow = startRow + rowPerPage -1;	// 상품 끝 번호 

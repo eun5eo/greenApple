@@ -16,6 +16,19 @@
 			#{fileName} )
 	</insert>
 	
+	<!-- 상품 수정 (이미지 수정 안하는 경우) -->
+	<update id="productUpdateNoImg" parameterType="product">
+		update product set productName = #{productName}, price = #{price},
+			productDescription = #{productDescription}, origin = #{origin},
+			seasonal = #{seasonal}, stock = #{stock}
+			where productCode = #{productCode}
+	</update>
+	
+	<!-- 상품 수정 (productImg 지우기) -->
+	<delete id="productImgDelete" parameterType="string">
+		delete from product_img where productCode = #{productCode}
+	</delete>
+	
 	<!-- 상품 수정 -->
 	<update id="pdUpdate" parameterType="product">
 		update product set thumbnail = #{thumbnail}, productName = #{productName}, 
@@ -38,8 +51,13 @@
 	</update>
 	
 	<!-- 회원 목록 -->
-	<select id="memberList" resultType="member">
+	<select id="memberList" resultType="member" parameterType="string">
 		select id, name, tel, joinDate, address1, address2, del from member
+			<where>
+				<if test="keyword != null and keyword != ''">
+					name like '%'||#{keyword}||'%'
+				</if>
+			</where>
 	</select>
 	
 	<!-- 회원 탈퇴 처리 -->
@@ -50,6 +68,11 @@
 	<!-- 리뷰 목록 -->
 	<select id="reviewList" resultType="review">
 		select * from review
+			<where>
+				<if test="keyword != null and keyword != ''">
+					content like '%'||#{keyword}||'%'
+				</if>
+			</where>
 	</select>
 	
 	<!-- 리뷰 삭제 -->

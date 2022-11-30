@@ -61,22 +61,24 @@ public class ReviewController {
 			HttpSession session) throws IOException {
 		int result = 0;
 		
+		String id = (String) session.getAttribute("id");
+		String realPath = "src/main/resources/static/rvImages";
+		
 		// 현재 시간으로 reviewId 생성
 		Date date = new Date();
 		SimpleDateFormat fm = new SimpleDateFormat("yyyyMMddHHmmss");		
 		String nowDate = fm.format(date) + (int)(Math.random() * 10);
 		
-		String id = (String) session.getAttribute("id");
 		review.setReviewId(nowDate);
 		review.setId(id);
 		
 		// 한 번에 여러 장의 파일을 받는다
 		List<MultipartFile> list = mhr.getFiles("files");
+		// 여러 장의 파일을 각각 담을 공간 생성
 		List<ReviewImg> rvPhotos = new ArrayList<ReviewImg>();
 		
 		// 사진 파일이 들어온 경우
 		if (review.getFiles() != null) {
-			String realPath = "src/main/resources/static/rvImages";
 			
 			// list의 사진을 하나씩 가져와 rvPhotos에 저장
 			for (MultipartFile mf : list) {
@@ -125,12 +127,12 @@ public class ReviewController {
 			int result = 0;
 			
 			String id = (String) session.getAttribute("id");
+			String realPath = "src/main/resources/static/rvImages";
 			
 			// 한 번에 여러 장의 파일을 받는다
 			List<MultipartFile> list = mhr.getFiles("files");
+			// 여러 장의 파일을 각각 담을 공간 생성
 			List<ReviewImg> rvPhotos = new ArrayList<ReviewImg>();
-			
-			String realPath = "src/main/resources/static/rvImages";
 			
 			// 수정 시 새 파일이 들어오지 않았다면, 사진 제외하고 내용만 변경
 			if (review.getFiles() == null) {
@@ -159,8 +161,10 @@ public class ReviewController {
 					// review 테이블에도 그림을 넣어줘야 등록된다
 					review.setFileName(fileName);
 				}
-				result = rs.reviewUpdate(review);
+				// 사진 재등록을 위해 result값을 다르게 한다
+				result = rs.reviewUpdate(review) + 1;
 				
+				// 상품 수정(이미지 포함의 경우)이 완료되면 review_img에 사진 입력
 				if (result == 2) {
 					String reviewId = review.getReviewId();
 					

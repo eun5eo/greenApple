@@ -32,6 +32,18 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 	
+	// 상품 수정 (이미지 수정 안하는 경우)
+	@Override
+	public int productUpdateNoImg(Product product) {
+		return am.productUpdateNoImg(product);
+	}
+	
+	// 상품 수정 (productImg 지우기)
+	@Override
+	public int productImgDelete(String productCode) {
+		return am.productImgDelete(productCode);
+	}
+	
 	// 상품 수정
 	@Override
 	public int pdUpdate(Product product) {
@@ -52,8 +64,8 @@ public class AdminServiceImpl implements AdminService {
 
 	// 회원 목록
 	@Override
-	public List<Member> memberList() {
-		return am.memberList();
+	public List<Member> memberList(String keyword) {
+		return am.memberList(keyword);
 	}
 	
 	// 회원 탈퇴 처리
@@ -64,8 +76,8 @@ public class AdminServiceImpl implements AdminService {
 
 	// 리뷰 목록
 	@Override
-	public List<Review> reviewList() {
-		return am.reviewList();
+	public List<Review> reviewList(String keyword) {
+		return am.reviewList(keyword);
 	}
 
 	// 리뷰 삭제

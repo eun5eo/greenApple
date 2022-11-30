@@ -34,6 +34,7 @@ public class OrderController {
 	@PostMapping(value = "/order/orderDetailList")
 	public List<OrderDetail> orderDetailList(@RequestBody Order order, HttpSession session) {
 		String orderId = order.getOrderId();
+		
 		List<OrderDetail> detailList = os.detailList(orderId);
 		
 		return detailList;

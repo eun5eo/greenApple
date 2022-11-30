@@ -36,9 +36,9 @@ public class Product {
 	private String del; // 상품 삭제 여부
 	
 	// upload용
-//	private MultipartFile thumbnailFile;
+	private MultipartFile thumbnailFile;
 	
-	private MultipartFile files;
+	private List<MultipartFile> files;
 	
 	// 검색용
 	private String keyword; // 검색 단어

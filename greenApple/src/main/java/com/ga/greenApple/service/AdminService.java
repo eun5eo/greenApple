@@ -15,6 +15,12 @@ public interface AdminService {
 	// 상품 사진 등록
 	void insertPhotos(List<ProductImg> pdPhotos, String productCode);
 	
+	// 상품 수정 (이미지 수정 안하는 경우)
+	int productUpdateNoImg(Product product);
+	
+	// 상품 수정 (productImg 지우기)
+	int productImgDelete(String productCode);
+	
 	// 상품 수정
 	int pdUpdate(Product product);
 
@@ -25,13 +31,13 @@ public interface AdminService {
 	int productSoldOut(String productCode);
 
 	// 회원 목록
-	List<Member> memberList();
+	List<Member> memberList(String keyword);
 	
 	// 회원 탈퇴 처리
 	int memberDelete(String id);
 
 	// 리뷰 목록
-	List<Review> reviewList();
+	List<Review> reviewList(String keyword);
 
 	// 리뷰 삭제
 	int reviewDelete(String reviewId);
