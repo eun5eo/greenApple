@@ -26,7 +26,7 @@ public class ProductController {
 			@RequestParam("page") int page) {
 		Product product = new Product();
 		
-		List<Product> list;
+		List<Product> list = null;
 		
 		// 검색
 		if (keyword != null || keyword != "") {
