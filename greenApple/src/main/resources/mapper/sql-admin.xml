@@ -55,7 +55,7 @@
 		select id, name, tel, joinDate, address1, address2, del from member
 			<where>
 				<if test="keyword != null and keyword != ''">
-					name like '%'||#{keyword}||'%'
+					#{tag} like '%'||#{keyword}||'%'
 				</if>
 			</where>
 	</select>
@@ -66,11 +66,11 @@
 	</update>
 	
 	<!-- 리뷰 목록 -->
-	<select id="reviewList" resultType="review">
+	<select id="reviewList" resultType="review" parameterType="string">
 		select * from review
 			<where>
 				<if test="keyword != null and keyword != ''">
-					content like '%'||#{keyword}||'%'
+					#{tag} like '%'||#{keyword}||'%'
 				</if>
 			</where>
 	</select>

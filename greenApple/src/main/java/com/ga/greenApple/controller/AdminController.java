@@ -171,13 +171,14 @@ public class AdminController {
 	
 	// 회원 목록
 	@PostMapping(value = "/admin/memberList")
-	public List<Member> memberList(@RequestParam("keyword") String keyword, HttpSession session) {		
+	public List<Member> memberList(@RequestParam("keyword") String keyword,
+			@RequestParam("tag") String tag, HttpSession session) {		
 		String id = (String) session.getAttribute("id");
 		
 		List<Member> memberList = null;
 		
 		if (id.equals("admin")) {
-			memberList = as.memberList(keyword);
+			memberList = as.memberList(keyword, tag);
 		}
 		
 		return memberList;
@@ -199,13 +200,14 @@ public class AdminController {
 	
 	// 리뷰 목록
 	@PostMapping(value = "/admin/reviewList")
-	public List<Review> reviewList(@RequestParam("keyword") String keyword, HttpSession session) {
+	public List<Review> reviewList(@RequestParam("keyword") String keyword,
+			@RequestParam("tag") String tag, HttpSession session) {
 		String id = (String) session.getAttribute("id");
 		
 		List<Review> reviewList = null;
 		
 		if (id.equals("admin")) {
-			reviewList = as.reviewList(keyword);
+			reviewList = as.reviewList(keyword, tag);
 		}
 		
 		return reviewList;

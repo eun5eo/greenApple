@@ -64,8 +64,8 @@ public class AdminServiceImpl implements AdminService {
 
 	// 회원 목록
 	@Override
-	public List<Member> memberList(String keyword) {
-		return am.memberList(keyword);
+	public List<Member> memberList(String keyword, String tag) {
+		return am.memberList(keyword, tag);
 	}
 	
 	// 회원 탈퇴 처리
@@ -76,8 +76,8 @@ public class AdminServiceImpl implements AdminService {
 
 	// 리뷰 목록
 	@Override
-	public List<Review> reviewList(String keyword) {
-		return am.reviewList(keyword);
+	public List<Review> reviewList(String keyword, String tag) {
+		return am.reviewList(keyword, tag);
 	}
 
 	// 리뷰 삭제

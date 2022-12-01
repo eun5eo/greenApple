@@ -34,13 +34,13 @@ public interface AdminMapper {
 	int productSoldOut(String productCode);
 
 	// 회원 목록
-	List<Member> memberList(String keyword);
+	List<Member> memberList(String keyword, String tag);
 	
 	// 회원 탈퇴 처리
 	int memberDelete(String id);
 
 	// 리뷰 목록
-	List<Review> reviewList(String keyword);
+	List<Review> reviewList(String keyword, String tag);
 
 	// 리뷰 삭제
 	int reviewDelete(String reviewId);

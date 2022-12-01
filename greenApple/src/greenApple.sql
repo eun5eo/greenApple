@@ -6,8 +6,8 @@ create table product (
 	productCode varchar2(20) primary key, -- 상품 코드
 	thumbnail varchar2(250) not null, -- 썸네일
 	fileName varchar2(150), -- 파일명
-	productName varchar2(90) not null, -- 상품명 30자
-	price number(7) not null, -- 가격
+	productName varchar2(150) not null, -- 상품명 50자
+	price number(8) not null, -- 가격
 	productDescription varchar2(3000), -- 설명
 	origin varchar2(40) not null, -- 원산지
 	seasonal varchar2(10) not null, -- 제철
