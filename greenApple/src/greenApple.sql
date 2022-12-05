@@ -207,4 +207,13 @@ CREATE SEQUENCE product_code_seq
     NOORDER
     NOCYCLE;
 
+CREATE SEQUENCE product_code_seq
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE 1
+    NOMAXVALUE
+    NOCACHE
+    NOORDER
+    NOCYCLE;
+
 

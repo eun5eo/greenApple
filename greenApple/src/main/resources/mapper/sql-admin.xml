@@ -24,7 +24,7 @@
 	</insert>
 	
 	<!-- 상품 사진 등록 -->
-	<insert id="insertphotos" parameterType="productImg">
+	<insert id="insertPhotos" parameterType="productImg">
 		insert into product_img values ( product_img_seq.nextval, #{productCode}, 
 			#{fileName} )
 	</insert>

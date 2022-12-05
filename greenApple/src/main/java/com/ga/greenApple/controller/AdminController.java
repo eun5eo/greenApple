@@ -98,7 +98,7 @@ public class AdminController {
 		String nowDate = fm.format(date);
 		
 		// 한 번에 여러 장의 파일을 받는다
-		List<MultipartFile> list = mhr.getFiles("file");
+		List<MultipartFile> list = mhr.getFiles("files");
 		// 여러 장의 파일을 각각 담을 공간 생성
 		List<ProductImg> pdPhotos = new ArrayList<ProductImg>();
 		
@@ -118,6 +118,7 @@ public class AdminController {
 				fos.close();
 				
 				// product 테이블에도 그림을 넣어줘야 등록된다
+				product.setThumbnail(product.getThumbnailFile().getOriginalFilename());
 				product.setFileName(fileName);
 				product.setProductCode(nowDate);
 			}
