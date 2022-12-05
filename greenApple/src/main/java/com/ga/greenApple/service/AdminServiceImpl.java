@@ -17,6 +17,12 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private AdminMapper am;
 
+	// 상품 목록
+	@Override
+	public List<Product> productList(AdminData forAdminData) {
+		return am.productList(forAdminData);
+	}
+	
 	// 상품 등록
 	@Override
 	public int pdInsert(Product product) {
@@ -71,8 +77,8 @@ public class AdminServiceImpl implements AdminService {
 
 	// 회원 목록
 	@Override
-	public List<Member> memberList(AdminData adminData) {
-		return am.memberList(adminData);
+	public List<Member> memberList(AdminData forAdminData) {
+		return am.memberList(forAdminData);
 	}
 	
 	// 회원 탈퇴 처리
@@ -83,8 +89,8 @@ public class AdminServiceImpl implements AdminService {
 
 	// 리뷰 목록
 	@Override
-	public List<Review> reviewList(AdminData adminData) {
-		return am.reviewList(adminData);
+	public List<Review> reviewList(AdminData forAdminData) {
+		return am.reviewList(forAdminData);
 	}
 
 	// 리뷰 삭제

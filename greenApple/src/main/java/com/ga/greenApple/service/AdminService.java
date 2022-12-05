@@ -10,6 +10,9 @@ import com.ga.greenApple.dto.Review;
 
 public interface AdminService {
 
+	// 상품 목록
+	List<Product> productList(AdminData forAdminData);
+	
 	// 상품 등록
 	int pdInsert(Product product);
 
@@ -35,13 +38,13 @@ public interface AdminService {
 	int getTotal();
 
 	// 회원 목록
-	List<Member> memberList(AdminData adminData);
+	List<Member> memberList(AdminData forAdminData);
 	
 	// 회원 탈퇴 처리
 	int memberDelete(String id);
 
 	// 리뷰 목록
-	List<Review> reviewList(AdminData adminData);
+	List<Review> reviewList(AdminData forAdminData);
 
 	// 리뷰 삭제
 	int reviewDelete(String reviewId);

@@ -34,6 +34,55 @@ public class AdminController {
 	@Autowired
 	private AdminService as;
 	
+	// 상품 목록
+	@PostMapping(value = "/admin/productList")
+	public List<Product> productList(@RequestParam("keyword") String keyword,
+			@RequestParam("tag") String tag, @RequestParam("pageNum") String pageNum,
+			HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		
+		// 페이징을 위한 값
+		final int ROW_PER_PAGE = 10; // 한 페이지에 들어갈 데이터 개수
+		final int PAGE_PER_BLOCK = 5; // 한 블럭에 들어갈 페이지수
+		
+		// 첫 로딩이거나 pageNum에 값이 없으면 페이지값은 1
+		if (pageNum == null || pageNum.equals("")) {
+			pageNum = "1";
+		}
+		
+		// 현재 페이지
+		int currentPage = Integer.parseInt(pageNum);
+		// 게시글 시작 번호 : (페이지번호 -1) * 페이지당 개수 +1
+		int startRow = (currentPage - 1) * ROW_PER_PAGE + 1;
+		// 게시글 끝 번호 : 시작번호 + 페이지당 개수 -1
+		int endRow = startRow + ROW_PER_PAGE - 1;
+		// 시작 페이지 : 현재 페이지 - (현재 페이지 -1) % 블록당 개수 => 1, 11, 21,..
+		int startPage = currentPage - (currentPage - 1) % PAGE_PER_BLOCK;
+		// 끝 페이지 : 시작 페이지 + 블록당 페이지수 -1
+		int endPage = startPage + PAGE_PER_BLOCK - 1;
+		// 총 데이터수
+		int total = as.getTotal();
+		// 총 페이지수
+		int totalPage = (int) Math.ceil((double)total/ROW_PER_PAGE);
+		// 끝 페이지가 총 페이지보다 크면, 끝 페이지는 총 페이지로 변경
+		if (endPage > totalPage) endPage = totalPage;
+		
+		// 목록을 보여주기 위해 필요한 데이터들 담기
+		AdminData forAdminData = new AdminData();
+		forAdminData.setTag(tag);
+		forAdminData.setKeyword(keyword);
+		forAdminData.setStartRow(startRow);
+		forAdminData.setEndRow(endRow);
+		
+		List<Product> productList = null;
+		
+		if (id.equals("admin")) {
+			productList = as.productList(forAdminData);
+		}
+		
+		return productList;
+	}
+	
 	// 상품 등록
 	@PostMapping(value = "/admin/productInsert")
 	public int productInsert(@ModelAttribute Product product, MultipartHttpServletRequest mhr, 
@@ -205,16 +254,16 @@ public class AdminController {
 		if (endPage > totalPage) endPage = totalPage;
 		
 		// 목록을 보여주기 위해 필요한 데이터들 담기
-		AdminData adminData = new AdminData();
-		adminData.setTag(tag);
-		adminData.setKeyword(keyword);
-		adminData.setStartRow(startRow);
-		adminData.setEndRow(endRow);
+		AdminData forAdminData = new AdminData();
+		forAdminData.setTag(tag);
+		forAdminData.setKeyword(keyword);
+		forAdminData.setStartRow(startRow);
+		forAdminData.setEndRow(endRow);
 		
 		List<Member> memberList = null;
 		
 		if (id.equals("admin")) {
-			memberList = as.memberList(adminData);
+			memberList = as.memberList(forAdminData);
 		}
 		
 		return memberList;
@@ -268,16 +317,16 @@ public class AdminController {
 		if (endPage > totalPage) endPage = totalPage;
 		
 		// 목록을 보여주기 위해 필요한 데이터들 담기
-		AdminData adminData = new AdminData();
-		adminData.setTag(tag);
-		adminData.setKeyword(keyword);
-		adminData.setStartRow(startRow);
-		adminData.setEndRow(endRow);
+		AdminData forAdminData = new AdminData();
+		forAdminData.setTag(tag);
+		forAdminData.setKeyword(keyword);
+		forAdminData.setStartRow(startRow);
+		forAdminData.setEndRow(endRow);
 		
 		List<Review> reviewList = null;
 		
 		if (id.equals("admin")) {
-			reviewList = as.reviewList(adminData);
+			reviewList = as.reviewList(forAdminData);
 		}
 		
 		return reviewList;
