@@ -27,12 +27,11 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	}
 	
 	// session check
-	/* sessonCheck는 InterceptorRegistry를 재정의 한 것이니 메소드명을
-	 addInterceptors로 꼭 적어줘야한다 */
+	// sessonCheck는 InterceptorRegistry를 재정의 한 것이니 메소드명을 addInterceptors로 꼭 적어줘야한다
 	// addInterceptors : 애플리케이션 내 인터셉터를 등록해주는 기능
 	@Override
 	public void addInterceptors(InterceptorRegistry registory) {
-		registory.addInterceptor(new SessionCheck())
+		registory.addInterceptor(new LoggerInterceptor())
 			// excludePathPatterns : 이곳에 지정된 URI나 경로는 인터셉터 호출에서 제외 => 정적 파일 무시
 			.excludePathPatterns(
 					"/product", "/product/seasonal/**", "/product/view/**",
