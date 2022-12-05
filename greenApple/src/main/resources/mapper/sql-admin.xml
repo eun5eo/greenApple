@@ -50,14 +50,23 @@
 		update product set soldOut = 'y' where productCode = #{productCode}
 	</update>
 	
+	<!-- 페이징 시 총 데이터 개수 구하기 -->
+	<select id="getTotal" resultType="integer">
+		select count(*) from member where del = 'n'
+	</select>
+	
 	<!-- 회원 목록 -->
-	<select id="memberList" resultType="member" parameterType="string">
-		select id, name, tel, joinDate, address1, address2, del from member
+	<select id="memberList" resultType="member" parameterType="forAdmin">
+		select id, name, tel, joinDate, address1, address2, del from
+			(select rowNum rn, a.* from
+			(select * from member
 			<where>
 				<if test="keyword != null and keyword != ''">
 					#{tag} like '%'||#{keyword}||'%'
 				</if>
 			</where>
+			order by joinDate desc) a)
+			where rn between #{startRow} and #{endRow}
 	</select>
 	
 	<!-- 회원 탈퇴 처리 -->
@@ -66,13 +75,16 @@
 	</update>
 	
 	<!-- 리뷰 목록 -->
-	<select id="reviewList" resultType="review" parameterType="string">
-		select * from review
+	<select id="reviewList" resultType="review" parameterType="forAdmin">
+		select * from (select rowNum rn, a.* from
+			(select * from review
 			<where>
 				<if test="keyword != null and keyword != ''">
 					#{tag} like '%'||#{keyword}||'%'
 				</if>
 			</where>
+			order by reviewDate desc) a)
+			where rn between #{startRow} and #{endRow}
 	</select>
 	
 	<!-- 리뷰 삭제 -->

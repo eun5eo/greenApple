@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ga.greenApple.dto.AdminData;
 import com.ga.greenApple.dto.Member;
 import com.ga.greenApple.dto.Product;
 import com.ga.greenApple.dto.ProductImg;
@@ -61,11 +62,17 @@ public class AdminServiceImpl implements AdminService {
 	public int productSoldOut(String productCode) {
 		return am.productSoldOut(productCode);
 	}
+	
+	// 페이징 시 총 데이터 개수 구하기
+	@Override
+	public int getTotal() {
+		return am.getTotal();
+	}
 
 	// 회원 목록
 	@Override
-	public List<Member> memberList(String keyword, String tag) {
-		return am.memberList(keyword, tag);
+	public List<Member> memberList(AdminData adminData) {
+		return am.memberList(adminData);
 	}
 	
 	// 회원 탈퇴 처리
@@ -76,8 +83,8 @@ public class AdminServiceImpl implements AdminService {
 
 	// 리뷰 목록
 	@Override
-	public List<Review> reviewList(String keyword, String tag) {
-		return am.reviewList(keyword, tag);
+	public List<Review> reviewList(AdminData adminData) {
+		return am.reviewList(adminData);
 	}
 
 	// 리뷰 삭제

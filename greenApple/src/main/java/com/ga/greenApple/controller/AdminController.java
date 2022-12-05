@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.ga.greenApple.dto.AdminData;
 import com.ga.greenApple.dto.Member;
 import com.ga.greenApple.dto.Product;
 import com.ga.greenApple.dto.ProductImg;
@@ -172,13 +174,47 @@ public class AdminController {
 	// 회원 목록
 	@PostMapping(value = "/admin/memberList")
 	public List<Member> memberList(@RequestParam("keyword") String keyword,
-			@RequestParam("tag") String tag, HttpSession session) {		
+			@RequestParam("tag") String tag, @RequestParam("pageNum") String pageNum,
+			HttpSession session) {		
 		String id = (String) session.getAttribute("id");
+		
+		// 페이징을 위한 값
+		final int ROW_PER_PAGE = 10; // 한 페이지에 들어갈 데이터 개수
+		final int PAGE_PER_BLOCK = 5; // 한 블럭에 들어갈 페이지수
+		
+		// 첫 로딩이거나 pageNum에 값이 없으면 페이지값은 1
+		if (pageNum == null || pageNum.equals("")) {
+			pageNum = "1";
+		}
+		
+		// 현재 페이지
+		int currentPage = Integer.parseInt(pageNum);
+		// 게시글 시작 번호 : (페이지번호 -1) * 페이지당 개수 +1
+		int startRow = (currentPage - 1) * ROW_PER_PAGE + 1;
+		// 게시글 끝 번호 : 시작번호 + 페이지당 개수 -1
+		int endRow = startRow + ROW_PER_PAGE - 1;
+		// 시작 페이지 : 현재 페이지 - (현재 페이지 -1) % 블록당 개수 => 1, 11, 21,..
+		int startPage = currentPage - (currentPage - 1) % PAGE_PER_BLOCK;
+		// 끝 페이지 : 시작 페이지 + 블록당 페이지수 -1
+		int endPage = startPage + PAGE_PER_BLOCK - 1;
+		// 총 데이터수
+		int total = as.getTotal();
+		// 총 페이지수
+		int totalPage = (int) Math.ceil((double)total/ROW_PER_PAGE);
+		// 끝 페이지가 총 페이지보다 크면, 끝 페이지는 총 페이지로 변경
+		if (endPage > totalPage) endPage = totalPage;
+		
+		// 목록을 보여주기 위해 필요한 데이터들 담기
+		AdminData adminData = new AdminData();
+		adminData.setTag(tag);
+		adminData.setKeyword(keyword);
+		adminData.setStartRow(startRow);
+		adminData.setEndRow(endRow);
 		
 		List<Member> memberList = null;
 		
 		if (id.equals("admin")) {
-			memberList = as.memberList(keyword, tag);
+			memberList = as.memberList(adminData);
 		}
 		
 		return memberList;
@@ -201,13 +237,47 @@ public class AdminController {
 	// 리뷰 목록
 	@PostMapping(value = "/admin/reviewList")
 	public List<Review> reviewList(@RequestParam("keyword") String keyword,
-			@RequestParam("tag") String tag, HttpSession session) {
+			@RequestParam("tag") String tag, @RequestParam("pageNum") String pageNum,
+			HttpSession session) {
 		String id = (String) session.getAttribute("id");
+		
+		// 페이징을 위한 값
+		final int ROW_PER_PAGE = 10; // 한 페이지에 들어갈 데이터 개수
+		final int PAGE_PER_BLOCK = 5; // 한 블럭에 들어갈 페이지수
+		
+		// 첫 로딩이거나 pageNum에 값이 없으면 페이지값은 1
+		if (pageNum == null || pageNum.equals("")) {
+			pageNum = "1";
+		}
+		
+		// 현재 페이지
+		int currentPage = Integer.parseInt(pageNum);
+		// 게시글 시작 번호 : (페이지번호 -1) * 페이지당 개수 +1
+		int startRow = (currentPage - 1) * ROW_PER_PAGE + 1;
+		// 게시글 끝 번호 : 시작번호 + 페이지당 개수 -1
+		int endRow = startRow + ROW_PER_PAGE - 1;
+		// 시작 페이지 : 현재 페이지 - (현재 페이지 -1) % 블록당 개수 => 1, 11, 21,..
+		int startPage = currentPage - (currentPage - 1) % PAGE_PER_BLOCK;
+		// 끝 페이지 : 시작 페이지 + 블록당 페이지수 -1
+		int endPage = startPage + PAGE_PER_BLOCK - 1;
+		// 총 데이터수
+		int total = as.getTotal();
+		// 총 페이지수
+		int totalPage = (int) Math.ceil((double)total/ROW_PER_PAGE);
+		// 끝 페이지가 총 페이지보다 크면, 끝 페이지는 총 페이지로 변경
+		if (endPage > totalPage) endPage = totalPage;
+		
+		// 목록을 보여주기 위해 필요한 데이터들 담기
+		AdminData adminData = new AdminData();
+		adminData.setTag(tag);
+		adminData.setKeyword(keyword);
+		adminData.setStartRow(startRow);
+		adminData.setEndRow(endRow);
 		
 		List<Review> reviewList = null;
 		
 		if (id.equals("admin")) {
-			reviewList = as.reviewList(keyword, tag);
+			reviewList = as.reviewList(adminData);
 		}
 		
 		return reviewList;
