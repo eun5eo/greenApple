@@ -33,7 +33,7 @@ public class AdminController {
 	
 	// 상품 목록
 	@PostMapping(value = "/admin/productList")
-	public List<Product> productList(@RequestBody AdminData data, HttpSession session) {
+	public AdminData productList(@RequestBody AdminData data, HttpSession session) {
 		String id = (String) session.getAttribute("id");
 		
 		// 페이징을 위한 값
@@ -71,7 +71,16 @@ public class AdminController {
 			productList = as.productList(data);
 		}
 		
-		return productList;
+		// 리스트랑 페이징 요소 한 번에 보내기
+		AdminData adminData = new AdminData();
+		adminData.setProductList(productList);
+		adminData.setCurrentPage(currentPage);
+		adminData.setStartPage(startPage);
+		adminData.setStartRow(startRow);
+		adminData.setEndPage(endPage);
+		adminData.setEndRow(endRow);
+		
+		return adminData;
 	}
 	
 	// 상품 등록
@@ -213,7 +222,7 @@ public class AdminController {
 	
 	// 회원 목록
 	@PostMapping(value = "/admin/memberList")
-	public List<Member> memberList(@RequestBody AdminData data,	HttpSession session) {		
+	public AdminData memberList(@RequestBody AdminData data, HttpSession session) {		
 		String id = (String) session.getAttribute("id");
 		
 		// 페이징을 위한 값
@@ -251,7 +260,16 @@ public class AdminController {
 			memberList = as.memberList(data);
 		}
 		
-		return memberList;
+		// 리스트랑 페이징 요소 한 번에 보내기
+		AdminData adminData = new AdminData();
+		adminData.setMemberList(memberList);
+		adminData.setCurrentPage(currentPage);
+		adminData.setStartPage(startPage);
+		adminData.setStartRow(startRow);
+		adminData.setEndPage(endPage);
+		adminData.setEndRow(endRow);
+		
+		return adminData;
 	}
 	
 	// 회원 탈퇴 처리
@@ -270,7 +288,7 @@ public class AdminController {
 	
 	// 리뷰 목록
 	@PostMapping(value = "/admin/reviewList")
-	public List<Review> reviewList(@RequestBody AdminData data,	HttpSession session) {
+	public AdminData reviewList(@RequestBody AdminData data, HttpSession session) {
 		String id = (String) session.getAttribute("id");
 		
 		// 페이징을 위한 값
@@ -308,7 +326,16 @@ public class AdminController {
 			reviewList = as.reviewList(data);
 		}
 		
-		return reviewList;
+		// 리스트랑 페이징 요소 한 번에 보내기
+		AdminData adminData = new AdminData();
+		adminData.setReviewList(reviewList);
+		adminData.setCurrentPage(currentPage);
+		adminData.setStartPage(startPage);
+		adminData.setStartRow(startRow);
+		adminData.setEndPage(endPage);
+		adminData.setEndRow(endRow);
+		
+		return adminData;
 	}
 	
 	// 리뷰 삭제 처리
