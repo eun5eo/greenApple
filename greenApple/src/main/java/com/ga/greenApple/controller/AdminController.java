@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,7 +24,6 @@ import com.ga.greenApple.dto.Member;
 import com.ga.greenApple.dto.Product;
 import com.ga.greenApple.dto.ProductImg;
 import com.ga.greenApple.dto.Review;
-import com.ga.greenApple.dto.ReviewImg;
 import com.ga.greenApple.service.AdminService;
 
 @RestController
@@ -36,9 +33,7 @@ public class AdminController {
 	
 	// 상품 목록
 	@PostMapping(value = "/admin/productList")
-	public List<Product> productList(@RequestParam("keyword") String keyword,
-			@RequestParam("tag") String tag, @RequestParam("pageNum") String pageNum,
-			HttpSession session) {
+	public List<Product> productList(@RequestBody AdminData data, HttpSession session) {
 		String id = (String) session.getAttribute("id");
 		
 		// 페이징을 위한 값
@@ -46,12 +41,12 @@ public class AdminController {
 		final int PAGE_PER_BLOCK = 5; // 한 블럭에 들어갈 페이지수
 		
 		// 첫 로딩이거나 pageNum에 값이 없으면 페이지값은 1
-		if (pageNum == null || pageNum.equals("")) {
-			pageNum = "1";
+		if (data.getPageNum() == null || data.getPageNum().equals("")) {
+			data.setPageNum("1");
 		}
 		
 		// 현재 페이지
-		int currentPage = Integer.parseInt(pageNum);
+		int currentPage = Integer.parseInt(data.getPageNum());
 		// 게시글 시작 번호 : (페이지번호 -1) * 페이지당 개수 +1
 		int startRow = (currentPage - 1) * ROW_PER_PAGE + 1;
 		// 게시글 끝 번호 : 시작번호 + 페이지당 개수 -1
@@ -69,8 +64,8 @@ public class AdminController {
 		
 		// 목록을 보여주기 위해 필요한 데이터들 담기
 		AdminData forAdminData = new AdminData();
-		forAdminData.setTag(tag);
-		forAdminData.setKeyword(keyword);
+		forAdminData.setTag(data.getTag());
+		forAdminData.setKeyword(data.getKeyword());
 		forAdminData.setStartRow(startRow);
 		forAdminData.setEndRow(endRow);
 		
@@ -193,15 +188,14 @@ public class AdminController {
 	}
 	
 	// 상품 삭제
-	@RequestMapping(value = "/admin/productDelete")
-	public int productDelete(@RequestParam("productCode") String productCode,
-			HttpSession session) {
+	@PostMapping(value = "/admin/productDelete")
+	public int productDelete(@RequestBody Product product, HttpSession session) {
 		int result = 0;
 		
 		String id = (String) session.getAttribute("id");
 		
 		if (id.equals("admin")) {
-			result = as.pdDelete(productCode);
+			result = as.pdDelete(product.getProductCode());
 		} else result = -1;
 		
 		return result;
@@ -223,9 +217,7 @@ public class AdminController {
 	
 	// 회원 목록
 	@PostMapping(value = "/admin/memberList")
-	public List<Member> memberList(@RequestParam("keyword") String keyword,
-			@RequestParam("tag") String tag, @RequestParam("pageNum") String pageNum,
-			HttpSession session) {		
+	public List<Member> memberList(@RequestBody AdminData data,	HttpSession session) {		
 		String id = (String) session.getAttribute("id");
 		
 		// 페이징을 위한 값
@@ -233,12 +225,12 @@ public class AdminController {
 		final int PAGE_PER_BLOCK = 5; // 한 블럭에 들어갈 페이지수
 		
 		// 첫 로딩이거나 pageNum에 값이 없으면 페이지값은 1
-		if (pageNum == null || pageNum.equals("")) {
-			pageNum = "1";
+		if (data.getPageNum() == null || data.getPageNum().equals("")) {
+			data.setPageNum("1");
 		}
 		
 		// 현재 페이지
-		int currentPage = Integer.parseInt(pageNum);
+		int currentPage = Integer.parseInt(data.getPageNum());
 		// 게시글 시작 번호 : (페이지번호 -1) * 페이지당 개수 +1
 		int startRow = (currentPage - 1) * ROW_PER_PAGE + 1;
 		// 게시글 끝 번호 : 시작번호 + 페이지당 개수 -1
@@ -256,8 +248,8 @@ public class AdminController {
 		
 		// 목록을 보여주기 위해 필요한 데이터들 담기
 		AdminData forAdminData = new AdminData();
-		forAdminData.setTag(tag);
-		forAdminData.setKeyword(keyword);
+		forAdminData.setTag(data.getTag());
+		forAdminData.setKeyword(data.getKeyword());
 		forAdminData.setStartRow(startRow);
 		forAdminData.setEndRow(endRow);
 		
@@ -286,9 +278,7 @@ public class AdminController {
 	
 	// 리뷰 목록
 	@PostMapping(value = "/admin/reviewList")
-	public List<Review> reviewList(@RequestParam("keyword") String keyword,
-			@RequestParam("tag") String tag, @RequestParam("pageNum") String pageNum,
-			HttpSession session) {
+	public List<Review> reviewList(@RequestBody AdminData data,	HttpSession session) {
 		String id = (String) session.getAttribute("id");
 		
 		// 페이징을 위한 값
@@ -296,12 +286,12 @@ public class AdminController {
 		final int PAGE_PER_BLOCK = 5; // 한 블럭에 들어갈 페이지수
 		
 		// 첫 로딩이거나 pageNum에 값이 없으면 페이지값은 1
-		if (pageNum == null || pageNum.equals("")) {
-			pageNum = "1";
+		if (data.getPageNum() == null || data.getPageNum().equals("")) {
+			data.setPageNum("1");
 		}
 		
 		// 현재 페이지
-		int currentPage = Integer.parseInt(pageNum);
+		int currentPage = Integer.parseInt(data.getPageNum());
 		// 게시글 시작 번호 : (페이지번호 -1) * 페이지당 개수 +1
 		int startRow = (currentPage - 1) * ROW_PER_PAGE + 1;
 		// 게시글 끝 번호 : 시작번호 + 페이지당 개수 -1
@@ -319,8 +309,8 @@ public class AdminController {
 		
 		// 목록을 보여주기 위해 필요한 데이터들 담기
 		AdminData forAdminData = new AdminData();
-		forAdminData.setTag(tag);
-		forAdminData.setKeyword(keyword);
+		forAdminData.setTag(data.getTag());
+		forAdminData.setKeyword(data.getKeyword());
 		forAdminData.setStartRow(startRow);
 		forAdminData.setEndRow(endRow);
 		

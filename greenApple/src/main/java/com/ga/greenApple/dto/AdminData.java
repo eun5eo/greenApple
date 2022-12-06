@@ -11,6 +11,8 @@ public class AdminData {
 	
 	private String keyword; // 검색 내용
 	
+	private String pageNum; // 페이징용
+	
 	private int startRow; // 페이징용 시작 번호
 	
 	private int endRow; // 페이징용 끝 번호
