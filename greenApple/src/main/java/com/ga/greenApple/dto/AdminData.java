@@ -27,9 +27,9 @@ public class AdminData {
 	
 	private int totalPage; // 총 페이지수
 	
-	private List<Member> memberList;
+	private List<Product> productList; // 상품 리스트
 	
-	private List<Product> productList;
+	private List<Member> memberList; // 멤버 리스트
 	
-	private List<Review> reviewList;
+	private List<Review> reviewList; // 리뷰 리스트
 }
