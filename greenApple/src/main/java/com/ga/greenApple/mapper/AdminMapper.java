@@ -36,9 +36,6 @@ public interface AdminMapper {
 	
 	// 상품 품절
 	int productSoldOut(String productCode);
-	
-	// 페이징 시 총 데이터 개수 구하기
-	int getTotal();
 
 	// 회원 목록
 	List<Member> memberList(AdminData forAdminData);
@@ -51,5 +48,14 @@ public interface AdminMapper {
 
 	// 리뷰 삭제
 	int reviewDelete(String reviewId);
-
+	
+	// 페이징 시 총 상품 개수 구하기
+	int productTotal();
+	
+	// 페이징 시 총 회원 수 구하기
+	int memberTotal();
+	
+	// 페이징 시 총 리뷰 개수 구하기
+	int reviewTotal();
+	
 }

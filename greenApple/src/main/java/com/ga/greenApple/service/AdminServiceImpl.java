@@ -68,12 +68,6 @@ public class AdminServiceImpl implements AdminService {
 	public int productSoldOut(String productCode) {
 		return am.productSoldOut(productCode);
 	}
-	
-	// 페이징 시 총 데이터 개수 구하기
-	@Override
-	public int getTotal() {
-		return am.getTotal();
-	}
 
 	// 회원 목록
 	@Override
@@ -99,4 +93,21 @@ public class AdminServiceImpl implements AdminService {
 		return am.reviewDelete(reviewId);
 	}
 
+	// 페이징 시 총 상품 개수 구하기
+	@Override
+	public int productTotal() {
+		return am.productTotal();
+	}
+	
+	// 페이징 시 총 회원 수 구하기
+	@Override
+	public int memberTotal() {
+		return am.memberTotal();
+	}
+	
+	// 페이징 시 총 리뷰 개수 구하기
+	@Override
+	public int reviewTotal() {
+		return am.reviewTotal();
+	}
 }

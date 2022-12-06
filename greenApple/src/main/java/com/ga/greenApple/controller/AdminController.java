@@ -56,7 +56,7 @@ public class AdminController {
 		// 끝 페이지 : 시작 페이지 + 블록당 페이지수 -1
 		int endPage = startPage + PAGE_PER_BLOCK - 1;
 		// 총 데이터수
-		int total = as.getTotal();
+		int total = as.productTotal();
 		// 총 페이지수
 		int totalPage = (int) Math.ceil((double)total/ROW_PER_PAGE);
 		// 끝 페이지가 총 페이지보다 크면, 끝 페이지는 총 페이지로 변경
@@ -79,6 +79,7 @@ public class AdminController {
 		adminData.setStartRow(startRow);
 		adminData.setEndPage(endPage);
 		adminData.setEndRow(endRow);
+		adminData.setTotalPage(totalPage);
 		
 		return adminData;
 	}
@@ -260,7 +261,7 @@ public class AdminController {
 		// 끝 페이지 : 시작 페이지 + 블록당 페이지수 -1
 		int endPage = startPage + PAGE_PER_BLOCK - 1;
 		// 총 데이터수
-		int total = as.getTotal();
+		int total = as.memberTotal();
 		// 총 페이지수
 		int totalPage = (int) Math.ceil((double)total/ROW_PER_PAGE);
 		// 끝 페이지가 총 페이지보다 크면, 끝 페이지는 총 페이지로 변경
@@ -283,6 +284,7 @@ public class AdminController {
 		adminData.setStartRow(startRow);
 		adminData.setEndPage(endPage);
 		adminData.setEndRow(endRow);
+		adminData.setTotalPage(totalPage);
 		
 		return adminData;
 	}
@@ -326,7 +328,7 @@ public class AdminController {
 		// 끝 페이지 : 시작 페이지 + 블록당 페이지수 -1
 		int endPage = startPage + PAGE_PER_BLOCK - 1;
 		// 총 데이터수
-		int total = as.getTotal();
+		int total = as.reviewTotal();
 		// 총 페이지수
 		int totalPage = (int) Math.ceil((double)total/ROW_PER_PAGE);
 		// 끝 페이지가 총 페이지보다 크면, 끝 페이지는 총 페이지로 변경
@@ -349,6 +351,7 @@ public class AdminController {
 		adminData.setStartRow(startRow);
 		adminData.setEndPage(endPage);
 		adminData.setEndRow(endRow);
+		adminData.setTotalPage(totalPage);
 		
 		return adminData;
 	}

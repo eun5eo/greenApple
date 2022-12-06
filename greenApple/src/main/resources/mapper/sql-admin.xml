@@ -64,11 +64,6 @@
 		update product set soldOut = 'y' where productCode = #{productCode}
 	</update>
 	
-	<!-- 페이징 시 총 데이터 개수 구하기 -->
-	<select id="getTotal" resultType="integer">
-		select count(*) from member where del = 'n'
-	</select>
-	
 	<!-- 회원 목록 -->
 	<select id="memberList" resultType="member" parameterType="forAdmin">
 		select id, name, tel, joinDate, address1, address2, del from
@@ -106,4 +101,18 @@
 		update review set del = 'y' where reviewId = #{reviewId}
 	</update>
 	
+		<!-- 페이징 시 총 상품 개수 구하기 -->
+	<select id="productTotal" resultType="integer">
+		select count(*) from product
+	</select>
+	
+		<!-- 페이징 시 총 회원수 구하기 -->
+	<select id="memberTotal" resultType="integer">
+		select count(*) from member
+	</select>
+	
+		<!-- 페이징 시 총 리뷰 개수 구하기 -->
+	<select id="reviewTotal" resultType="integer">
+		select count(*) from review
+	</select>
 </mapper>

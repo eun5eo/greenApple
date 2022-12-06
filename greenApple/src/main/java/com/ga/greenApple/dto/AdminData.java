@@ -25,6 +25,8 @@ public class AdminData {
 	
 	private int endPage; // 페이징용 끝 번호
 	
+	private int totalPage; // 총 페이지수
+	
 	private List<Member> memberList;
 	
 	private List<Product> productList;
