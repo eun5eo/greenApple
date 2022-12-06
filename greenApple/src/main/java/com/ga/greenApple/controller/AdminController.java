@@ -98,24 +98,31 @@ public class AdminController {
 		String nowDate = fm.format(date);
 		
 		// 한 번에 여러 장의 파일을 받는다
-		List<MultipartFile> list = mhr.getFiles("files");
+		List<MultipartFile> fileList = mhr.getFiles("files");
 		// 여러 장의 파일을 각각 담을 공간 생성
 		List<ProductImg> pdPhotos = new ArrayList<ProductImg>();
 		
 		if (id.equals("admin")) {
+			// 썸네일 사진 저장 (사진 전송 시 순서 유지 어려움으로 썸네일은 따로 처리)
+			MultipartFile thumbnailFile = mhr.getFile("thumbnailFile");
+			FileOutputStream fos1 = new FileOutputStream(
+					new File(realPath+"/"+thumbnailFile.getOriginalFilename()));
+			fos1.write(thumbnailFile.getBytes());
+			fos1.close();
+			
 			// list의 사진을 하나씩 가져와 pdPhotos에 저장
-			for (MultipartFile mf : list) {
+			for (MultipartFile mf2 : fileList) {
 				ProductImg pi = new ProductImg();
-				String fileName = mf.getOriginalFilename();
+				String fileName = mf2.getOriginalFilename();
 				pi.setFileName(fileName);
 				
 				// productImg의 갯수는 사진의 갯수만큼
 				pdPhotos.add(pi);
 				
 				// 그림 파일 저장
-				FileOutputStream fos = new FileOutputStream(new File(realPath+"/"+fileName));
-				fos.write(mf.getBytes());
-				fos.close();
+				FileOutputStream fos2 = new FileOutputStream(new File(realPath+"/"+fileName));
+				fos2.write(mf2.getBytes());
+				fos2.close();
 				
 				// product 테이블에도 그림을 넣어줘야 등록된다
 				product.setThumbnail(product.getThumbnailFile().getOriginalFilename());
@@ -145,7 +152,7 @@ public class AdminController {
 		String realPath = "src/main/resources/static/pdImages";
 		
 		// 한 번에 여러 장의 파일을 받는다
-		List<MultipartFile> list = mhr.getFiles("files");
+		List<MultipartFile> fileList = mhr.getFiles("files");
 		// 여러 장의 파일을 각각 담을 공간 생성
 		List<ProductImg> pdPhotos = new ArrayList<ProductImg>();
 		
@@ -160,9 +167,16 @@ public class AdminController {
 				// 기존에 등록된 이미지를 지운다
 				result = as.productImgDelete(product.getProductCode());
 				
+				// 썸네일 사진 저장 (사진 전송 시 순서 유지 어려움으로 썸네일은 따로 처리)
+				MultipartFile thumbnailFile = mhr.getFile("thumbnailFile");
+				FileOutputStream fos1 = new FileOutputStream(
+						new File(realPath+"/"+thumbnailFile.getOriginalFilename()));
+				fos1.write(thumbnailFile.getBytes());
+				fos1.close();
+				
 				// list의 사진을 하나씩 가져와 pdPhotos에 저장
-				for (MultipartFile mf : list) {
-					String fileName = mf.getOriginalFilename();
+				for (MultipartFile mf2 : fileList) {
+					String fileName = mf2.getOriginalFilename();
 					ProductImg pi = new ProductImg();
 					pi.setFileName(fileName);
 					
@@ -170,9 +184,9 @@ public class AdminController {
 					pdPhotos.add(pi);
 					
 					// 그림 파일 저장
-					FileOutputStream fos = new FileOutputStream(new File(realPath+"/"+fileName));
-					fos.write(mf.getBytes());
-					fos.close();
+					FileOutputStream fos2 = new FileOutputStream(new File(realPath+"/"+fileName));
+					fos2.write(mf2.getBytes());
+					fos2.close();
 					
 					// product 테이블에도 그림을 넣어줘야 등록된다
 					product.setThumbnail(product.getThumbnailFile().getOriginalFilename());
