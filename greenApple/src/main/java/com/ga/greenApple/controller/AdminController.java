@@ -62,17 +62,13 @@ public class AdminController {
 		// 끝 페이지가 총 페이지보다 크면, 끝 페이지는 총 페이지로 변경
 		if (endPage > totalPage) endPage = totalPage;
 		
-		// 목록을 보여주기 위해 필요한 데이터들 담기
-		AdminData forAdminData = new AdminData();
-		forAdminData.setTag(data.getTag());
-		forAdminData.setKeyword(data.getKeyword());
-		forAdminData.setStartRow(startRow);
-		forAdminData.setEndRow(endRow);
-		
 		List<Product> productList = null;
 		
 		if (id.equals("admin")) {
-			productList = as.productList(forAdminData);
+			data.setStartRow(startRow);
+			data.setEndRow(endRow);
+			
+			productList = as.productList(data);
 		}
 		
 		return productList;
@@ -246,17 +242,13 @@ public class AdminController {
 		// 끝 페이지가 총 페이지보다 크면, 끝 페이지는 총 페이지로 변경
 		if (endPage > totalPage) endPage = totalPage;
 		
-		// 목록을 보여주기 위해 필요한 데이터들 담기
-		AdminData forAdminData = new AdminData();
-		forAdminData.setTag(data.getTag());
-		forAdminData.setKeyword(data.getKeyword());
-		forAdminData.setStartRow(startRow);
-		forAdminData.setEndRow(endRow);
-		
 		List<Member> memberList = null;
 		
 		if (id.equals("admin")) {
-			memberList = as.memberList(forAdminData);
+			data.setStartRow(startRow);
+			data.setEndRow(endRow);
+			
+			memberList = as.memberList(data);
 		}
 		
 		return memberList;
@@ -307,17 +299,13 @@ public class AdminController {
 		// 끝 페이지가 총 페이지보다 크면, 끝 페이지는 총 페이지로 변경
 		if (endPage > totalPage) endPage = totalPage;
 		
-		// 목록을 보여주기 위해 필요한 데이터들 담기
-		AdminData forAdminData = new AdminData();
-		forAdminData.setTag(data.getTag());
-		forAdminData.setKeyword(data.getKeyword());
-		forAdminData.setStartRow(startRow);
-		forAdminData.setEndRow(endRow);
-		
 		List<Review> reviewList = null;
 		
 		if (id.equals("admin")) {
-			reviewList = as.reviewList(forAdminData);
+			data.setStartRow(startRow);
+			data.setEndRow(endRow);
+			
+			reviewList = as.reviewList(data);
 		}
 		
 		return reviewList;
