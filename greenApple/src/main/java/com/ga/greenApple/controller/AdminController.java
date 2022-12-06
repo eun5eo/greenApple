@@ -145,7 +145,7 @@ public class AdminController {
 		String realPath = "src/main/resources/static/pdImages";
 		
 		// 한 번에 여러 장의 파일을 받는다
-		List<MultipartFile> list = mhr.getFiles("file");
+		List<MultipartFile> list = mhr.getFiles("files");
 		// 여러 장의 파일을 각각 담을 공간 생성
 		List<ProductImg> pdPhotos = new ArrayList<ProductImg>();
 		
@@ -175,6 +175,7 @@ public class AdminController {
 					fos.close();
 					
 					// product 테이블에도 그림을 넣어줘야 등록된다
+					product.setThumbnail(product.getThumbnailFile().getOriginalFilename());
 					product.setFileName(fileName);
 				}
 				// 사진 재등록을 위해 result값을 다르게 한다

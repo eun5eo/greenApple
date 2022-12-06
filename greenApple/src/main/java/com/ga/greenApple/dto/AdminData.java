@@ -17,9 +17,9 @@ public class AdminData {
 	
 	private int currentPage; // 현재 페이지
 	
-	private int startRow; // 
+	private int startRow; // 페이징 시작 번호
 	
-	private int endRow;
+	private int endRow; // 페이징 끝 번호
 	
 	private int startPage; // 페이징용 시작 번호
 	
