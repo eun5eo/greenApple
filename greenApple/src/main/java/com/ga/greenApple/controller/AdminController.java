@@ -104,7 +104,7 @@ public class AdminController {
 		List<ProductImg> pdPhotos = new ArrayList<ProductImg>();
 		
 		if (id.equals("admin")) {
-			// 썸네일 사진 저장 (사진 전송 시 순서 유지 어려움으로 썸네일은 따로 처리)
+			// 썸네일 파일 저장 (사진 전송 시 순서 유지 어려움으로 썸네일은 따로 처리)
 			MultipartFile thumbnailFile = mhr.getFile("thumbnailFile");
 			FileOutputStream fos1 = new FileOutputStream(
 					new File(realPath+"/"+thumbnailFile.getOriginalFilename()));
@@ -168,7 +168,7 @@ public class AdminController {
 				// 기존에 등록된 이미지를 지운다
 				result = as.productImgDelete(product.getProductCode());
 				
-				// 썸네일 사진 저장 (사진 전송 시 순서 유지 어려움으로 썸네일은 따로 처리)
+				// 썸네일 파일 저장 (사진 전송 시 순서 유지 어려움으로 썸네일은 따로 처리)
 				MultipartFile thumbnailFile = mhr.getFile("thumbnailFile");
 				FileOutputStream fos1 = new FileOutputStream(
 						new File(realPath+"/"+thumbnailFile.getOriginalFilename()));
