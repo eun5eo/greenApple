@@ -30,7 +30,7 @@ public class MemberController {
 	public int memberIdCheck(@RequestParam String id) {
 		int result = 0;
 		Member member = ms.select(id);
-		
+		System.out.println("hello "+id);
 		if (member == null)
 			result = 1;
 		else 
