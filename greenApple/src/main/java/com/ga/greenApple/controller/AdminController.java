@@ -56,7 +56,14 @@ public class AdminController {
 		// 끝 페이지 : 시작 페이지 + 블록당 페이지수 -1
 		int endPage = startPage + PAGE_PER_BLOCK - 1;
 		// 총 데이터수
-		int total = as.productTotal();
+		int total = 0;
+		
+		if (data.getKeyword() == null || data.getKeyword() == "") {
+			total = as.productTotal();
+		} else if (data.getKeyword() != null) {
+			total = as.productTotalSearch(data);
+		}
+		
 		// 총 페이지수
 		int totalPage = (int) Math.ceil((double)total/ROW_PER_PAGE);
 		// 끝 페이지가 총 페이지보다 크면, 끝 페이지는 총 페이지로 변경

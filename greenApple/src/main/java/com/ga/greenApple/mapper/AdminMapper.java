@@ -52,6 +52,9 @@ public interface AdminMapper {
 	// 페이징 시 총 상품 개수 구하기
 	int productTotal();
 	
+	// 페이징 시 검색한 경우 총 상품 개수 구하기
+	int productTotalSearch(AdminData data);
+	
 	// 페이징 시 총 회원 수 구하기
 	int memberTotal();
 	
