@@ -13,13 +13,11 @@ public class GreenAppleApplication {
 		SpringApplication.run(GreenAppleApplication.class, args);
 	}
 
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("http://13.124.91.28");
-			}
-		};
-	}
+	/*
+	 * @Bean public WebMvcConfigurer corsConfigurer() { return new
+	 * WebMvcConfigurer() {
+	 * 
+	 * @Override public void addCorsMappings(CorsRegistry registry) {
+	 * registry.addMapping("/**").allowedOrigins("http://13.124.91.28"); } }; }
+	 */
 }
