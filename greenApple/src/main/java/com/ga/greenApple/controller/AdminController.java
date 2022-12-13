@@ -37,7 +37,7 @@ public class AdminController {
 		String id = (String) session.getAttribute("id");
 		
 		// 페이징을 위한 값
-		final int ROW_PER_PAGE = 10; // 한 페이지에 들어갈 데이터 개수
+		final int ROW_PER_PAGE = 5; // 한 페이지에 들어갈 데이터 개수
 		final int PAGE_PER_BLOCK = 5; // 한 블럭에 들어갈 페이지수
 		
 		// 첫 로딩이거나 pageNum에 값이 없으면 페이지값은 1

@@ -64,7 +64,7 @@ create table review_img (
 	reviewImgNo number primary key, -- 사진 번호
 	reviewId varchar2(20) not null, -- 리뷰 번호 fk
 	id varchar2(20) not null, -- 아이디 fk
-	fileName varchar2(100), -- 파일명
+	fileName varchar2(100) not null, -- 파일명
 	FOREIGN KEY(reviewId) REFERENCES review(reviewId),
 	FOREIGN KEY(id) REFERENCES member(id)
 );
@@ -96,7 +96,7 @@ create table product_order (
 	recipientTel varchar2(15) not null, -- 수령자 전화번호
 	orderMemo varchar2(180), -- 배송 요청사항
 	payment char(1) default 'n' not null, -- 결제 여부
-	payMoney number default 0 not null, -- 결제 금액
+	payMoney number not null, -- 결제 금액
 	orderDel char(1) default 'n' not null, -- 주문취소 여부
 	FOREIGN KEY(id) REFERENCES member(id)
 );
