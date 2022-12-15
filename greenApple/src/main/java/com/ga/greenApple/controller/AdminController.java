@@ -157,7 +157,7 @@ public class AdminController {
 		int result = 0;
 		
 		String id = (String) session.getAttribute("id");
-		String realPath = "src/main/resources/static/pdImages";
+		String realPath = "/home/uploads";
 		
 		// 한 번에 여러 장의 파일을 받는다
 		List<MultipartFile> fileList = mhr.getFiles("files");

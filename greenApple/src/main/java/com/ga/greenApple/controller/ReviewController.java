@@ -62,7 +62,7 @@ public class ReviewController {
 		int result = 0;
 		
 		String id = (String) session.getAttribute("id");
-		String realPath = "src/main/resources/static/rvImages";
+		String realPath = "/home/uploads";
 		
 		// 현재 시간으로 reviewId 생성
 		Date date = new Date();
@@ -127,7 +127,7 @@ public class ReviewController {
 			int result = 0;
 			
 			String id = (String) session.getAttribute("id");
-			String realPath = "src/main/resources/static/rvImages";
+			String realPath = "/home/uploads";
 			
 			// 한 번에 여러 장의 파일을 받는다
 			List<MultipartFile> list = mhr.getFiles("files");
