@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.ga.greenApple.service.SessionCheck;
@@ -46,6 +47,11 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 					"/review/insert", "/review/update", "/review/delete",
 					"/cart/**", "/order/**", "/admin/**"
 					);
+	}
+	
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/pdImages/**")
+		.addResourceLocations("file:///home/uploads/");
 	}
 	
 	// spring 암호화
