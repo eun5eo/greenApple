@@ -98,7 +98,7 @@ public class AdminController {
 		int result = 0;
 		
 		String id = (String) session.getAttribute("id");
-		String realPath = "build/resources/main/static/pdImages";
+		String realPath = "/home/uploads";
 		
 		// productCode 생성
 		Date date = new Date();
