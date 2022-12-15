@@ -47,25 +47,25 @@ public class AdminController {
 		
 		// 현재 페이지
 		int currentPage = Integer.parseInt(data.getPageNum());
+		
 		// 게시글 시작 번호 : (페이지번호 -1) * 페이지당 개수 +1
 		int startRow = (currentPage - 1) * ROW_PER_PAGE + 1;
+		
 		// 게시글 끝 번호 : 시작번호 + 페이지당 개수 -1
 		int endRow = startRow + ROW_PER_PAGE - 1;
+		
 		// 시작 페이지 : 현재 페이지 - (현재 페이지 -1) % 블록당 개수 => 1, 11, 21,..
 		int startPage = currentPage - (currentPage - 1) % PAGE_PER_BLOCK;
+		
 		// 끝 페이지 : 시작 페이지 + 블록당 페이지수 -1
 		int endPage = startPage + PAGE_PER_BLOCK - 1;
-		// 총 데이터수
-		int total = 0;
 		
-		if (data.getKeyword() == null || data.getKeyword() == "") {
-			total = as.productTotal();
-		} else if (data.getKeyword() != null) {
-			total = as.productTotalSearch(data);
-		}
+		// 총 데이터수
+		int total = as.productTotal(data);
 		
 		// 총 페이지수
 		int totalPage = (int) Math.ceil((double)total/ROW_PER_PAGE);
+		
 		// 끝 페이지가 총 페이지보다 크면, 끝 페이지는 총 페이지로 변경
 		if (endPage > totalPage) endPage = totalPage;
 		
@@ -259,18 +259,25 @@ public class AdminController {
 		
 		// 현재 페이지
 		int currentPage = Integer.parseInt(data.getPageNum());
+		
 		// 게시글 시작 번호 : (페이지번호 -1) * 페이지당 개수 +1
 		int startRow = (currentPage - 1) * ROW_PER_PAGE + 1;
+		
 		// 게시글 끝 번호 : 시작번호 + 페이지당 개수 -1
 		int endRow = startRow + ROW_PER_PAGE - 1;
+		
 		// 시작 페이지 : 현재 페이지 - (현재 페이지 -1) % 블록당 개수 => 1, 11, 21,..
 		int startPage = currentPage - (currentPage - 1) % PAGE_PER_BLOCK;
+		
 		// 끝 페이지 : 시작 페이지 + 블록당 페이지수 -1
 		int endPage = startPage + PAGE_PER_BLOCK - 1;
+		
 		// 총 데이터수
-		int total = as.memberTotal();
+		int total = as.memberTotal(data);
+		
 		// 총 페이지수
 		int totalPage = (int) Math.ceil((double)total/ROW_PER_PAGE);
+		
 		// 끝 페이지가 총 페이지보다 크면, 끝 페이지는 총 페이지로 변경
 		if (endPage > totalPage) endPage = totalPage;
 		
@@ -326,18 +333,25 @@ public class AdminController {
 		
 		// 현재 페이지
 		int currentPage = Integer.parseInt(data.getPageNum());
+		
 		// 게시글 시작 번호 : (페이지번호 -1) * 페이지당 개수 +1
 		int startRow = (currentPage - 1) * ROW_PER_PAGE + 1;
+		
 		// 게시글 끝 번호 : 시작번호 + 페이지당 개수 -1
 		int endRow = startRow + ROW_PER_PAGE - 1;
+		
 		// 시작 페이지 : 현재 페이지 - (현재 페이지 -1) % 블록당 개수 => 1, 11, 21,..
 		int startPage = currentPage - (currentPage - 1) % PAGE_PER_BLOCK;
+		
 		// 끝 페이지 : 시작 페이지 + 블록당 페이지수 -1
 		int endPage = startPage + PAGE_PER_BLOCK - 1;
+		
 		// 총 데이터수
-		int total = as.reviewTotal();
+		int total = as.reviewTotal(data);
+		
 		// 총 페이지수
 		int totalPage = (int) Math.ceil((double)total/ROW_PER_PAGE);
+		
 		// 끝 페이지가 총 페이지보다 크면, 끝 페이지는 총 페이지로 변경
 		if (endPage > totalPage) endPage = totalPage;
 		
