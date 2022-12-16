@@ -6,7 +6,8 @@
 	<!-- 회원별 주문 목록 -->
 	<!-- resultType은 dto의 alias와 일치해야한다 -->
 	<select id="orderList" resultType="productOrder" parameterType="string">
-		select * from product_order where id = #{id}
+		select * from product_order order by orderDate
+			where id = #{id}
 	</select>
 	
 	<!-- 주문 상세 목록 -->
