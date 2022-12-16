@@ -49,8 +49,11 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 					);
 	}
 	
+	// s3를 사용하지 않고 사진 업로드를 위해 사용
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		// addResourceHandler에서 아래 형식으로 들어온 요청을
 		registry.addResourceHandler("/pdImages/**")
+		// 아래 주소에서 파일을 찾아 갖다준다
 		.addResourceLocations("file:///home/uploads/");
 	}
 	
