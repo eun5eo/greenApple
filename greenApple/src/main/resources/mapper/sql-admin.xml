@@ -102,32 +102,35 @@
 	</update>
 	
 	<!-- 페이징 시 총 상품 개수 구하기 -->
+	<select id="productTotal" resultType="integer">
+		select count(*) from product
+	</select>
+
+	<!-- 페이징 시 검색한 경우 총 상품 개수 구하기 -->
 	<select id="productTotalSearch" resultType="integer" parameterType="forAdmin">
 		select count(*) from product
-			<where>
-				<if test="keyword != null and keyword != ''">
-					${tag} like '%'||#{keyword}||'%'
-				</if>
-			</where>
+			where ${tag} like '%'||#{keyword}||'%'
 	</select>
 	
 	<!-- 페이징 시 총 회원수 구하기 -->
-	<select id="memberTotal" resultType="integer" parameterType="forAdmin">
+	<select id="memberTotal" resultType="integer">
 		select count(*) from member
-			<where>
-				<if test="keyword != null and keyword != ''">
-					${tag} like '%'||#{keyword}||'%'
-				</if>
-			</where>
+	</select>
+
+	<!-- 페이징 시 검색한 경우 총 회원수 구하기 -->
+	<select id="memberTotalSearch" resultType="integer" parameterType="forAdmin">
+		select count(*) from member
+			where ${tag} like '%'||#{keyword}||'%'
 	</select>
 	
-	<!-- 페이징 총 리뷰 개수 구하기 -->
-	<select id="reviewTotal" resultType="integer" parameterType="forAdmin">
+	<!-- 페이징 시 총 리뷰 개수 구하기 -->
+	<select id="reviewTotal" resultType="integer">
 		select count(*) from review
-			<where>
-				<if test="keyword != null and keyword != ''">
-					${tag} like '%'||#{keyword}||'%'
-				</if>
-			</where>
+	</select>
+
+	<!-- 페이징 시 검색한 경우 총 리뷰 개수 구하기 -->
+	<select id="reviewTotalSearch" resultType="integer" parameterType="forAdmin">
+		select count(*) from review
+			where ${tag} like '%'||#{keyword}||'%'
 	</select>
 </mapper>

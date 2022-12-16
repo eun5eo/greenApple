@@ -47,12 +47,21 @@ public interface AdminService {
 	int reviewDelete(String reviewId);
 	
 	// 페이징 시 총 상품 개수 구하기
-	int productTotal(AdminData data);
+	int productTotal();
+	
+	// 페이징 시 검색한 경우 총 상품 개수 구하기
+	int productTotalSearch(AdminData data);
 	
 	// 페이징 시 총 회원수 구하기
-	int memberTotal(AdminData data);
+	int memberTotal();
+	
+	// 페이징 시 검색한 경우 총 회원수 구하기
+	int memberTotalSearch(AdminData data);
 	
 	// 페이징 시 총 리뷰 개수 구하기
-	int reviewTotal(AdminData data);
+	int reviewTotal();
+	
+	// 페이징 시 검색한 경우 총 리뷰 개수 구하기
+	int reviewTotalSearch(AdminData data);
 
 }

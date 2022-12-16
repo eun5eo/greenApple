@@ -60,8 +60,14 @@ public class AdminController {
 		// 끝 페이지 : 시작 페이지 + 블록당 페이지수 -1
 		int endPage = startPage + PAGE_PER_BLOCK - 1;
 		
-		// 총 데이터수
-		int total = as.productTotal(data);
+		// 총 데이터수 (검색 안한 경우와 검색한 경우로 나눠서 추출)
+		int total = 1;
+		
+		if (data.getKeyword() == null || data.getKeyword() == "") {
+			total = as.productTotal();
+		} else if (data.getKeyword() != null) {
+			total = as.productTotalSearch(data);
+		}
 		
 		// 총 페이지수
 		int totalPage = (int) Math.ceil((double)total/ROW_PER_PAGE);
@@ -272,8 +278,14 @@ public class AdminController {
 		// 끝 페이지 : 시작 페이지 + 블록당 페이지수 -1
 		int endPage = startPage + PAGE_PER_BLOCK - 1;
 		
-		// 총 데이터수
-		int total = as.memberTotal(data);
+		// 총 데이터수 (검색 안한 경우와 검색한 경우로 나눠서 추출)
+		int total = 1;
+
+		if (data.getKeyword() == null || data.getKeyword() == "") {
+			total = as.memberTotal();
+		} else if (data.getKeyword() != null) {
+			total = as.memberTotalSearch(data);
+		}
 		
 		// 총 페이지수
 		int totalPage = (int) Math.ceil((double)total/ROW_PER_PAGE);
@@ -346,8 +358,14 @@ public class AdminController {
 		// 끝 페이지 : 시작 페이지 + 블록당 페이지수 -1
 		int endPage = startPage + PAGE_PER_BLOCK - 1;
 		
-		// 총 데이터수
-		int total = as.reviewTotal(data);
+		// 총 데이터수 (검색 안한 경우와 검색한 경우로 나눠서 추출)
+		int total = 1;
+
+		if (data.getKeyword() == null || data.getKeyword() == "") {
+			total = as.reviewTotal();
+		} else if (data.getKeyword() != null) {
+			total = as.reviewTotalSearch(data);
+		}
 		
 		// 총 페이지수
 		int totalPage = (int) Math.ceil((double)total/ROW_PER_PAGE);
@@ -379,13 +397,13 @@ public class AdminController {
 	
 	// 리뷰 삭제 처리
 	@PostMapping(value = "/admin/reviewDelete")
-	public int reviewDelete(@RequestParam("reviewId") String reviewId, HttpSession session) {
+	public int reviewDelete(@RequestBody Review review, HttpSession session) {
 		int result = 0;
 		
 		String id = (String) session.getAttribute("id");
 		
 		if (id.equals("admin")) {
-			result = as.reviewDelete(reviewId);
+			result = as.reviewDelete(review.getReviewId());
 		} else result = -1;
 		
 		return result;
