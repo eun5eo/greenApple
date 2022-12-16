@@ -13,7 +13,7 @@
 					and productName like '%'||#{keyword}||'%'
 				</if>
 			</where>
-			order by inputDate desc, soldOut desc) e)
+			order by inputDate, soldOut desc) e)
 			where del = 'n' and rn between 1 and #{endRow}
 	</select>
 	
